@@ -1,0 +1,187 @@
+.footer {
+  background: linear-gradient(135deg, #2F1808 0%, #1E1E1F 100%);
+  color: #FCFCFC;
+  padding: 4rem 2rem 2rem;
+  margin-top: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ED6A00;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  color: #C6C6C6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.columnTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFD166;
+  margin: 0 0 0.5rem 0;
+}
+
+.link {
+  color: #C6C6C6;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #ED6A00;
+}
+
+.bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(198, 198, 198, 0.2);
+  text-align: center;
+}
+
+.copyright {
+  color: #808080;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 3rem 2rem 1.5rem;
+  }
+  
+  .content {
+    gap: 3rem;
+  }
+  
+  .links {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+  
+  .content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .brand {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(198, 198, 198, 0.2);
+  }
+  
+  .logo {
+    font-size: 1.75rem;
+  }
+  
+  .tagline {
+    font-size: 0.875rem;
+  }
+  
+  .links {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .column {
+    gap: 0.5rem;
+  }
+  
+  .columnTitle {
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .link {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0;
+    display: block;
+  }
+  
+  .bottom {
+    padding-top: 1.5rem;
+  }
+  
+  .copyright {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem 1rem 1rem;
+  }
+  
+  .content {
+    gap: 2rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.8125rem;
+  }
+  
+  .links {
+    gap: 1.5rem;
+  }
+  
+  .columnTitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+  
+  .link {
+    font-size: 0.75rem;
+  }
+  
+  .copyright {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+}

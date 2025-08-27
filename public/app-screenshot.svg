@@ -1,0 +1,10 @@
+<svg width="304" height="634" viewBox="0 0 304 634" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="304" height="634" rx="32" fill="#F5F5F5"/>
+  <rect x="20" y="60" width="264" height="100" rx="12" fill="#ED6A00"/>
+  <text x="152" y="120" text-anchor="middle" fill="white" font-family="-apple-system, system-ui" font-size="32" font-weight="700">StreetFeast</text>
+  <rect x="20" y="180" width="264" height="60" rx="8" fill="#FCFCFC"/>
+  <rect x="20" y="260" width="264" height="160" rx="8" fill="#FCFCFC"/>
+  <rect x="20" y="440" width="264" height="80" rx="8" fill="#FCFCFC"/>
+  <rect x="20" y="540" width="120" height="40" rx="20" fill="#ED6A00"/>
+  <rect x="164" y="540" width="120" height="40" rx="20" fill="#F2974D"/>
+</svg>

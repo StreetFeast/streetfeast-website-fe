@@ -1,0 +1,156 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFEDC2 0%, #FFD166 100%);
+  padding: 2rem;
+}
+
+.nav {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.backLink {
+  color: #ED6A00;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s ease;
+}
+
+.backLink:hover {
+  gap: 0.75rem;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(252, 252, 252, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1E1E1F;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+}
+
+.lastUpdated {
+  color: #808080;
+  font-size: 0.875rem;
+  margin-bottom: 3rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ED6A00;
+  margin: 0 0 1rem 0;
+}
+
+.section p {
+  color: #636363;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+.section ul {
+  color: #636363;
+  line-height: 1.7;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .main {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .nav {
+    margin-bottom: 1.5rem;
+  }
+  
+  .main {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .lastUpdated {
+    margin-bottom: 2rem;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .section ul {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+  
+  .main {
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .section h2 {
+    font-size: 1.125rem;
+  }
+  
+  .section p,
+  .section ul {
+    font-size: 0.875rem;
+  }
+  
+  .backLink {
+    font-size: 0.875rem;
+  }
+}

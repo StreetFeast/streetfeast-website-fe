@@ -290,7 +290,7 @@ export default function Privacy() {
             please contact us at:
           </p>
           <div className={styles.contactInfo}>
-            <p><strong>StreetFeast, Inc.</strong></p>
+            <p><strong>StreetFeast LLC</strong></p>
             <a href="mailto:customer-support@streetfeast.com">
               <p>Email: customer-support@streetfeast.com</p>
             </a>

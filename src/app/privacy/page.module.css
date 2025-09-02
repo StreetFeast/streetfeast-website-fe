@@ -79,6 +79,43 @@
   font-weight: 600;
 }
 
+.section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1E1E1F;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.intro {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #636363;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contactInfo {
+  background: rgba(255, 209, 102, 0.15);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.contactInfo p {
+  margin: 0.5rem 0;
+}
+
+.section a {
+  color: #ED6A00;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.section a:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 1024px) {
   .container {
     padding: 1.5rem;
@@ -134,6 +171,21 @@
   .section strong {
     display: block;
     margin-bottom: 0.25rem;
+  }
+  
+  .section h3 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem 0;
+  }
+  
+  .intro {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contactInfo {
+    padding: 1.25rem;
   }
 }
 

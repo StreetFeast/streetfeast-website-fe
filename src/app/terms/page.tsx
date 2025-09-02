@@ -1,6 +1,18 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'Read the StreetFeast Terms of Service. Understand your rights and responsibilities when using our food discovery platform.',
+  openGraph: {
+    title: 'Terms of Service | StreetFeast',
+    description: 'Read the StreetFeast Terms of Service. Understand your rights and responsibilities when using our platform.',
+    url: 'https://streetfeast.com/terms',
+  },
+};
+
 export default function Terms() {
   return (
     <div className={styles.container}>

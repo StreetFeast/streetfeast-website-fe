@@ -1,6 +1,18 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Learn how StreetFeast protects your privacy and handles your personal information. We are committed to safeguarding your data.',
+  openGraph: {
+    title: 'Privacy Policy | StreetFeast',
+    description: 'Learn how StreetFeast protects your privacy and handles your personal information.',
+    url: 'https://streetfeast.com/privacy',
+  },
+};
+
 export default function Privacy() {
   const lastUpdated = "January 2, 2025";
   

@@ -4,6 +4,8 @@ export const Colors = {
     gray: "#F5F5F5",
     orange: "#ED6A00"
   },
+  secondaryBlue: "#0066b3",
+  tertiaryBlue: '#2c3787',
   primary: ["#FCFCFC", "#C6C6C6", "#808080", "#636363", "#1E1E1F"],
   secondary: ["#FFEDC2", "#FFDF94", "#FFD166", "#CCA752", "#815F0E"],
   tertiary: ["#FAD2B3", "#F2974D", "#ED6A00", "#8E4717", "#2F1808"],

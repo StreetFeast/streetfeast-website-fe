@@ -3,7 +3,7 @@ import styles from './HeroHeader.module.css';
 
 export default function HeroHeader() {
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} id="main-content">
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 className={styles.title}>

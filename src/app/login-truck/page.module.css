@@ -45,6 +45,8 @@
   background: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 4rem;
   overflow-y: auto;
   height: 100vh;
@@ -59,22 +61,25 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   color: #1a202c;
   text-align: center;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #718096;
-  text-align: center;
-  margin-bottom: 2rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.errorBanner {
+  padding: 1rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #c33;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .formGroup {
@@ -102,28 +107,6 @@
   outline: none;
   border-color: #ED6A00;
   box-shadow: 0 0 0 3px rgba(237, 106, 0, 0.1);
-}
-
-.inputError {
-  border-color: #f56565;
-}
-
-.inputError:focus {
-  border-color: #f56565;
-  box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
-}
-
-.errorMessage {
-  color: #f56565;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-}
-
-.passwordRequirements {
-  color: #718096;
-  font-size: 0.875rem;
-  margin: 0.25rem 0 0 0;
-  line-height: 1.5;
 }
 
 .passwordInputWrapper {
@@ -158,93 +141,6 @@
 .eyeIcon {
   width: 20px;
   height: 20px;
-}
-
-.planOptions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.planCard {
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  display: block;
-}
-
-.planCard:hover {
-  border-color: #cbd5e0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.planCard.selected {
-  border-color: #ED6A00;
-  background: white;
-  box-shadow: 0 4px 16px rgba(237, 106, 0, 0.2);
-}
-
-.radio {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.planContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.planTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-.planPrice {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ED6A00;
-  margin: 0.5rem 0;
-}
-
-.planNote {
-  font-size: 0.875rem;
-  color: #718096;
-  margin: 0;
-}
-
-.savingsBadge {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #4CAF50;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.trialNote {
-  margin-top: 0.75rem;
-  padding: 1rem;
-  background: #edf2f7;
-  border-radius: 8px;
-  color: #2d3748;
-  font-size: 0.95rem;
-  text-align: center;
 }
 
 .submitButton {
@@ -300,16 +196,5 @@
 
   .title {
     font-size: 1.5rem;
-  }
-
-  .planOptions {
-    grid-template-columns: 1fr;
-  }
-
-  .savingsBadge {
-    top: 1rem;
-    left: auto;
-    right: 1rem;
-    transform: none;
   }
 }

@@ -16,7 +16,6 @@ This is the StreetFeast website frontend - a Next.js landing page for a mobile a
 ### Task Completion Checklist
 Always run these commands after making changes:
 1. `npm run lint` - Fix any ESLint errors
-2. `npm run build` - Ensure production build succeeds
 
 ## Architecture
 

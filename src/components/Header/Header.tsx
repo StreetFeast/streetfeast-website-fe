@@ -18,7 +18,7 @@ export default function Header() {
         </Link>
         <nav className={styles.nav}>
           {user ? (
-            <Link href="/profile" className={styles.button}>
+            <Link href="/my-profile" className={styles.button}>
               My Profile
             </Link>
           ) : (

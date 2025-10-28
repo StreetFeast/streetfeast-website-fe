@@ -77,6 +77,22 @@
   gap: 1.5rem;
 }
 
+.nameRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.errorBanner {
+  padding: 1rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #c33;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -311,5 +327,9 @@
     left: auto;
     right: 1rem;
     transform: none;
+  }
+
+  .nameRow {
+    grid-template-columns: 1fr;
   }
 }

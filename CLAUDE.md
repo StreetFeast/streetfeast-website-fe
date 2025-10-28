@@ -27,12 +27,24 @@ Always run these commands after making changes:
 
 ### Project Structure
 - `/src/app/` - Next.js App Router pages using file-based routing
-- `/src/components/` - React components with corresponding .module.css files
+- `/src/components/` - React components, each in its own folder with co-located styles
+  - Component folder structure: `ComponentName/ComponentName.tsx`, `ComponentName.module.css`, `index.ts`
+  - Example: `FormInput/FormInput.tsx`, `FormInput/FormInput.module.css`, `FormInput/index.ts`
+- `/src/hooks/` - Custom React hooks for reusable logic
+- `/src/utils/` - Utility functions and helpers
+- `/src/lib/` - Third-party library configurations (e.g., Supabase)
+- `/src/store/` - Global state management (Zustand)
 - `/src/constants/` - Shared constants like colors
 - Path alias: `@/*` maps to `./src/*`
 
 ### Code Conventions
+- **Separation of Concerns**: Keep UI components, business logic, and utilities separate
+  - UI Components: Presentation-only, receive data via props
+  - Custom Hooks: Encapsulate complex state management and side effects
+  - Utilities: Pure functions for validation, formatting, etc.
 - Components: Functional with default exports, PascalCase naming
 - Styling: CSS Modules imported as `styles`, accessed via `styles.className`
 - Client components: Mark with "use client" when using browser APIs or state
-- Forms: Use React hooks (useState) for form handling
+- Forms: Extract form logic into custom hooks (e.g., `useRegisterTruckForm`)
+- Component Organization: Each component in its own folder with all related files co-located
+- Reusability: Create generic, reusable components when patterns emerge (e.g., FormInput, PasswordInput)

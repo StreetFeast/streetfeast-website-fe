@@ -63,14 +63,24 @@ export default function MyProfile() {
   };
 
   const handleSubscriptionUpdate = () => {
-    // TODO: Implement subscription update logic
-    toast.success(`Subscription updated to ${billingPeriod} plan!`);
+    // Navigate to Stripe checkout link based on selected billing period
+    const checkoutUrl = billingPeriod === "monthly"
+      ? stripeCheckoutLinks?.monthly
+      : stripeCheckoutLinks?.yearly;
+
+    if (checkoutUrl) {
+      window.location.href = checkoutUrl;
+    } else {
+      toast.error("Checkout link not available. Please try again later.");
+    }
   };
 
-  const handleCancelSubscription = () => {
-    // TODO: Implement cancel subscription logic
-    if (window.confirm("Are you sure you want to cancel your subscription?")) {
-      toast.success("Subscription cancelled successfully!");
+  const handleViewSubscriptionDetails = () => {
+    const stripeDashboardUrl = process.env.NEXT_PUBLIC_STRIPE_DASHBOARD_URL;
+    if (stripeDashboardUrl) {
+      window.open(stripeDashboardUrl, "_blank");
+    } else {
+      toast.error("Unable to open subscription dashboard");
     }
   };
 
@@ -89,7 +99,9 @@ export default function MyProfile() {
   // Extract data from profile
   const userInfo = profile?.userInformation;
   const ownedTruck = profile?.ownedTrucks?.[0]; // Get first truck
-  const isTruckSubscriptionActive = userInfo?.isTruckSubscriptionActive ?? false;
+  const stripeMetadata = userInfo?.stripeMetadata;
+  const isTruckSubscriptionActive = stripeMetadata?.isTruckSubscriptionActive ?? false;
+  const stripeCheckoutLinks = stripeMetadata?.stripeCheckoutLinks;
 
   return (
     <div className={styles.container}>
@@ -158,7 +170,7 @@ export default function MyProfile() {
             <Skeleton height={48} />
           </div>
         ) : isTruckSubscriptionActive ? (
-          // Subscribed State
+          // Subscribed State - Show link to Stripe dashboard
           <div className={styles.subscriptionCard}>
             <div className={styles.activeSubscriptionBadge}>
               <span className={styles.activeDot}></span>
@@ -166,59 +178,18 @@ export default function MyProfile() {
             </div>
 
             <div className={styles.subscriptionDetails}>
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Plan Name</span>
-                <span className={styles.detailValue}>Food Truck Membership Annual</span>
-              </div>
-
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Plan Price</span>
-                <span className={styles.detailValue}>$499.00/year</span>
-              </div>
-
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Billing Cycle</span>
-                <span className={styles.detailValue}>Annual</span>
-              </div>
-
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Next Renewal Date</span>
-                <span className={styles.detailValue}>October 12, 2026</span>
-              </div>
-
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Payment Method</span>
-                <span className={styles.detailValue}>•••• •••• •••• 4242</span>
-              </div>
-
-              <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Subscription Status</span>
-                <span className={styles.statusActive}>Active & Auto-Renewing</span>
-              </div>
-            </div>
-
-            <div className={styles.subscriptionPerks}>
-              <h3 className={styles.perksTitle}>Your Benefits</h3>
-              <ul className={styles.perksList}>
-                <li>Unlimited location updates</li>
-                <li>Priority placement in search results</li>
-                <li>Advanced analytics dashboard</li>
-                <li>Customer engagement tools</li>
-                <li>24/7 priority support</li>
-              </ul>
+              <p className={styles.subscriptionMessage}>
+                You have an active subscription! Manage your subscription details,
+                billing information, and payment methods through our secure customer portal.
+              </p>
             </div>
 
             <button
-              onClick={handleCancelSubscription}
-              className={styles.cancelButton}
+              onClick={handleViewSubscriptionDetails}
+              className={styles.updateButton}
             >
-              Cancel Subscription
+              See Subscription Information
             </button>
-
-            <p className={styles.cancellationNote}>
-              You can cancel anytime. Your access will continue until {" "}
-              <strong>October 12, 2026</strong>
-            </p>
           </div>
         ) : (
           // Unsubscribed State (Original)
@@ -275,7 +246,7 @@ export default function MyProfile() {
               onClick={handleSubscriptionUpdate}
               className={styles.updateButton}
             >
-              Update Subscription
+              Start Subscription
             </button>
           </div>
         )}

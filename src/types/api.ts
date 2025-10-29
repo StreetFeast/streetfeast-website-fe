@@ -6,14 +6,21 @@ export interface UserProfileMetadataSupabaseResponse {
   userType?: number | null;
 }
 
+export interface StripeMetadata {
+  stripeCustomerId?: string | null;
+  isTruckSubscriptionActive?: boolean | null;
+  stripeCheckoutLinks?: {
+    [key: string]: string;
+  } | null;
+}
+
 export interface UserProfileSupabaseResponse {
   id?: string | null;
   email?: string | null;
   phone?: string | null;
   existsInDb: boolean;
-  stripeCustomerId?: string | null;
-  isTruckSubscriptionActive?: boolean | null;
   user_metadata?: UserProfileMetadataSupabaseResponse;
+  stripeMetadata?: StripeMetadata;
 }
 
 export interface TruckImageMap {

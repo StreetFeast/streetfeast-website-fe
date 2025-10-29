@@ -1,16 +1,12 @@
-import axios from 'axios';
 import { UserProfileSummary } from '@/types/api';
+import { apiClient } from './axiosConfig';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export const getUserProfile = async (accessToken: string): Promise<UserProfileSummary> => {
-  const response = await axios.get<UserProfileSummary>(
-    `${API_BASE_URL}/api/v1/User/Profile`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
+/**
+ * Fetches the user profile from the backend API
+ * The access token is automatically included via axios interceptor
+ * If the token is expired, it will be automatically refreshed
+ */
+export const getUserProfile = async (): Promise<UserProfileSummary> => {
+  const response = await apiClient.get<UserProfileSummary>('/api/v1/User/Profile');
   return response.data;
 };

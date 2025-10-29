@@ -15,6 +15,7 @@ export default function MyProfile() {
   const router = useRouter();
   const user = useAuthStore((state) => state.user);
   const accessToken = useAuthStore((state) => state.accessToken);
+  const isHydrated = useAuthStore((state) => state.isHydrated);
   const clearAuth = useAuthStore((state) => state.clearAuth);
 
   const profile = useProfileStore((state) => state.profile);
@@ -26,6 +27,11 @@ export default function MyProfile() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
 
   useEffect(() => {
+    // Wait for store to hydrate before checking authentication
+    if (!isHydrated) {
+      return;
+    }
+
     // Check if user is authenticated
     if (!user || !accessToken) {
       toast.error("You must be authenticated to view this page!");
@@ -37,7 +43,7 @@ export default function MyProfile() {
     const fetchUserProfile = async () => {
       setLoading(true);
       try {
-        const profileData = await getUserProfile(accessToken);
+        const profileData = await getUserProfile();
         setProfile(profileData);
       } catch (error) {
         console.error("Error loading user profile:", error);
@@ -49,7 +55,8 @@ export default function MyProfile() {
     };
 
     fetchUserProfile();
-  }, [user, accessToken, router, setProfile, setLoading, setError]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHydrated]);
 
   const handleBillingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBillingPeriod(e.target.value as "monthly" | "yearly");
@@ -64,7 +71,6 @@ export default function MyProfile() {
     // TODO: Implement cancel subscription logic
     if (window.confirm("Are you sure you want to cancel your subscription?")) {
       toast.success("Subscription cancelled successfully!");
-      setIsSubscribed(false);
     }
   };
 

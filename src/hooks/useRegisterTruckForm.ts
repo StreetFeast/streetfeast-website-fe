@@ -181,12 +181,7 @@ export const useRegisterTruckForm = () => {
       try {
         const backendResponse = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/User/RegisterTruck`,
-          {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phoneNumber: formData.phone,
-          },
+          {},
           {
             headers: {
               "Content-Type": "application/json",

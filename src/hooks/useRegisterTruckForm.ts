@@ -156,10 +156,10 @@ export const useRegisterTruckForm = () => {
         password: formData.password,
         options: {
           data: {
-            truck_name: formData.truckName,
-            phone_number: formData.phone,
-            first_name: formData.firstName,
-            last_name: formData.lastName,
+            truckName: formData.truckName,
+            phoneNumber: formData.phone,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
           },
         },
       });

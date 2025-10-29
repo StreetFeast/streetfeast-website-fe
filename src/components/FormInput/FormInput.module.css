@@ -1,0 +1,41 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.95rem;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ED6A00;
+  box-shadow: 0 0 0 3px rgba(237, 106, 0, 0.1);
+}
+
+.inputError {
+  border-color: #f56565;
+}
+
+.inputError:focus {
+  border-color: #f56565;
+  box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+
+.errorMessage {
+  color: #f56565;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}

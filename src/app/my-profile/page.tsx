@@ -10,6 +10,7 @@ import { useProfileStore } from "@/store/profileStore";
 import { supabase } from "@/lib/supabase";
 import { getUserProfile } from "@/utils/api";
 import styles from "./page.module.css";
+import Image from "next/image";
 
 export default function MyProfile() {
   const router = useRouter();
@@ -106,7 +107,7 @@ export default function MyProfile() {
   return (
     <div className={styles.container}>
       <div className={styles.leftSection}>
-        <img src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} />
+        <Image src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} />
         <h1 className={styles.sectionTitle}>Profile Information</h1>
         <div className={styles.profileCard}>
           {isLoading ? (
@@ -141,7 +142,7 @@ export default function MyProfile() {
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Truck Name</label>
-                <p className={styles.fieldValue}>{ownedTruck?.name || "Not provided"}</p>
+                <p className={styles.fieldValue}>{userInfo?.user_metadata?.truckName || "Not provided"}</p>
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Phone</label>

@@ -1,6 +1,7 @@
 // API Response Types based on swagger.json
 
 export interface UserProfileMetadataSupabaseResponse {
+  truckName?: string | null;
   firstName?: string | null;
   lastName?: string | null;
   userType?: number | null;

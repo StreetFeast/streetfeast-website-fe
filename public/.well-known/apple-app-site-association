@@ -1,0 +1,23 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "GWA3RNTJ4B.com.streetfeast.streetfeast.dev",
+        "paths": [
+          "/m/*"
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "GWA3RNTJ4B.com.streetfeast.streetfeast.dev"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "GWA3RNTJ4B.com.streetfeast.streetfeast.dev"
+    ]
+  }
+}

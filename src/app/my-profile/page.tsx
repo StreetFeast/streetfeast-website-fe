@@ -98,16 +98,16 @@ export default function MyProfile() {
   };
 
   // Extract data from profile
-  const userInfo = profile?.userInformation;
+  const userInfo = profile;
   const ownedTruck = profile?.ownedTrucks?.[0]; // Get first truck
-  const stripeMetadata = userInfo?.stripeMetadata;
-  const isTruckSubscriptionActive = stripeMetadata?.isTruckSubscriptionActive ?? false;
+  const stripeMetadata = userInfo?.user_metadata?.stripeMetadata;
+  const isTruckSubscriptionActive = userInfo?.user_metadata?.isTruckSubscriptionActive ?? false;
   const stripeCheckoutLinks = stripeMetadata?.stripeCheckoutLinks;
 
   return (
     <div className={styles.container}>
       <div className={styles.leftSection}>
-        <Image src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} />
+        <Image src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} width={200} height={200} />
         <h1 className={styles.sectionTitle}>Profile Information</h1>
         <div className={styles.profileCard}>
           {isLoading ? (
@@ -199,9 +199,8 @@ export default function MyProfile() {
               <label className={styles.label}>Subscription Plan</label>
               <div className={styles.planOptions}>
                 <label
-                  className={`${styles.planCard} ${
-                    billingPeriod === "monthly" ? styles.selected : ""
-                  }`}
+                  className={`${styles.planCard} ${billingPeriod === "monthly" ? styles.selected : ""
+                    }`}
                 >
                   <input
                     type="radio"
@@ -219,9 +218,8 @@ export default function MyProfile() {
                 </label>
 
                 <label
-                  className={`${styles.planCard} ${
-                    billingPeriod === "yearly" ? styles.selected : ""
-                  }`}
+                  className={`${styles.planCard} ${billingPeriod === "yearly" ? styles.selected : ""
+                    }`}
                 >
                   <input
                     type="radio"

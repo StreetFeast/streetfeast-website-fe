@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-import { UserProfileSummary } from '@/types/api';
+import { UserProfileSupabaseResponse } from '@/types/api';
 
 interface ProfileState {
-  profile: UserProfileSummary | null;
+  profile: UserProfileSupabaseResponse | null;
   isLoading: boolean;
   error: string | null;
-  setProfile: (profile: UserProfileSummary) => void;
+  setProfile: (profile: UserProfileSupabaseResponse) => void;
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
   clearProfile: () => void;

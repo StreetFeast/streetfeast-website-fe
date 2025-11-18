@@ -229,8 +229,10 @@ export default function MyProfile() {
                     onChange={handleBillingChange}
                     className={styles.radio}
                   />
+                    <div className={styles.savingsBadge}>
+                      <p className={styles.savingsBadgeText}>Save 37%</p>
+                    </div>
                   <div className={styles.planContent}>
-                    <div className={styles.savingsBadge}>Save 37%</div>
                     <h3 className={styles.planTitle}>Yearly</h3>
                     <p className={styles.planPrice}>$599.88/year</p>
                     <p className={styles.planNote}>$49.99/month equivalent</p>

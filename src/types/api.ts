@@ -5,11 +5,13 @@ export interface UserProfileMetadataSupabaseResponse {
   firstName?: string | null;
   lastName?: string | null;
   userType?: number | null;
+  existsInDb: boolean;
+  isTruckSubscriptionActive?: boolean | null;
+  stripeMetadata?: StripeMetadata | null;
 }
 
 export interface StripeMetadata {
   stripeCustomerId?: string | null;
-  isTruckSubscriptionActive?: boolean | null;
   stripeCheckoutLinks?: {
     [key: string]: string;
   } | null;
@@ -19,9 +21,8 @@ export interface UserProfileSupabaseResponse {
   id?: string | null;
   email?: string | null;
   phone?: string | null;
-  existsInDb: boolean;
   user_metadata?: UserProfileMetadataSupabaseResponse;
-  stripeMetadata?: StripeMetadata;
+  ownedTrucks?: Truck[] | null;
 }
 
 export interface TruckImageMap {
@@ -43,10 +44,4 @@ export interface Truck {
   createdAt: string;
   lastNotificationSentTimestampUtc: string;
   images?: TruckImageMap[] | null;
-}
-
-export interface UserProfileSummary {
-  userInformation?: UserProfileSupabaseResponse;
-  favorites?: Truck[] | null;
-  ownedTrucks?: Truck[] | null;
 }

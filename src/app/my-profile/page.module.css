@@ -175,15 +175,25 @@
 }
 
 .savingsBadge {
+  display: flex;
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  bottom: -0.8rem;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.savingsBadgeText {
   background: #48bb78;
   color: white;
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
+  width: 100px;
+  text-align: center;
 }
 
 .planTitle {
@@ -411,7 +421,6 @@
 @media (max-width: 968px) {
   .container {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
   }
 
   .planOptions {

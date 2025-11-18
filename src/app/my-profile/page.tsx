@@ -107,7 +107,7 @@ export default function MyProfile() {
   return (
     <div className={styles.container}>
       <div className={styles.leftSection}>
-        <Image src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} />
+        <Image width={120} height={120} src="/app-vector-file.svg" alt="StreetFeast" className={styles.logo} />
         <h1 className={styles.sectionTitle}>Profile Information</h1>
         <div className={styles.profileCard}>
           {isLoading ? (
@@ -231,8 +231,10 @@ export default function MyProfile() {
                     onChange={handleBillingChange}
                     className={styles.radio}
                   />
+                    <div className={styles.savingsBadge}>
+                      <p className={styles.savingsBadgeText}>Save 37%</p>
+                    </div>
                   <div className={styles.planContent}>
-                    <div className={styles.savingsBadge}>Save 37%</div>
                     <h3 className={styles.planTitle}>Yearly</h3>
                     <p className={styles.planPrice}>$599.88/year</p>
                     <p className={styles.planNote}>$49.99/month equivalent</p>

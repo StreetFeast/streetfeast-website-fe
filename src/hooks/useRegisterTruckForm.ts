@@ -157,7 +157,7 @@ export const useRegisterTruckForm = () => {
         options: {
           data: {
             truckName: formData.truckName,
-            phoneNumber: formData.phone,
+            phone: formData.phone,
             firstName: formData.firstName,
             lastName: formData.lastName,
           },

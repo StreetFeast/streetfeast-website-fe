@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import { validatePassword } from "@/utils/validation";
 import axios from "axios";
+import zipcodes from "zipcodes";
 
 interface RegisterTruckFormData {
   firstName: string;
@@ -12,12 +13,14 @@ interface RegisterTruckFormData {
   phone: string;
   email: string;
   truckName: string;
+  zipCode: string;
   password: string;
   verifyPassword: string;
 }
 
 interface FormErrors {
   phone: string;
+  zipCode: string;
   password: string;
   verifyPassword: string;
 }
@@ -29,12 +32,14 @@ export const useRegisterTruckForm = () => {
     phone: "",
     email: "",
     truckName: "",
+    zipCode: "",
     password: "",
     verifyPassword: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({
     phone: "",
+    zipCode: "",
     password: "",
     verifyPassword: "",
   });
@@ -68,6 +73,21 @@ export const useRegisterTruckForm = () => {
         newErrors.phone = "Please enter a valid US phone number";
       } else {
         newErrors.phone = "";
+      }
+    }
+
+    // Handle zipcode validation
+    if (name === "zipCode") {
+      // Only allow digits
+      processedValue = value.replace(/\D/g, "").slice(0, 5);
+
+      // Validate zipcode format
+      if (processedValue && processedValue.length !== 5) {
+        newErrors.zipCode = "ZIP code must be 5 digits";
+      } else if (processedValue && !zipcodes.lookup(processedValue)) {
+        newErrors.zipCode = "Please enter a valid ZIP code";
+      } else {
+        newErrors.zipCode = "";
       }
     }
 
@@ -135,9 +155,11 @@ export const useRegisterTruckForm = () => {
       formData.phone.trim() !== "" &&
       formData.email.trim() !== "" &&
       formData.truckName.trim() !== "" &&
+      formData.zipCode.trim() !== "" &&
       formData.password.trim() !== "" &&
       formData.verifyPassword.trim() !== "" &&
       !errors.phone &&
+      !errors.zipCode &&
       !errors.password &&
       !errors.verifyPassword &&
       formData.password === formData.verifyPassword
@@ -150,6 +172,17 @@ export const useRegisterTruckForm = () => {
     setIsLoading(true);
 
     try {
+      // Lookup latitude and longitude from zipcode
+      const zipCodeData = zipcodes.lookup(formData.zipCode);
+
+      if (!zipCodeData) {
+        setError("Invalid ZIP code");
+        setIsLoading(false);
+        return;
+      }
+
+      const { latitude, longitude } = zipCodeData;
+
       // Step 1: Register user with Supabase
       const { data: supabaseData, error: supabaseError } = await supabase.auth.signUp({
         email: formData.email,
@@ -157,9 +190,12 @@ export const useRegisterTruckForm = () => {
         options: {
           data: {
             truckName: formData.truckName,
-            phone: formData.phone,
+            phoneNumber: formData.phone,
             firstName: formData.firstName,
             lastName: formData.lastName,
+            zipCode: Number(formData.zipCode),
+            latitude,
+            longitude,
           },
         },
       });
@@ -181,7 +217,15 @@ export const useRegisterTruckForm = () => {
       try {
         const backendResponse = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/User/RegisterTruck`,
-          {},
+          {
+            truckName: formData.truckName,
+            phone: formData.phone,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            zipCode: formData.zipCode,
+            latitude,
+            longitude,
+          },
           {
             headers: {
               "Content-Type": "application/json",

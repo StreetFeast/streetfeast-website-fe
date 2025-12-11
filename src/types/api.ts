@@ -5,6 +5,7 @@ export interface UserProfileMetadataSupabaseResponse {
   firstName?: string | null;
   lastName?: string | null;
   userType?: number | null;
+  phoneNumber?: string | null;
   existsInDb: boolean;
   isTruckSubscriptionActive?: boolean | null;
   stripeMetadata?: StripeMetadata | null;

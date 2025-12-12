@@ -1,0 +1,275 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFEDC2 0%, #FFD166 100%);
+  padding: 2rem;
+}
+
+.nav {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.backLink {
+  color: #ED6A00;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s ease;
+}
+
+.backLink:hover {
+  gap: 0.75rem;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(252, 252, 252, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1E1E1F;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: #808080;
+  font-size: 1.125rem;
+  margin: 0 0 3rem 0;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ED6A00;
+  margin: 0 0 1rem 0;
+}
+
+.section p {
+  color: #636363;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+.section ul {
+  color: #636363;
+  line-height: 1.7;
+  padding-left: 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+}
+
+.section strong {
+  color: #1E1E1F;
+  font-weight: 600;
+}
+
+.section a {
+  color: #ED6A00;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.section a:hover {
+  opacity: 0.8;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ED6A00 0%, #FF8534 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepContent {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.stepContent h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1E1E1F;
+  margin: 0 0 0.25rem 0;
+}
+
+.stepContent p {
+  margin: 0;
+  color: #636363;
+}
+
+.contactInfo {
+  background: rgba(255, 209, 102, 0.15);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.contactInfo p {
+  margin: 0.5rem 0;
+}
+
+.responseTime {
+  font-size: 0.875rem;
+  color: #808080 !important;
+  margin-top: 0.75rem !important;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .main {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .nav {
+    margin-bottom: 1.5rem;
+  }
+  
+  .main {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .section ul {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .steps {
+    gap: 1.25rem;
+    margin: 1.25rem 0;
+  }
+  
+  .step {
+    gap: 1rem;
+  }
+  
+  .stepNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+  }
+  
+  .stepContent h3 {
+    font-size: 1rem;
+  }
+  
+  .stepContent p {
+    font-size: 0.9rem;
+  }
+  
+  .contactInfo {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+  
+  .main {
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .section h2 {
+    font-size: 1.125rem;
+  }
+  
+  .section p,
+  .section ul {
+    font-size: 0.875rem;
+  }
+  
+  .backLink {
+    font-size: 0.875rem;
+  }
+  
+  .stepNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .stepContent h3 {
+    font-size: 0.9375rem;
+  }
+}
+

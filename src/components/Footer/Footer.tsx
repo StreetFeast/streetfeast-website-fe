@@ -24,6 +24,7 @@ export default function Footer() {
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
               <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
               <Link href="/cookies" className={styles.link}>Cookie Policy</Link>
+              <Link href="/delete-my-data" className={styles.link}>Delete My Data</Link>
             </div>
             
             <div className={styles.column}>

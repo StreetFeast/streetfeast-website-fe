@@ -103,6 +103,11 @@ export default function MyProfile() {
   const stripeMetadata = userInfo?.user_metadata?.stripeMetadata;
   const isTruckSubscriptionActive = userInfo?.user_metadata?.isTruckSubscriptionActive ?? false;
   const stripeCheckoutLinks = stripeMetadata?.stripeCheckoutLinks;
+  const stripeCustomerId = stripeMetadata?.stripeCustomerId;
+  const stripeSubscriptionId = stripeMetadata?.stripeSubscriptionId;
+  const hasSubscription = !!stripeSubscriptionId;
+
+  console.log(stripeSubscriptionId);
 
   return (
     <div className={styles.container}>
@@ -171,7 +176,7 @@ export default function MyProfile() {
             <Skeleton height={48} />
           </div>
         ) : isTruckSubscriptionActive ? (
-          // Subscribed State - Show link to Stripe dashboard
+          // Active Subscription State - Show subscription details
           <div className={styles.subscriptionCard}>
             <div className={styles.activeSubscriptionBadge}>
               <span className={styles.activeDot}></span>
@@ -183,6 +188,20 @@ export default function MyProfile() {
                 You have an active subscription! Manage your subscription details,
                 billing information, and payment methods through our secure customer portal.
               </p>
+
+              {stripeCustomerId && (
+                <div className={styles.profileField}>
+                  <label className={styles.fieldLabel}>Customer ID</label>
+                  <p className={styles.fieldValue}>{stripeCustomerId}</p>
+                </div>
+              )}
+
+              {stripeSubscriptionId && (
+                <div className={styles.profileField}>
+                  <label className={styles.fieldLabel}>Subscription ID</label>
+                  <p className={styles.fieldValue}>{stripeSubscriptionId}</p>
+                </div>
+              )}
             </div>
 
             <button
@@ -190,6 +209,41 @@ export default function MyProfile() {
               className={styles.updateButton}
             >
               See Subscription Information
+            </button>
+          </div>
+        ) : hasSubscription ? (
+          // Inactive Subscription State - Has subscription ID but not active
+          <div className={styles.subscriptionCard}>
+            <div className={styles.inactiveSubscriptionBadge}>
+              Inactive Subscription
+            </div>
+
+            <div className={styles.subscriptionDetails}>
+              <p className={styles.subscriptionMessage}>
+                Your subscription is currently inactive. This may be due to payment issues or cancellation.
+                Please manage your subscription through our secure customer portal.
+              </p>
+
+              {stripeCustomerId && (
+                <div className={styles.profileField}>
+                  <label className={styles.fieldLabel}>Customer ID</label>
+                  <p className={styles.fieldValue}>{stripeCustomerId}</p>
+                </div>
+              )}
+
+              {stripeSubscriptionId && (
+                <div className={styles.profileField}>
+                  <label className={styles.fieldLabel}>Subscription ID</label>
+                  <p className={styles.fieldValue}>{stripeSubscriptionId}</p>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={handleViewSubscriptionDetails}
+              className={styles.updateButton}
+            >
+              Manage Subscription
             </button>
           </div>
         ) : (

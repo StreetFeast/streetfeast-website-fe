@@ -1,0 +1,266 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* Animated background circles */
+.backgroundAnimation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle1,
+.circle2,
+.circle3 {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--main-orange);
+  opacity: 0.1;
+  animation: float 20s infinite ease-in-out;
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.circle2 {
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  right: -150px;
+  animation-delay: 7s;
+}
+
+.circle3 {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 14s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--main-white);
+  max-width: 700px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.logoContainer {
+  margin-bottom: 2rem;
+  animation: scaleIn 1s ease-out;
+}
+
+.logoImage {
+  filter: drop-shadow(0 8px 24px rgba(237, 106, 0, 0.4));
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.brand {
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  color: var(--main-white);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+  animation: fadeInUp 1s ease-out 0.2s backwards;
+}
+
+.comingSoonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out 0.4s backwards;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--main-orange);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Animated dots */
+.dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--main-orange);
+  animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.description {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(252, 252, 252, 0.9);
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out 0.6s backwards;
+}
+
+.tagline {
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: rgba(252, 252, 252, 0.7);
+  font-style: italic;
+  animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .logoImage {
+    width: 140px;
+    height: 140px;
+  }
+
+  .brand {
+    font-size: 3.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .circle1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle2 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .circle3 {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoImage {
+    width: 120px;
+    height: 120px;
+  }
+
+  .brand {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .comingSoonWrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+}

@@ -4,7 +4,6 @@ import { AsYouType, isValidPhoneNumber } from "libphonenumber-js";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import { validatePassword } from "@/utils/validation";
-import axios from "axios";
 import zipcodes from "zipcodes";
 
 interface RegisterTruckFormData {
@@ -172,7 +171,6 @@ export const useRegisterTruckForm = () => {
     setIsLoading(true);
 
     try {
-      // Lookup latitude and longitude from zipcode
       const zipCodeData = zipcodes.lookup(formData.zipCode);
 
       if (!zipCodeData) {
@@ -183,7 +181,6 @@ export const useRegisterTruckForm = () => {
 
       const { latitude, longitude } = zipCodeData;
 
-      // Step 1: Register user with Supabase
       const { data: supabaseData, error: supabaseError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -212,53 +209,15 @@ export const useRegisterTruckForm = () => {
         return;
       }
 
-      // Step 2: Register truck on backend
-      // TODO: Eventually we'll require email validation which will make Supabase not return a session.
-      try {
-        const backendResponse = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/User/RegisterTruck`,
-          {
-            truckName: formData.truckName,
-            phone: formData.phone,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            zipCode: formData.zipCode,
-            latitude,
-            longitude,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${supabaseData.session?.access_token}`,
-            },
-          }
+      if (supabaseData.session && supabaseData.user) {
+        setAuth(
+          supabaseData.user,
+          supabaseData.session.access_token,
+          supabaseData.session.refresh_token
         );
-
-        if (backendResponse) {
-          // Set auth state
-          if (supabaseData.session && supabaseData.user) {
-            setAuth(
-              supabaseData.user,
-              supabaseData.session.access_token,
-              supabaseData.session.refresh_token
-            );
-          }
-
-          // Redirect to home or dashboard
-          router.push("/");
-        }
-      } catch (backendError) {
-        if (axios.isAxiosError(backendError) && backendError.response) {
-          setError(
-            backendError.response.data?.title ||
-              backendError.response.data?.detail ||
-              "Failed to register truck."
-          );
-        } else {
-          setError("Failed to register truck.");
-        }
-        setIsLoading(false);
       }
+
+      router.push("/my-profile");
     } catch {
       setError("An unexpected error occurred. Please try again.");
       setIsLoading(false);

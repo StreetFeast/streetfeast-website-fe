@@ -302,6 +302,20 @@
   }
 }
 
+/* Inactive Subscription Badge */
+.inactiveSubscriptionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fed7d7;
+  color: #742a2a;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
 /* Subscription Details */
 .subscriptionDetails {
   display: flex;

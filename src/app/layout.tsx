@@ -3,6 +3,7 @@ import { Lexend } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import { ComingSoon } from "@/components/ComingSoon";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -67,22 +68,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isLaunched = process.env.NEXT_PUBLIC_IS_LAUNCHED === 'true';
+
   return (
     <html lang="en">
       <body className={lexend.className}>
-        {children}
-        <ToastContainer
-          position="bottom-right"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+        {isLaunched ? (
+          <>
+            {children}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={4000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </>
+        ) : (
+          <ComingSoon />
+        )}
       </body>
     </html>
   );

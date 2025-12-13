@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './ComingSoon.module.css';
 
 export default function ComingSoon() {
@@ -39,6 +40,16 @@ export default function ComingSoon() {
 
         <div className={styles.tagline}>
           Your next favorite meal is waiting to be discovered.
+        </div>
+
+        <div className={styles.links}>
+          <Link href="/terms" className={styles.link}>
+            Terms of Service
+          </Link>
+          <span className={styles.separator}>•</span>
+          <Link href="/privacy" className={styles.link}>
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </div>

@@ -22,7 +22,6 @@ interface FormErrors {
   zipCode: string;
   password: string;
   verifyPassword: string;
-  zipCode: string;
 }
 
 export const useRegisterTruckForm = () => {
@@ -42,7 +41,6 @@ export const useRegisterTruckForm = () => {
     zipCode: "",
     password: "",
     verifyPassword: "",
-    zipCode: "",
   });
 
   const [error, setError] = useState("");

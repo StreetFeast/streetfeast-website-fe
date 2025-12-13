@@ -183,7 +183,7 @@ export default function Privacy() {
           <p>You have the right to request a copy of your personal information in a structured, commonly used format.</p>
 
           <h3>6.3 Deletion</h3>
-          <p>You can request deletion of your account and personal information by contacting us. Note that we may retain certain information as required by law or for legitimate business purposes.</p>
+          <p>You can request deletion of your account and personal information through the app or by contacting us. For detailed instructions on how to delete your data, please visit our <Link href="/delete-my-data">Delete My Data</Link> page. Note that we may retain certain information as required by law or for legitimate business purposes.</p>
 
           <h3>6.4 Marketing Communications</h3>
           <p>You can opt-out of marketing communications through:</p>

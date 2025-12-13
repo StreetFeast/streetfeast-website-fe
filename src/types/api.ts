@@ -13,6 +13,7 @@ export interface UserProfileMetadataSupabaseResponse {
 
 export interface StripeMetadata {
   stripeCustomerId?: string | null;
+  stripeSubscriptionId?: string | null;
   stripeCheckoutLinks?: {
     [key: string]: string;
   } | null;

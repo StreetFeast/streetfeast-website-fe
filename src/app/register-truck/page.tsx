@@ -103,6 +103,19 @@ export default function RegisterTruck() {
               autoComplete="organization"
             />
 
+            <FormInput
+              label="ZIP Code"
+              type="text"
+              id="zipCode"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+              error={errors.zipCode}
+              required
+              disabled={isLoading}
+              autoComplete="postal-code"
+            />
+
             <PasswordInput
               label="Password"
               id="password"

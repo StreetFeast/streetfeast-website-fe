@@ -19,6 +19,7 @@ interface RegisterTruckFormData {
 
 interface FormErrors {
   phone: string;
+  zipCode: string;
   password: string;
   verifyPassword: string;
   zipCode: string;
@@ -38,6 +39,7 @@ export const useRegisterTruckForm = () => {
 
   const [errors, setErrors] = useState<FormErrors>({
     phone: "",
+    zipCode: "",
     password: "",
     verifyPassword: "",
     zipCode: "",
@@ -72,6 +74,21 @@ export const useRegisterTruckForm = () => {
         newErrors.phone = "Please enter a valid US phone number";
       } else {
         newErrors.phone = "";
+      }
+    }
+
+    // Handle zipcode validation
+    if (name === "zipCode") {
+      // Only allow digits
+      processedValue = value.replace(/\D/g, "").slice(0, 5);
+
+      // Validate zipcode format
+      if (processedValue && processedValue.length !== 5) {
+        newErrors.zipCode = "ZIP code must be 5 digits";
+      } else if (processedValue && !zipcodes.lookup(processedValue)) {
+        newErrors.zipCode = "Please enter a valid ZIP code";
+      } else {
+        newErrors.zipCode = "";
       }
     }
 
@@ -139,9 +156,11 @@ export const useRegisterTruckForm = () => {
       formData.phone.trim() !== "" &&
       formData.email.trim() !== "" &&
       formData.truckName.trim() !== "" &&
+      formData.zipCode.trim() !== "" &&
       formData.password.trim() !== "" &&
       formData.verifyPassword.trim() !== "" &&
       !errors.phone &&
+      !errors.zipCode &&
       !errors.password &&
       !errors.verifyPassword &&
       formData.password === formData.verifyPassword

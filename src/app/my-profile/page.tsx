@@ -146,7 +146,7 @@ export default function MyProfile() {
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Phone</label>
-                <p className={styles.fieldValue}>{userInfo?.phone || "Not provided"}</p>
+                <p className={styles.fieldValue}>{userInfo?.user_metadata?.phoneNumber || "Not provided"}</p>
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Email</label>

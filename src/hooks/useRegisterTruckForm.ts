@@ -176,45 +176,56 @@ export const useRegisterTruckForm = () => {
         return;
       }
 
+      if (supabaseData.session && supabaseData.user) {
+        setAuth(
+          supabaseData.user,
+          supabaseData.session.access_token,
+          supabaseData.session.refresh_token
+        );
+      }
+
+      // Redirect to home or dashboard
+      router.push("/my-profile");
+
       // Step 2: Register truck on backend
       // TODO: Eventually we'll require email validation which will make Supabase not return a session.
-      try {
-        const backendResponse = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/User/RegisterTruck`,
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${supabaseData.session?.access_token}`,
-            },
-          }
-        );
+      // try {
+      //   const backendResponse = await axios.post(
+      //     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/User/RegisterTruck`,
+      //     {},
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         Authorization: `Bearer ${supabaseData.session?.access_token}`,
+      //       },
+      //     }
+      //   );
 
-        if (backendResponse) {
-          // Set auth state
-          if (supabaseData.session && supabaseData.user) {
-            setAuth(
-              supabaseData.user,
-              supabaseData.session.access_token,
-              supabaseData.session.refresh_token
-            );
-          }
+      //   if (backendResponse) {
+      //     // Set auth state
+      //     if (supabaseData.session && supabaseData.user) {
+      //       setAuth(
+      //         supabaseData.user,
+      //         supabaseData.session.access_token,
+      //         supabaseData.session.refresh_token
+      //       );
+      //     }
 
-          // Redirect to home or dashboard
-          router.push("/");
-        }
-      } catch (backendError) {
-        if (axios.isAxiosError(backendError) && backendError.response) {
-          setError(
-            backendError.response.data?.title ||
-              backendError.response.data?.detail ||
-              "Failed to register truck."
-          );
-        } else {
-          setError("Failed to register truck.");
-        }
-        setIsLoading(false);
-      }
+      //     // Redirect to home or dashboard
+      //     router.push("/");
+      //   }
+      // } catch (backendError) {
+      //   if (axios.isAxiosError(backendError) && backendError.response) {
+      //     setError(
+      //       backendError.response.data?.title ||
+      //         backendError.response.data?.detail ||
+      //         "Failed to register truck."
+      //     );
+      //   } else {
+      //     setError("Failed to register truck.");
+      //   }
+      //   setIsLoading(false);
+      // }
     } catch {
       setError("An unexpected error occurred. Please try again.");
       setIsLoading(false);

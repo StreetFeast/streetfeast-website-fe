@@ -99,15 +99,16 @@ export default function MyProfile() {
 
   // Extract data from profile
   const userInfo = profile;
-  const ownedTruck = profile?.ownedTrucks?.[0]; // Get first truck
-  const stripeMetadata = userInfo?.user_metadata?.stripeMetadata;
-  const isTruckSubscriptionActive = userInfo?.user_metadata?.isTruckSubscriptionActive ?? false;
-  const stripeCheckoutLinks = stripeMetadata?.stripeCheckoutLinks;
-  const stripeCustomerId = stripeMetadata?.stripeCustomerId;
-  const stripeSubscriptionId = stripeMetadata?.stripeSubscriptionId;
+  const ownedTruck = profile?.truckToCreate || profile?.ownedTrucks?.[0];
+  const isTruckSubscriptionActive = userInfo?.isTruckSubscriptionActive ?? false;
+  const stripeCheckoutLinks = {
+    yearly: userInfo?.stripeCheckoutLinkYearly,
+    monthly: userInfo?.stripeCheckoutLinkMonthly,
+  };
+  const stripeCustomerId = userInfo?.stripeCustomerId;
+  const stripeSubscriptionId = userInfo?.stripeSubscriptionId;
   const hasSubscription = !!stripeSubscriptionId;
 
-  console.log(stripeSubscriptionId);
 
   return (
     <div className={styles.container}>
@@ -140,18 +141,18 @@ export default function MyProfile() {
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Name</label>
                 <p className={styles.fieldValue}>
-                  {userInfo?.user_metadata?.firstName && userInfo?.user_metadata?.lastName
-                    ? `${userInfo.user_metadata.firstName} ${userInfo.user_metadata.lastName}`
+                  {userInfo?.firstName && userInfo?.lastName
+                    ? `${userInfo.firstName} ${userInfo.lastName}`
                     : "Not provided"}
                 </p>
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Truck Name</label>
-                <p className={styles.fieldValue}>{userInfo?.user_metadata?.truckName || "Not provided"}</p>
+                <p className={styles.fieldValue}>{ownedTruck?.name || "Not provided"}</p>
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Phone</label>
-                <p className={styles.fieldValue}>{userInfo?.user_metadata?.phoneNumber || "Not provided"}</p>
+                <p className={styles.fieldValue}>{userInfo?.phoneNumber || "Not provided"}</p>
               </div>
               <div className={styles.profileField}>
                 <label className={styles.fieldLabel}>Email</label>

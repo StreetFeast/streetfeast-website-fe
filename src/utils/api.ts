@@ -1,4 +1,4 @@
-import { UserProfileSupabaseResponse } from '@/types/api';
+import { UserResponse } from '@/types/api';
 import { apiClient } from './axiosConfig';
 
 /**
@@ -6,7 +6,7 @@ import { apiClient } from './axiosConfig';
  * The access token is automatically included via axios interceptor
  * If the token is expired, it will be automatically refreshed
  */
-export const getUserProfile = async (): Promise<UserProfileSupabaseResponse> => {
-  const response = await apiClient.get<UserProfileSupabaseResponse>('/api/v1/User/Profile');
+export const getUserProfile = async (): Promise<UserResponse> => {
+  const response = await apiClient.get<UserResponse>('/api/v1/User/Profile');
   return response.data;
 };

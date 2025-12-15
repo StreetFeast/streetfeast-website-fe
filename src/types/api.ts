@@ -47,3 +47,37 @@ export interface Truck {
   lastNotificationSentTimestampUtc: string;
   images?: TruckImageMap[] | null;
 }
+
+export interface UserFavoriteMap {
+  id: number;
+  userId: string;
+  truckId: number;
+  createdAt: string;
+}
+
+export interface UserFCMTokenMap {
+  id: number;
+  userId: string;
+  fcmToken: string;
+}
+
+export interface UserResponse {
+  id: string;
+  createdAt: string;
+  userTypeId: number;
+  firstName?: string | null;
+  lastName?: string | null;
+  email?: string | null;
+  phoneNumber?: string | null;
+  stripeCustomerId?: string | null;
+  stripeSubscriptionId?: string | null;
+  stripeCheckoutLinkYearly?: string | null;
+  stripeCheckoutLinkMonthly?: string | null;
+  isTruckSubscriptionActive: boolean;
+  timeZone?: string | null;
+  unreadNotifications: number;
+  ownedTrucks?: Truck[] | null;
+  truckToCreate?: Truck | null;
+  favorites?: UserFavoriteMap[] | null;
+  fcmTokens?: UserFCMTokenMap[] | null;
+}

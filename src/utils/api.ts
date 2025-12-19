@@ -1,4 +1,4 @@
-import { UserResponse } from '@/types/api';
+import { UserResponse, TruckDetailResponse } from '@/types/api';
 import { apiClient } from './axiosConfig';
 
 /**
@@ -8,5 +8,35 @@ import { apiClient } from './axiosConfig';
  */
 export const getUserProfile = async (): Promise<UserResponse> => {
   const response = await apiClient.get<UserResponse>('/api/v1/User/Profile');
+  return response.data;
+};
+
+/**
+ * Fetches truck details by truck ID
+ * This endpoint is public and does not require authentication
+ */
+export const getTruckDetails = async (truckId: string): Promise<TruckDetailResponse> => {
+  const response = await apiClient.get<TruckDetailResponse>(`/api/v1/Truck/${truckId}`);
+  return response.data;
+};
+
+/**
+ * Fetches truck occurrences for a date range
+ * This endpoint is public and does not require authentication
+ */
+export const getTruckOccurrences = async (
+  truckId: string,
+  startUtc: string,
+  endUtc: string
+): Promise<import('@/types/api').TruckOccurrence[]> => {
+  const response = await apiClient.get<import('@/types/api').TruckOccurrence[]>(
+    `/api/v1/Truck/${truckId}/Schedule/Occurrences`,
+    {
+      params: {
+        startUtc,
+        endUtc,
+      },
+    }
+  );
   return response.data;
 };

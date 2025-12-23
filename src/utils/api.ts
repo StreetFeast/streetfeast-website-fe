@@ -26,15 +26,15 @@ export const getTruckDetails = async (truckId: string): Promise<TruckDetailRespo
  */
 export const getTruckOccurrences = async (
   truckId: string,
-  startUtc: string,
-  endUtc: string
+  startLocal: string,
+  endLocal: string
 ): Promise<import('@/types/api').TruckOccurrence[]> => {
   const response = await apiClient.get<import('@/types/api').TruckOccurrence[]>(
     `/api/v1/Truck/${truckId}/Schedule/Occurrences`,
     {
       params: {
-        startUtc,
-        endUtc,
+        startLocal,
+        endLocal,
       },
     }
   );

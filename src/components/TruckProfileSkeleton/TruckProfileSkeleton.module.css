@@ -1,0 +1,260 @@
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #F5F5F5 0%,
+    #E8E8E8 20%,
+    #F5F5F5 40%,
+    #F5F5F5 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 8px;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background: #F8F9FA;
+  overflow: hidden;
+}
+
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+/* Left Panel */
+.leftPanel {
+  width: 540px;
+  height: 100vh;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroSkeleton {
+  composes: skeleton;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  border-radius: 0;
+}
+
+.content {
+  padding: 2rem;
+  background: white;
+  flex: 1;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.titleSkeleton {
+  composes: skeleton;
+  height: 2.5rem;
+  flex: 1;
+}
+
+.iconSkeleton {
+  composes: skeleton;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Description */
+.descriptionSkeleton {
+  composes: skeleton;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+}
+
+/* Contact Info */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.iconSmallSkeleton {
+  composes: skeleton;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.textSkeleton {
+  composes: skeleton;
+  height: 1.25rem;
+  flex: 1;
+}
+
+.textMediumSkeleton {
+  composes: skeleton;
+  height: 1.25rem;
+  width: 80%;
+  margin-bottom: 0.5rem;
+}
+
+.textSmallSkeleton {
+  composes: skeleton;
+  height: 1rem;
+  width: 60%;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #F5F5F5;
+}
+
+.tabSkeleton {
+  composes: skeleton;
+  height: 3rem;
+  flex: 1;
+  border-radius: 0;
+}
+
+/* Date Scroller */
+.dateScroller {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: hidden;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dateCardSkeleton {
+  composes: skeleton;
+  min-width: 85px;
+  max-width: 85px;
+  height: 110px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Occurrences List */
+.occurrencesListSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.occurrenceCardSkeleton {
+  composes: skeleton;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  min-height: 80px;
+}
+
+/* Map Section */
+.mapSection {
+  flex: 1;
+  height: 100vh;
+  background: #E5E3DF;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapSkeleton {
+  composes: skeleton;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .leftPanel {
+    width: 420px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .leftPanel {
+    width: 380px;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    background: white;
+    overflow: auto;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .leftPanel {
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+    box-shadow: none;
+  }
+
+  .mapSection {
+    height: 400px;
+    width: 100%;
+  }
+
+  .dateCardSkeleton {
+    min-width: 70px;
+    max-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem;
+  }
+
+  .mapSection {
+    height: 300px;
+  }
+}

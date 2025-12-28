@@ -81,3 +81,84 @@ export interface UserResponse {
   favorites?: UserFavoriteMap[] | null;
   fcmTokens?: UserFCMTokenMap[] | null;
 }
+
+export interface Location {
+  id: number;
+  truckId: number;
+  address: string;
+  timeZone: string;
+  sqlTimeZone: string;
+  longitude: number;
+  latitude: number;
+}
+
+export interface MenuItem {
+  truckMenuItemMapId: number;
+  sortOrder: number;
+  price: number;
+  id: number;
+  truckId: number;
+  image?: string | null;
+  name: string;
+  description?: string | null;
+  isActive: boolean;
+  images: TruckImageMap[];
+}
+
+export interface MenuCategory {
+  id: number;
+  truckId: number;
+  name: string;
+  sortOrder: number;
+  menuItems: MenuItem[];
+}
+
+export interface Menu {
+  id: number;
+  truckId: number;
+  name: string;
+  description?: string | null;
+  categories: MenuCategory[];
+  isDefault: boolean;
+}
+
+export interface TruckOccurrence {
+  id: number;
+  menuId?: number | null;
+  locationId: number;
+  ruleId?: number | null;
+  truckId: number;
+  name: string;
+  openTimeLocal: string;
+  closeTimeLocal: string;
+  openTimeUtc: string;
+  closeTimeUtc: string;
+  isUserModified: boolean;
+  isClosed: boolean;
+  checkedInAt?: string | null;
+  location: Location;
+  menu?: Menu | null;
+}
+
+export interface TruckDetailResponse {
+  id: number;
+  ownerUserId: string;
+  name: string;
+  cuisine?: string | null;
+  description?: string | null;
+  phone?: string | null;
+  website?: string | null;
+  isActive: boolean;
+  createdAt: string;
+  lastNotificationSentTimestampUtc: string;
+  defaultMenuId?: number | null;
+  favoriteId?: number | null;
+  zipCode?: number | null;
+  homeLatitude?: number | null;
+  homeLongitude?: number | null;
+  distanceMeters?: number | null;
+  distanceFeet?: number | null;
+  images: TruckImageMap[];
+  activeOccurrence?: TruckOccurrence | null;
+  todaysOccurrences?: TruckOccurrence[] | null;
+}

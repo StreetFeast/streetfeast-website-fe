@@ -16,6 +16,13 @@ export default function LoginTruck() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetMessage, setResetMessage] = useState("");
+  const [resetError, setResetError] = useState("");
+  const [isResetting, setIsResetting] = useState(false);
+  const [showResendVerification, setShowResendVerification] = useState(false);
+  const [resendingVerification, setResendingVerification] = useState(false);
 
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -45,7 +52,14 @@ export default function LoginTruck() {
       });
 
       if (error) {
-        setError(error.message);
+        // Check if error is due to unconfirmed email
+        if (error.message.toLowerCase().includes("email not confirmed")) {
+          setError("Please verify your email address before logging in.");
+          setShowResendVerification(true);
+        } else {
+          setError(error.message);
+          setShowResendVerification(false);
+        }
         setIsLoading(false);
         return;
       }
@@ -61,6 +75,64 @@ export default function LoginTruck() {
     } catch {
       setError("An unexpected error occurred. Please try again.");
       setIsLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    setResendingVerification(true);
+    setError("");
+
+    try {
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email: formData.username,
+        options: {
+          emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_DOMAIN}/verify`
+        }
+      });
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setError("Verification email sent! Please check your inbox.");
+        setShowResendVerification(false);
+      }
+    } catch {
+      setError("Failed to resend verification email. Please try again.");
+    } finally {
+      setResendingVerification(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetError("");
+    setResetMessage("");
+    setIsResetting(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+        redirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_DOMAIN}/reset-password`,
+      });
+
+      if (error) {
+        setResetError(error.message);
+        setIsResetting(false);
+        return;
+      }
+
+      setResetMessage(
+        "Password reset email sent! Please check your inbox."
+      );
+      setIsResetting(false);
+      setTimeout(() => {
+        setShowResetModal(false);
+        setResetEmail("");
+        setResetMessage("");
+      }, 3000);
+    } catch {
+      setResetError("An unexpected error occurred. Please try again.");
+      setIsResetting(false);
     }
   };
 
@@ -176,9 +248,101 @@ export default function LoginTruck() {
             >
               {isLoading ? "Logging in..." : "Login"}
             </button>
+
+            {showResendVerification && (
+              <button
+                type="button"
+                className={styles.submitButton}
+                onClick={handleResendVerification}
+                disabled={resendingVerification}
+                style={{ marginTop: '0.5rem' }}
+              >
+                {resendingVerification ? "Sending..." : "Resend Verification Email"}
+              </button>
+            )}
+
+            <button
+              type="button"
+              className={styles.forgotPasswordButton}
+              onClick={() => setShowResetModal(true)}
+            >
+              Forgot Password?
+            </button>
           </form>
         </div>
       </div>
+
+      {showResetModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowResetModal(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2 className={styles.modalTitle}>Reset Password</h2>
+              <button
+                className={styles.closeButton}
+                onClick={() => setShowResetModal(false)}
+                aria-label="Close modal"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className={styles.closeIcon}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <form onSubmit={handleResetPassword} className={styles.resetForm}>
+              {resetError && (
+                <div className={styles.errorBanner}>
+                  {resetError}
+                </div>
+              )}
+
+              {resetMessage && (
+                <div className={styles.successBanner}>
+                  {resetMessage}
+                </div>
+              )}
+
+              <p className={styles.modalDescription}>
+                Enter your email address and we&apos;ll send you a link to reset your password.
+              </p>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="resetEmail" className={styles.label}>
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="resetEmail"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  className={styles.input}
+                  required
+                  disabled={isResetting}
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={!resetEmail.trim() || isResetting}
+              >
+                {isResetting ? "Sending..." : "Send Reset Link"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

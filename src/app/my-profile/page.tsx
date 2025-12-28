@@ -57,7 +57,7 @@ export default function MyProfile() {
 
     fetchUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isHydrated]);
+  }, [isHydrated, user, accessToken, router]);
 
   const handleBillingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBillingPeriod(e.target.value as "monthly" | "yearly");
@@ -66,8 +66,9 @@ export default function MyProfile() {
   const handleSubscriptionUpdate = () => {
     // Navigate to Stripe checkout link based on selected billing period
     const checkoutUrl = billingPeriod === "monthly"
-      ? stripeCheckoutLinks?.monthly
-      : stripeCheckoutLinks?.yearly;
+      ? profile?.stripeCheckoutLinkMonthly
+      : profile?.stripeCheckoutLinkYearly;
+      
 
     if (checkoutUrl) {
       window.location.href = checkoutUrl;
@@ -103,7 +104,7 @@ export default function MyProfile() {
   const isTruckSubscriptionActive = userInfo?.isTruckSubscriptionActive ?? false;
   const stripeCheckoutLinks = {
     yearly: userInfo?.stripeCheckoutLinkYearly,
-    monthly: userInfo?.stripeCheckoutLinkMonthly,
+    monthly: userInfo?.stripeCheckoutLinkMonthly
   };
   const stripeCustomerId = userInfo?.stripeCustomerId;
   const stripeSubscriptionId = userInfo?.stripeSubscriptionId;

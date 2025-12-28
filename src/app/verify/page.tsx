@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import styles from "./page.module.css";
 
-export default function Verify() {
+function VerifyContent() {
   const [status, setStatus] = useState<"awaiting" | "verifying" | "success" | "error" | "loading">("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [resendLoading, setResendLoading] = useState(false);
@@ -313,5 +313,35 @@ export default function Verify() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Verify() {
+  return (
+    <Suspense fallback={
+      <div className={styles.container}>
+        <div className={styles.leftSection}>
+          <Image
+            src="/app-vector-file.svg"
+            alt="StreetFeast Logo"
+            width={200}
+            height={200}
+            className={styles.logo}
+          />
+          <h1 className={styles.brandTitle}>StreetFeast</h1>
+          <p className={styles.brandDescription}>
+            Welcome to StreetFeast, the app built to connect you to your hungry customers.
+          </p>
+        </div>
+        <div className={styles.rightSection}>
+          <div className={styles.contentWrapper}>
+            <div className={styles.spinner} />
+            <h1 className={styles.title}>Loading...</h1>
+          </div>
+        </div>
+      </div>
+    }>
+      <VerifyContent />
+    </Suspense>
   );
 }

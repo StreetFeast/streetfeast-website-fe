@@ -85,15 +85,104 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         fetchTruckData();
     }, [truckId]);
 
+    const closeModal = () => {
+        setShowModal(false);
+        setModalMessage('');
+    };
+
     if (loading) {
         return <TruckProfileSkeleton />;
     }
 
     if (error || !truckData) {
         return (
-            <div className={styles.container}>
-                <div className={styles.error}>{error || 'Truck not found'}</div>
-            </div>
+            <>
+                {/* Modal */}
+                {showModal && (
+                    <div className={styles.modalOverlay} onClick={closeModal}>
+                        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                            <div className={styles.modalAccent} />
+                            <button className={styles.modalClose} onClick={closeModal}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <h2 className={styles.modalTitle}>Download the app to {modalMessage}</h2>
+                            <p className={styles.modalText}>
+                                Get the full StreetFeast experience with our mobile app.
+                            </p>
+                            <div className={styles.modalButtons}>
+                                {(userDevice === 'ios' || userDevice === 'unknown') && (
+                                    <a
+                                        href="https://apps.apple.com"
+                                        className={styles.appStoreButton}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Image
+                                            src="/app-store-badge.svg"
+                                            alt="Download on the App Store"
+                                            width={144}
+                                            height={48}
+                                        />
+                                    </a>
+                                )}
+                                {(userDevice === 'android' || userDevice === 'unknown') && (
+                                    <a
+                                        href="https://play.google.com"
+                                        className={styles.playStoreButton}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Image
+                                            src="/google-play-badge.png"
+                                            alt="Get it on Google Play"
+                                            width={162}
+                                            height={48}
+                                        />
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                <div className={styles.errorContainer}>
+                    <div className={styles.errorContent}>
+                        <div className={styles.errorIcon}>
+                            <Image
+                                src="/streetfeastlogowhite.png"
+                                alt="StreetFeast"
+                                width={120}
+                                height={120}
+                            />
+                        </div>
+                        <h1 className={styles.errorTitle}>Oops! We couldn&apos;t find this truck</h1>
+                        <p className={styles.errorMessage}>
+                            This food truck might have moved locations or is no longer available.
+                            Don&apos;t worry - there are plenty more delicious options waiting for you!
+                        </p>
+                        <div className={styles.errorActions}>
+                            <button
+                                className={styles.primaryButton}
+                                onClick={() => {
+                                    setModalMessage('find food trucks near you');
+                                    setShowModal(true);
+                                }}
+                            >
+                                Find Other Trucks
+                            </button>
+                        </div>
+                        <div className={styles.errorBranding}>
+                            <span className={styles.brandText}>Street</span>
+                            <span className={styles.brandTextAccent}>Feast</span>
+                        </div>
+                        <p className={styles.errorSubtext}>
+                            Discover street food vendors, food trucks & pop-ups near you
+                        </p>
+                    </div>
+                </div>
+            </>
         );
     }
 
@@ -283,11 +372,6 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
     const handleMapClick = () => {
         setModalMessage('view the full interactive map');
         setShowModal(true);
-    };
-
-    const closeModal = () => {
-        setShowModal(false);
-        setModalMessage('');
     };
 
     return (

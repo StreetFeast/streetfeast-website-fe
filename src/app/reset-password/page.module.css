@@ -53,6 +53,8 @@
 }
 
 .formWrapper {
+  display: flex;
+  flex-direction: column;
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
@@ -78,6 +80,16 @@
   border: 1px solid #fcc;
   border-radius: 8px;
   color: #c33;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.successBanner {
+  padding: 1rem;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  color: #155724;
   font-size: 0.95rem;
   text-align: center;
 }
@@ -143,6 +155,53 @@
   height: 20px;
 }
 
+.passwordRequirements {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.requirementsTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 0.5rem 0;
+}
+
+.requirementsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.requirementsList li {
+  font-size: 0.85rem;
+  color: #718096;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.requirementsList li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: #cbd5e0;
+}
+
+.requirementsList li.met {
+  color: #38a169;
+}
+
+.requirementsList li.met::before {
+  content: "✓";
+  color: #38a169;
+  font-weight: bold;
+}
+
 .submitButton {
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #ED6A00 0%, #FFD166 100%);
@@ -165,117 +224,6 @@
 .submitButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.forgotPasswordButton {
-  background: none;
-  border: none;
-  color: #ED6A00;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.5rem;
-  text-align: center;
-  transition: color 0.2s;
-  font-family: inherit;
-}
-
-.forgotPasswordButton:hover {
-  color: #c55700;
-  text-decoration: underline;
-}
-
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 1rem;
-}
-
-.modal {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modalHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.modalTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-}
-
-.closeButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #718096;
-  transition: color 0.2s;
-}
-
-.closeButton:hover {
-  color: #2d3748;
-}
-
-.closeIcon {
-  width: 24px;
-  height: 24px;
-}
-
-.modalDescription {
-  color: #4a5568;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
-}
-
-.resetForm {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.successBanner {
-  padding: 1rem;
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-  border-radius: 8px;
-  color: #155724;
-  font-size: 0.95rem;
-  text-align: center;
 }
 
 @media (max-width: 968px) {

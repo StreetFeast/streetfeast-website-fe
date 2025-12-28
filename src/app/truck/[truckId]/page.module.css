@@ -7,7 +7,6 @@
 
 /* Loading & Error States */
 .loading,
-.error,
 .noData {
   display: flex;
   align-items: center;
@@ -18,8 +17,121 @@
   text-align: center;
 }
 
-.error {
-  color: #F44336;
+/* Error Container - Full Screen */
+.errorContainer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f36f24 0%, #ed6a00 100%);
+  padding: 2rem;
+}
+
+.errorContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 600px;
+  gap: 1.5rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.errorIcon {
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15));
+  animation: gentleBob 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorIcon img {
+  border-radius: 24px;
+}
+
+@keyframes gentleBob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.errorTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  line-height: 1.2;
+}
+
+.errorMessage {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 500px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.errorActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryButton {
+  background: white;
+  color: #ed6a00;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background: #f9f9f9;
+}
+
+.errorBranding {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.errorSubtext {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* Modal */
@@ -169,7 +281,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #fbaa1d7e 0%, #fbaa1d74 50%);
+  background: linear-gradient(135deg, #f36f24 0%, #f36f24 50%);
   position: relative;
 }
 
@@ -221,7 +333,7 @@
 }
 
 .brandTextAccent {
-  color: #ED6A00;
+  color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -811,5 +923,42 @@
 
   .mapSection {
     height: 300px;
+  }
+
+  /* Error Screen Mobile Responsive */
+  .errorContainer {
+    padding: 1.5rem;
+  }
+
+  .errorIcon img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .errorTitle {
+    font-size: 1.75rem;
+  }
+
+  .errorMessage {
+    font-size: 1rem;
+  }
+
+  .errorActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryButton {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .errorBranding {
+    font-size: 2rem;
+  }
+
+  .errorSubtext {
+    font-size: 0.875rem;
   }
 }

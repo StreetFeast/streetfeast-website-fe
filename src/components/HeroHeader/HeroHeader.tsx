@@ -7,54 +7,69 @@ export default function HeroHeader() {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 className={styles.title}>
-            StreetFeast
-          </h1>
-          <p className={styles.subtitle}>
             Discover amazing street food near you
-          </p>
+          </h1>
           <p className={styles.description}>
-            Find the best food trucks, street vendors, and pop-up restaurants in your area. 
+            Find the best food trucks, street vendors, and pop-up restaurants in your area.
             Download the app and start your culinary adventure today.
           </p>
           <div className={styles.ctaButtons}>
-            <a 
-              href="https://apps.apple.com" 
+            <a
+              href="https://apps.apple.com"
               className={styles.appStoreBtn}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image 
-                src="/app-store-badge.svg" 
+              <Image
+                src="/app-store-badge.svg"
                 alt="Download on the App Store"
-                width={120}
+                width={135}
                 height={40}
               />
             </a>
-            <a 
-              href="https://play.google.com" 
+            <a
+              href="https://play.google.com"
               className={styles.playStoreBtn}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image 
-                src="/google-play-badge.png" 
+              <Image
+                src="/google-play-badge.png"
                 alt="Get it on Google Play"
                 width={135}
                 height={40}
               />
             </a>
           </div>
+          <p className={styles.truckNote}>
+            For food truck, please register to get started!
+          </p>
         </div>
         <div className={styles.heroImage}>
-          <div className={styles.phoneFrame}>
-            <Image 
-              src="/app-screenshot.svg" 
-              alt="StreetFeast App Screenshot"
-              width={304}
-              height={634}
-              priority
-            />
-          </div>
+          <Image
+            src="/lefthome.png"
+            alt="StreetFeast App - Map View"
+            width={506}
+            height={1036}
+            priority
+            className={styles.leftPhone}
+          />
+          <Image
+            src="/fronthome.png"
+            alt="StreetFeast App - Vendor Details"
+            width={560}
+            height={1036}
+            priority
+            className={styles.centerPhone}
+          />
+          <Image
+            src="/righthome.png"
+            alt="StreetFeast App - Menu View"
+            width={506}
+            height={1036}
+            priority
+            className={styles.rightPhone}
+          />
         </div>
       </div>
     </section>

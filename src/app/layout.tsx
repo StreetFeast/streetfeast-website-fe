@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { LayoutContent } from "@/components/LayoutContent";
+import Providers from "@/components/Providers";
+
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -71,21 +71,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexend.className}>
-        <LayoutContent>
-          {children}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </LayoutContent>
+        <Providers>
+          <LayoutContent>
+            {children}
+          </LayoutContent>
+        </Providers>
       </body>
     </html>
   );

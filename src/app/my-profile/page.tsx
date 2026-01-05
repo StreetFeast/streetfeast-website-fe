@@ -286,7 +286,7 @@ export default function MyProfile() {
                     className={styles.radio}
                   />
                     <div className={styles.savingsBadge}>
-                      <p className={styles.savingsBadgeText}>Save 37%</p>
+                      <p className={styles.savingsBadgeText}>Save 28%</p>
                     </div>
                   <div className={styles.planContent}>
                     <h3 className={styles.planTitle}>Yearly</h3>

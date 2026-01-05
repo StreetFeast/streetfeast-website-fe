@@ -268,7 +268,7 @@ export default function MyProfile() {
                   />
                   <div className={styles.planContent}>
                     <h3 className={styles.planTitle}>Monthly</h3>
-                    <p className={styles.planPrice}>$79.99/month</p>
+                    <p className={styles.planPrice}>$69.99/month</p>
                     <p className={styles.planNote}>Billed monthly</p>
                   </div>
                 </label>

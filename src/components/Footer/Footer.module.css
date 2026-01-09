@@ -38,9 +38,10 @@
 }
 
 .links {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4rem;
 }
 
 .column {

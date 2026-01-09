@@ -13,17 +13,9 @@ export default function Footer() {
           
           <div className={styles.links}>
             <div className={styles.column}>
-              <h4 className={styles.columnTitle}>Company</h4>
-              <Link href="/about" className={styles.link}>About Us</Link>
-              <Link href="/contact" className={styles.link}>Contact</Link>
-              <Link href="/careers" className={styles.link}>Careers</Link>
-            </div>
-            
-            <div className={styles.column}>
               <h4 className={styles.columnTitle}>Legal</h4>
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
               <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
-              <Link href="/cookies" className={styles.link}>Cookie Policy</Link>
               <Link href="/delete-my-data" className={styles.link}>Delete My Data</Link>
             </div>
             

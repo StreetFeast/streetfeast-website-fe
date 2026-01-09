@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function Terms() {
+  const lastUpdated = "January 9, 2026";
+
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
@@ -24,7 +26,7 @@ export default function Terms() {
       
       <main className={styles.main}>
         <h1 className={styles.title}>Terms of Service</h1>
-        <p className={styles.lastUpdated}>Last updated: {new Date().toLocaleDateString()}</p>
+        <p className={styles.lastUpdated}>Last updated: {lastUpdated}</p>
         
         <section className={styles.section}>
           <h2>1. Acceptance of Terms</h2>

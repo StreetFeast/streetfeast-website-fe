@@ -41,9 +41,6 @@ export default function HeroHeader() {
               />
             </a>
           </div>
-          <p className={styles.truckNote}>
-            For food truck, please register to get started!
-          </p>
         </div>
         <div className={styles.heroImage}>
           <Image

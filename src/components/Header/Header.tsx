@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuthStore } from '@/store/authStore';
@@ -7,6 +8,15 @@ import styles from './Header.module.css';
 
 export default function Header() {
   const user = useAuthStore((state) => state.user);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className={styles.header}>
@@ -23,6 +33,8 @@ export default function Header() {
             priority
           />
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className={styles.nav}>
           {user ? (
             <Link href="/my-profile" className={styles.button}>
@@ -39,6 +51,64 @@ export default function Header() {
             </>
           )}
         </nav>
+
+        {/* Hamburger Menu Button */}
+        <button
+          className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
+        </button>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className={styles.mobileMenu}>
+            <div className={styles.mobileMenuHeader}>
+              <Link href="/" className={styles.mobileMenuLogo} onClick={closeMenu}>
+                <Image
+                  src="/app-symbol.png"
+                  alt="StreetFeast"
+                  width={74}
+                  height={70}
+                  priority
+                />
+              </Link>
+            </div>
+
+            <nav className={styles.mobileNav}>
+              {user ? (
+                <Link href="/my-profile" className={styles.mobileButton} onClick={closeMenu}>
+                  My Profile
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login-truck" className={styles.mobileButton} onClick={closeMenu}>
+                    Login
+                  </Link>
+                  <Link href="/register-truck" className={styles.mobileButton} onClick={closeMenu}>
+                    Register
+                  </Link>
+                </>
+              )}
+              <Link href="/about" className={styles.mobileButton} onClick={closeMenu}>
+                About Us
+              </Link>
+              <Link href="/contact" className={styles.mobileButton} onClick={closeMenu}>
+                Contact Us
+              </Link>
+              <Link href="/privacy" className={styles.mobileButton} onClick={closeMenu}>
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className={styles.mobileButton} onClick={closeMenu}>
+                Terms of Service
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

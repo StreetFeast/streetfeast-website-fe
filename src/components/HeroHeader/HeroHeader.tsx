@@ -23,8 +23,8 @@ export default function HeroHeader() {
               <Image
                 src="/app-store-badge.svg"
                 alt="Download on the App Store"
-                width={135}
-                height={40}
+                width={180}
+                height={63}
               />
             </a>
             <a
@@ -36,8 +36,8 @@ export default function HeroHeader() {
               <Image
                 src="/google-play-badge.png"
                 alt="Get it on Google Play"
-                width={135}
-                height={40}
+                width={180}
+                height={63}
               />
             </a>
           </div>
@@ -67,6 +67,34 @@ export default function HeroHeader() {
             priority
             className={styles.rightPhone}
           />
+        </div>
+        <div className={styles.ctaButtonsMobile}>
+          <a
+            href="https://apps.apple.com"
+            className={styles.appStoreBtn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/app-store-badge.svg"
+              alt="Download on the App Store"
+              width={200}
+              height={70}
+            />
+          </a>
+          <a
+            href="https://play.google.com"
+            className={styles.playStoreBtn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/google-play-badge.png"
+              alt="Get it on Google Play"
+              width={200}
+              height={70}
+            />
+          </a>
         </div>
       </div>
     </section>

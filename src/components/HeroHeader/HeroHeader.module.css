@@ -9,12 +9,13 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1500px;
   width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -33,19 +34,27 @@
   color: #1E1E1F;
   margin: 0;
   line-height: 1.2;
-  max-width: 450px;
+  max-width: 700px;
 }
 
 .description {
-  font-size: 1.125rem;
+  font-size: 1.525rem;
   color: #1E1E1F;
   line-height: 1.6;
   margin: 0;
-  max-width: 450px;
+  max-width: 600px;
 }
 
 .ctaButtons {
   display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.ctaButtonsMobile {
+  width: 100%;
+  justify-content: center;
+  display: none;
   gap: 1rem;
   margin-top: 0.5rem;
 }
@@ -64,7 +73,7 @@
 
 .appStoreBtn img,
 .playStoreBtn img {
-  height: 48px;
+  height: 50px;
   width: auto;
 }
 
@@ -75,58 +84,73 @@
 }
 
 .heroImage {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  min-height: 600px;
+  height: 100%;
 }
-
-.leftPhone,
-.centerPhone,
-.rightPhone {
-  position: absolute;
-  max-width: 100%;
+.heroImage img {
+  width: 50%;
   height: auto;
 }
 
 .leftPhone {
-  left: -20%;
-  z-index: 1;
-}
-
-.centerPhone {
-  z-index: 2;
+  position: absolute;
+  top: -10%;
+  left: -3%;
 }
 
 .rightPhone {
-  right: -20%;
-  z-index: 1;
+  position: absolute;
+  top: -10%;
+  right: -3%;
 }
 
+.centerPhone {
+  position: relative;
+  z-index: 2;
+}
+
+
 @media (max-width: 1200px) {
+  .hero {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   .container {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
+    gap: 7rem;
+    margin-top: 50px;
+  }
+
+  .content {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 
   .title {
     font-size: 2.25rem;
   }
-
 }
 
 @media (max-width: 968px) {
-  .hero {
-    padding: 5rem 1.5rem 3rem;
-    min-height: auto;
+  .ctaButtons {
+    display: none;
+  }
+
+  .ctaButtonsMobile {
+    display: flex;
   }
 
   .container {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+    flex-direction: column;
   }
 
   .content {
+
     text-align: center;
     align-items: center;
   }
@@ -137,8 +161,12 @@
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 1.3rem;
     max-width: 100%;
+  }
+
+  .truckNote {
+    display: none;
   }
 
   .ctaButtons {
@@ -146,59 +174,17 @@
   }
 
   .heroImage {
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .leftPhone,
-  .rightPhone {
-    display: none;
-  }
-
-  .centerPhone {
-    position: relative !important;
-    max-width: 300px;
-    width: 100%;
-    height: auto;
+    position: relative;
   }
 }
 
 @media (max-width: 640px) {
-  .hero {
-    padding: 5rem 1rem 2rem;
-  }
-
-  .container {
-    gap: 2rem;
-  }
-
   .title {
     font-size: 1.75rem;
   }
 
   .description {
-    font-size: 0.9rem;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .appStoreBtn img,
-  .playStoreBtn img {
-    height: 44px;
-  }
-
-  .heroImage {
-    min-height: 400px;
-  }
-
-  .centerPhone {
-    max-width: 260px;
+    font-size: 1.2rem;
   }
 
   .truckNote {

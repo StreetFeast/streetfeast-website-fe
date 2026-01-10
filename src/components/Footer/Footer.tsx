@@ -18,7 +18,7 @@ export default function Footer() {
               <Link href="/contact" className={styles.link}>Contact</Link>
               <Link href="/careers" className={styles.link}>Careers</Link>
             </div>
-            
+
             <div className={styles.column}>
               <h4 className={styles.columnTitle}>Legal</h4>
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
@@ -26,19 +26,19 @@ export default function Footer() {
               <Link href="/cookies" className={styles.link}>Cookie Policy</Link>
               <Link href="/delete-my-data" className={styles.link}>Delete My Data</Link>
             </div>
-            
+
             <div className={styles.column}>
               <h4 className={styles.columnTitle}>Download</h4>
-              <a 
-                href="https://apps.apple.com" 
+              <a
+                href="https://apps.apple.com"
                 className={styles.link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 iOS App
               </a>
-              <a 
-                href="https://play.google.com" 
+              <a
+                href="https://play.google.com"
                 className={styles.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -48,7 +48,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
         <div className={styles.bottom}>
           <p className={styles.copyright}>
             © {new Date().getFullYear()} StreetFeast. All rights reserved.

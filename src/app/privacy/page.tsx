@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function Privacy() {
-  const lastUpdated = "January 2, 2025";
+  const lastUpdated = "January 9, 2026";
   
   return (
     <div className={styles.container}>
@@ -59,7 +59,7 @@ export default function Privacy() {
 
           <h3>1.3 Information from Third Parties</h3>
           <ul>
-            <li><strong>Analytics Data:</strong> We use CleverTap for analytics and engagement services</li>
+            <li><strong>Analytics Data:</strong> We use PostHog for analytics and product insights</li>
             <li><strong>Social Media:</strong> If you connect social media accounts, we may receive profile information</li>
             <li><strong>Payment Processors:</strong> Transaction data when you make purchases through the App</li>
           </ul>
@@ -113,7 +113,7 @@ export default function Privacy() {
           <h3>3.2 With Service Providers</h3>
           <p>We share information with third-party service providers who help us operate our Services:</p>
           <ul>
-            <li><strong>Analytics Services:</strong> CleverTap for user analytics and engagement</li>
+            <li><strong>Analytics Services:</strong> PostHog for product analytics and user insights</li>
             <li><strong>Cloud Services:</strong> For data storage and processing</li>
             <li><strong>Payment Processors:</strong> To facilitate transactions</li>
             <li><strong>Communication Services:</strong> For SMS and email delivery</li>
@@ -221,21 +221,25 @@ export default function Privacy() {
         <section className={styles.section}>
           <h2>8. Third-Party Analytics</h2>
           <p>
-            We use CleverTap as our analytics and engagement platform. CleverTap collects and processes data on 
-            our behalf to help us understand user behavior and improve our Services. For information about how 
-            CleverTap handles data, please review their privacy policy at:{' '}
-            <a href="https://clevertap.com/privacy-policy/" target="_blank" rel="noopener noreferrer">
-              https://clevertap.com/privacy-policy/
+            We use PostHog as our product analytics platform. PostHog collects and processes data on
+            our behalf to help us understand user behavior and improve our Services. For information about how
+            PostHog handles data, please review their privacy policy at:{' '}
+            <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">
+              https://posthog.com/privacy
+            </a>
+            {' '}and their terms of service at:{' '}
+            <a href="https://posthog.com/terms" target="_blank" rel="noopener noreferrer">
+              https://posthog.com/terms
             </a>
           </p>
           <p>
-            CleverTap may collect information including but not limited to:
+            PostHog may collect information including but not limited to:
           </p>
           <ul>
             <li>Device identifiers and information</li>
             <li>App usage data and events</li>
-            <li>User attributes and segments</li>
-            <li>Campaign interaction data</li>
+            <li>User session recordings and interactions</li>
+            <li>Feature flag and experiment data</li>
           </ul>
         </section>
 

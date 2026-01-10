@@ -1,12 +1,12 @@
 .contactSection {
-  padding: 5rem 2rem;
+  padding: 8rem 2rem 5rem;
   background: linear-gradient(135deg, #F5F5F5 0%, #FAD2B3 50%, #FFEDC2 100%);
   position: relative;
 }
 
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 30px auto;
   background: rgba(255, 255, 255, 0.98);
   padding: 3rem;
   border-radius: 20px;
@@ -144,7 +144,7 @@
 
 @media (max-width: 768px) {
   .contactSection {
-    padding: 3rem 1.5rem;
+    padding: 6rem 1.5rem 3rem;
   }
   
   .container {
@@ -185,7 +185,7 @@
 
 @media (max-width: 480px) {
   .contactSection {
-    padding: 2.5rem 1rem;
+    padding: 5rem 1rem 2.5rem;
   }
   
   .container {

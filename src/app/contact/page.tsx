@@ -1,12 +1,12 @@
 import { Header } from '@/components/Header';
-import { HeroHeader } from '@/components/HeroHeader';
+import { ContactForm } from '@/components/ContactForm';
 import { Footer } from '@/components/Footer';
 
-export default function Home() {
+export default function ContactPage() {
   return (
     <>
       <Header />
-      <HeroHeader />
+      <ContactForm />
       <Footer />
     </>
   );

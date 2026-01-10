@@ -61,8 +61,16 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #1a202c;
+  text-align: center;
+}
+
+.description {
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
@@ -80,6 +88,17 @@
   color: #c33;
   font-size: 0.95rem;
   text-align: center;
+}
+
+.successBanner {
+  padding: 1rem;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  color: #155724;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .formGroup {
@@ -109,40 +128,6 @@
   box-shadow: 0 0 0 3px rgba(237, 106, 0, 0.1);
 }
 
-.passwordInputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.passwordInputWrapper .input {
-  padding-right: 3rem;
-  flex: 1;
-}
-
-.passwordToggle {
-  position: absolute;
-  right: 0.75rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #718096;
-  transition: color 0.2s;
-}
-
-.passwordToggle:hover {
-  color: #2d3748;
-}
-
-.eyeIcon {
-  width: 20px;
-  height: 20px;
-}
-
 .submitButton {
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #ED6A00 0%, #FFD166 100%);
@@ -167,7 +152,7 @@
   cursor: not-allowed;
 }
 
-.forgotPasswordButton {
+.backButton {
   background: none;
   border: none;
   color: #ED6A00;
@@ -180,9 +165,14 @@
   font-family: inherit;
 }
 
-.forgotPasswordButton:hover {
+.backButton:hover:not(:disabled) {
   color: #c55700;
   text-decoration: underline;
+}
+
+.backButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 968px) {

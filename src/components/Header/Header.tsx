@@ -18,6 +18,8 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  const allowAuth = process.env.NEXT_PUBLIC_ALLOW_AUTH === 'true';
+
   return (
     <header className={styles.header}>
       <a href="#main-content" className={styles.skipLink}>
@@ -35,22 +37,24 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={styles.nav}>
-          {user ? (
-            <Link href="/my-profile" className={styles.button}>
-              My Profile
-            </Link>
-          ) : (
-            <>
-              <Link href="/login-truck" className={styles.loginButton}>
-                Login
+        {allowAuth && (
+          <nav className={styles.nav}>
+            {user ? (
+              <Link href="/my-profile" className={styles.button}>
+                My Profile
               </Link>
-              <Link href="/register-truck" className={styles.registerButton}>
-                Register
-              </Link>
-            </>
-          )}
-        </nav>
+            ) : (
+              <>
+                <Link href="/login-truck" className={styles.loginButton}>
+                  Login
+                </Link>
+                <Link href="/register-truck" className={styles.registerButton}>
+                  Register
+                </Link>
+              </>
+            )}
+          </nav>
+        )}
 
         {/* Hamburger Menu Button */}
         <button
@@ -80,18 +84,22 @@ export default function Header() {
             </div>
 
             <nav className={styles.mobileNav}>
-              {user ? (
-                <Link href="/my-profile" className={styles.mobileButton} onClick={closeMenu}>
-                  My Profile
-                </Link>
-              ) : (
+              {allowAuth && (
                 <>
-                  <Link href="/login-truck" className={styles.mobileButton} onClick={closeMenu}>
-                    Login
-                  </Link>
-                  <Link href="/register-truck" className={styles.mobileButton} onClick={closeMenu}>
-                    Register
-                  </Link>
+                  {user ? (
+                    <Link href="/my-profile" className={styles.mobileButton} onClick={closeMenu}>
+                      My Profile
+                    </Link>
+                  ) : (
+                    <>
+                      <Link href="/login-truck" className={styles.mobileButton} onClick={closeMenu}>
+                        Login
+                      </Link>
+                      <Link href="/register-truck" className={styles.mobileButton} onClick={closeMenu}>
+                        Register
+                      </Link>
+                    </>
+                  )}Í\
                 </>
               )}
               <Link href="/about" className={styles.mobileButton} onClick={closeMenu}>

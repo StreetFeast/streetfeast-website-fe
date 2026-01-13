@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  background: white;
+  padding: 3rem;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 5rem 2rem 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 5rem 1.5rem 1.5rem;
+  }
+}

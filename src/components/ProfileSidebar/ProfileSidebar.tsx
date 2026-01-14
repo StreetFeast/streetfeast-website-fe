@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { FiUser, FiCreditCard, FiBook, FiMail, FiMenu, FiX } from "react-icons/fi";
+import { FiUser, FiCreditCard, FiBook, FiMail, FiMap, FiMenu, FiX } from "react-icons/fi";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import styles from "./ProfileSidebar.module.css";
@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
   { label: "Profile", href: "/profile/home", Icon: FiUser },
   { label: "Subscription", href: "/profile/subscription", Icon: FiCreditCard },
   { label: "Tutorials", href: "/profile/tutorials", Icon: FiBook },
+  { label: "Roadmap", href: "/profile/roadmap", Icon: FiMap },
   { label: "Contact Us", href: "/profile/contact", Icon: FiMail },
 ];
 

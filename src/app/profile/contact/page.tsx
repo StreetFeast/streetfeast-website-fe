@@ -14,10 +14,10 @@ export default function Contact() {
           <div className={styles.contactItem}>
             <span className={styles.contactLabel}>Email</span>
             <a
-              href="mailto:support@streetfeast.com"
+              href="mailto:customer-support@streetfeastapp.com"
               className={styles.contactValue}
             >
-              support@streetfeast.com
+              customer-support@streetfeastapp.com
             </a>
           </div>
         </div>

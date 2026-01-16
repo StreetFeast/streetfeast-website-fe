@@ -65,7 +65,7 @@ export default function LoginTruck() {
           data.session.access_token,
           data.session.refresh_token
         );
-        router.push("/my-profile");
+        router.push("/profile");
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");

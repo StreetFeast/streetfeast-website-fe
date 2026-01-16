@@ -72,7 +72,7 @@ function VerifyContent() {
             window.history.replaceState(null, "", window.location.pathname);
 
             setTimeout(() => {
-              router.push("/my-profile");
+              router.push("/profile");
             }, 2000);
           } else {
             setStatus("error");
@@ -115,7 +115,7 @@ function VerifyContent() {
           setHasProcessed(true);
           setStatus("success");
           setTimeout(() => {
-            router.push("/my-profile");
+            router.push("/profile");
           }, 1500);
         } else {
           // Unverified - show awaiting status

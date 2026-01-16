@@ -40,7 +40,7 @@ export default function Header() {
         {allowAuth && (
           <nav className={styles.nav}>
             {user ? (
-              <Link href="/my-profile" className={styles.button}>
+              <Link href="/profile" className={styles.button}>
                 My Profile
               </Link>
             ) : (
@@ -87,7 +87,7 @@ export default function Header() {
               {allowAuth && (
                 <>
                   {user ? (
-                    <Link href="/my-profile" className={styles.mobileButton} onClick={closeMenu}>
+                    <Link href="/profile" className={styles.mobileButton} onClick={closeMenu}>
                       My Profile
                     </Link>
                   ) : (

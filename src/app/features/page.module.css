@@ -1,0 +1,520 @@
+.main {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #F2A261 0%, #F4B07A 50%, #F7C89B 100%);
+  padding: 8rem 2rem 5rem;
+  overflow: hidden;
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle1,
+.circle2,
+.circle3 {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  animation: float 20s infinite ease-in-out;
+}
+
+.circle1 {
+  width: 400px;
+  height: 400px;
+  top: -150px;
+  right: -100px;
+  opacity: 0.2;
+  animation-delay: 0s;
+}
+
+.circle2 {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  left: -80px;
+  opacity: 0.15;
+  animation-delay: -5s;
+}
+
+.circle3 {
+  width: 200px;
+  height: 200px;
+  top: 40%;
+  left: 15%;
+  opacity: 0.1;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.heroLabel {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background: rgba(30, 30, 31, 0.1);
+  border: 1px solid rgba(30, 30, 31, 0.2);
+  border-radius: 50px;
+  color: #1E1E1F;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1E1E1F;
+  margin: 0 0 1.5rem;
+  line-height: 1.15;
+}
+
+.highlight {
+  color: #c45500;
+  position: relative;
+}
+
+.heroDescription {
+  font-size: 1.25rem;
+  color: #1E1E1F;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Features Section ===== */
+.featuresSection {
+  background: linear-gradient(180deg, #F5F5F5 0%, #FCFCFC 50%, #F5F5F5 100%);
+  padding: 6rem 2rem;
+}
+
+.featuresContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.featureCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "phone content";
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  background: #FCFCFC;
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideUp 0.6s ease-out both;
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Phone mockup styling */
+.phoneFrame {
+  grid-area: phone;
+  position: relative;
+  width: 180px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 28px;
+  padding: 8px;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 20px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.featureImage {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+/* Feature content */
+.featureContent {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* Mobile-only header (above phone) - hidden on desktop */
+.featureHeader {
+  display: none;
+}
+
+/* Desktop header (inside content) */
+.featureHeaderDesktop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(237, 106, 0, 0.12);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+  color: var(--main-orange);
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1E1E1F;
+  margin: 0;
+}
+
+.featureDescription {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.featureBenefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--main-orange);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+  padding: 0.75rem 1rem;
+  background: rgba(237, 106, 0, 0.08);
+  border-radius: 12px;
+  border-left: 3px solid var(--main-orange);
+}
+
+.benefitIcon {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ===== CTA Section ===== */
+.cta {
+  position: relative;
+  background: linear-gradient(135deg, #2F1808 0%, #1E1E1F 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ctaBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ctaCircle1,
+.ctaCircle2 {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--main-orange);
+  opacity: 0.08;
+}
+
+.ctaCircle1 {
+  width: 400px;
+  height: 400px;
+  top: -200px;
+  left: -100px;
+}
+
+.ctaCircle2 {
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  right: -50px;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FCFCFC;
+  margin: 0 0 1rem;
+}
+
+.ctaDescription {
+  font-size: 1.15rem;
+  color: rgba(252, 252, 252, 0.8);
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.storeBtn {
+  display: inline-flex;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.storeBtn:hover {
+  transform: translateY(-4px);
+  opacity: 0.9;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 1100px) {
+  .featuresContainer {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 7rem 1.5rem 4rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1.1rem;
+  }
+
+  .featuresSection {
+    padding: 4rem 1.5rem;
+  }
+
+  .featureCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .phoneFrame {
+    width: 200px;
+  }
+
+  .featureContent {
+    align-items: center;
+  }
+
+  /* Show mobile header, hide desktop header */
+  .featureHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .featureHeaderDesktop {
+    display: none;
+  }
+
+  .featureBenefit {
+    justify-content: center;
+    text-align: left;
+  }
+
+  .circle1 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .circle2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle3 {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 6rem 1rem 3rem;
+  }
+
+  .heroLabel {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .featuresSection {
+    padding: 3rem 1rem;
+  }
+
+  .featuresContainer {
+    gap: 2rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+    gap: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .phoneFrame {
+    width: 180px;
+    border-radius: 24px;
+  }
+
+  .phoneNotch {
+    width: 50px;
+    height: 16px;
+    top: 10px;
+  }
+
+  .featureImage {
+    border-radius: 16px;
+  }
+
+  .iconWrapper {
+    width: 52px;
+    height: 52px;
+  }
+
+  .featureIcon {
+    font-size: 1.5rem;
+  }
+
+  .featureTitle {
+    font-size: 1.35rem;
+  }
+
+  .featureDescription {
+    font-size: 0.95rem;
+  }
+
+  .featureBenefit {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .cta {
+    padding: 4rem 1.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.75rem;
+  }
+
+  .ctaDescription {
+    font-size: 1rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

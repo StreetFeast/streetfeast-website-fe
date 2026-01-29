@@ -5,7 +5,6 @@ import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import { validatePassword } from "@/utils/validation";
 import zipcodes from "zipcodes";
-import axios from "axios";
 
 interface RegisterTruckFormData {
   firstName: string;

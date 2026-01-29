@@ -21,7 +21,8 @@
       "namespace": "android_app",
       "package_name": "com.streetfeast.streetfeast",
       "sha256_cert_fingerprints": [
-        "A8:53:1F:40:CF:74:80:FA:53:45:13:7F:61:88:FD:B8:9E:1B:B4:34:74:0D:BC:EE:40:CB:8E:F8:88:78:52:3F"
+        "A8:53:1F:40:CF:74:80:FA:53:45:13:7F:61:88:FD:B8:9E:1B:B4:34:74:0D:BC:EE:40:CB:8E:F8:88:78:52:3F",
+        "64:FD:5E:90:4B:E3:37:F5:4B:36:E9:10:D7:1A:35:C8:08:83:E5:1B:E4:AD:A1:98:DD:2B:09:09:FF:69:56"
       ]
     }
   }

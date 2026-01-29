@@ -1,22 +1,23 @@
-import { NextResponse } from "next/server";
-
 export async function GET() {
-  return NextResponse.json([
+  const data = [
     {
-      "relation": [
+      relation: [
         "delegate_permission/common.handle_all_urls",
-        "delegate_permission/common.get_login_creds"
+        "delegate_permission/common.get_login_creds",
       ],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.streetfeast.streetfeast.dev",
-        "sha256_cert_fingerprints": [
-          "C8:D3:2C:61:72:35:5D:FE:36:58:37:E8:6F:23:D3:CB:B9:3E:A6:29:97:31:FA:58:F5:05:78:10:5D:4E:74:6E"
-        ]
-      }
+      target: {
+        namespace: "android_app",
+        package_name: "com.streetfeast.streetfeast.dev",
+        sha256_cert_fingerprints: [
+          "C8:D3:2C:61:72:35:5D:FE:36:58:37:E8:6F:23:D3:CB:B9:3E:A6:29:97:31:FA:58:F5:05:78:10:5D:4E:74:6E",
+        ],
+      },
     },
     {
-      relation: ["delegate_permission/common.handle_all_urls"],
+      relation: [
+        "delegate_permission/common.handle_all_urls",
+        "delegate_permission/common.get_login_creds",
+      ],
       target: {
         namespace: "android_app",
         package_name: "com.streetfeast.streetfeast",
@@ -25,5 +26,11 @@ export async function GET() {
         ],
       },
     },
-  ]);
+  ];
+
+  return new Response(JSON.stringify(data), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

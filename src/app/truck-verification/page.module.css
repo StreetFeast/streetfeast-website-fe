@@ -1,0 +1,206 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.leftSection {
+  flex: 1;
+  background: #ED6A00;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  gap: 2rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.brandTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.brandDescription {
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0;
+}
+
+.rightSection {
+  flex: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.contentWrapper {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a202c;
+  text-align: center;
+}
+
+.message {
+  font-size: 1.125rem;
+  color: #4a5568;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.submessage {
+  font-size: 0.95rem;
+  color: #718096;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 6px solid #f3f4f6;
+  border-top-color: #ED6A00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  color: #10b981;
+  animation: scaleIn 0.5s ease-out;
+}
+
+.errorIcon {
+  width: 80px;
+  height: 80px;
+  color: #ef4444;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkIcon,
+.xIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #ED6A00 0%, #FFD166 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(237, 106, 0, 0.4);
+}
+
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .leftSection {
+    padding: 2rem;
+    min-height: auto;
+    position: relative;
+    height: auto;
+  }
+
+  .logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .brandTitle {
+    font-size: 2rem;
+  }
+
+  .brandDescription {
+    font-size: 1rem;
+  }
+
+  .rightSection {
+    padding: 2rem;
+    height: auto;
+    min-height: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+  }
+
+  .successIcon,
+  .errorIcon {
+    width: 64px;
+    height: 64px;
+  }
+}

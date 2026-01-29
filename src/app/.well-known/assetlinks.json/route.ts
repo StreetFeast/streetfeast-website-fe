@@ -1,0 +1,26 @@
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  return NextResponse.json([
+    {
+      relation: ["delegate_permission/common.handle_all_urls"],
+      target: {
+        namespace: "android_app",
+        package_name: "com.streetfeast.streetfeast.dev",
+        sha256_cert_fingerprints: [
+          "2F:75:42:63:4A:9A:66:B2:18:FB:AB:75:FB:F6:1D:AB:02:BB:85:83:C5:18:3D:42:DC:DF:DF:AB:38:B0:85:15",
+        ],
+      },
+    },
+    {
+      relation: ["delegate_permission/common.handle_all_urls"],
+      target: {
+        namespace: "android_app",
+        package_name: "com.streetfeast.streetfeast",
+        sha256_cert_fingerprints: [
+          "A8:53:1F:40:CF:74:80:FA:53:45:13:7F:61:88:FD:B8:9E:1B:B4:34:74:0D:BC:EE:40:CB:8E:F8:88:78:52:3F",
+        ],
+      },
+    },
+  ]);
+}

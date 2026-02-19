@@ -9,7 +9,8 @@
       "Bash(npm run build:*)",
       "Bash(mkdir:*)",
       "mcp__context7__resolve-library-id",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(dig:*)"
     ]
   }
 }

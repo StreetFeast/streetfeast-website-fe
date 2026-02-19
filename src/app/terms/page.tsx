@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Terms of Service | StreetFeast',
     description: 'Read the StreetFeast Terms of Service. Understand your rights and responsibilities when using our platform.',
-    url: 'https://streetfeast.com/terms',
+    url: 'https://streetfeastapp.com/terms',
   },
 };
 
@@ -41,7 +41,7 @@ export default function Terms() {
           <h2>1. Acceptance of Terms</h2>
           <p>
             By downloading, installing, accessing, or using the StreetFeast mobile application
-            (&quot;App&quot;), the StreetFeast website located at streetfeast.com and streetfeastapp.com
+            (&quot;App&quot;), the StreetFeast website located at streetfeastapp.com
             (&quot;Site&quot;), or any related services, features, content, or functionality
             (collectively, the &quot;Service&quot;), you acknowledge that you have read, understood,
             and agree to be bound by these Terms of Service (&quot;Terms&quot;), our Privacy Policy,
@@ -942,7 +942,7 @@ export default function Terms() {
           <p>
             <strong>StreetFeast</strong><br />
             Email: <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a><br />
-            Website: <a href="https://www.streetfeastapp.com/contact">streetfeast.com/contact</a>
+            Website: <a href="https://www.streetfeastapp.com/contact">streetfeastapp.com/contact</a>
           </p>
           <p>
             <strong>California Residents:</strong> If you are a California resident, you may

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Delete My Data | StreetFeast',
     description: 'Learn how to request deletion of your personal data from StreetFeast.',
-    url: 'https://streetfeast.com/delete-my-data',
+    url: 'https://streetfeastapp.com/delete-my-data',
   },
 };
 

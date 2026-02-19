@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Privacy Policy | StreetFeast',
     description: 'Learn how StreetFeast protects your privacy and handles your personal information.',
-    url: 'https://streetfeast.com/privacy',
+    url: 'https://streetfeastapp.com/privacy',
   },
 };
 

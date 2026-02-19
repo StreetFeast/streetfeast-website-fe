@@ -237,7 +237,7 @@ export default function Privacy() {
           <p>You may access and update your Personal Information through your account settings within the App. You may also submit a verifiable request to access the specific pieces of Personal Information we hold about you by contacting us as described in Section 16.</p>
 
           <h3>9.2 Data Portability</h3>
-          <p>You have the right to request a copy of your Personal Information in a structured, commonly used, and machine-readable format (e.g., JSON or CSV) and to transmit that data to another controller, where technically feasible.</p>
+          <p>You have the right to request a copy of your Personal Information in a structured, commonly used, and machine-readable format (e.g., JSON or CSV).</p>
 
           <h3>9.3 Deletion</h3>
           <p>You may request deletion of your account and Personal Information through the App or by visiting our <Link href="/delete-my-data">Delete My Data</Link> page. You may also submit a deletion request by contacting us as described in Section 16. Note that we may retain certain information as required by law or as described in Section 7.</p>

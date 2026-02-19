@@ -31,10 +31,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Privacy policy is updated to reflect Google's April 2, 2026 data controller shift for reCAPTCHA compliance
   4. Zustand consent store integrates with existing state management patterns (matches authStore architecture)
 
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 01-01: TBD during planning
+- [ ] 01-01-PLAN.md — Consent store creation and privacy policy update
 
 ### Phase 2: Banner UI & User Controls
 **Goal**: Users see a compliant cookie consent banner on first visit and can manage preferences anytime
@@ -83,7 +83,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. State Management Foundation | 0/TBD | Not started | - |
+| 1. State Management Foundation | 0/1 | Planning complete | - |
 | 2. Banner UI & User Controls | 0/TBD | Not started | - |
 | 3. Script Blocking & Form Gating | 0/TBD | Not started | - |
 

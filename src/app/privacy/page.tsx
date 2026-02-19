@@ -85,7 +85,7 @@ export default function Privacy() {
           <ul>
             <li><strong>Authentication Providers:</strong> account verification data from Supabase, our authentication infrastructure provider</li>
             <li><strong>Analytics Platforms:</strong> aggregated and individual usage metrics from PostHog, our product analytics platform</li>
-            <li><strong>Payment Processors:</strong> transaction confirmation data, subscription status, and billing events from Stripe, our payment processing provider</li>
+            <li><strong>Payment Processors:</strong> transaction confirmation data, subscription status, and billing events from Apple App Store and Google Play in-app purchase systems</li>
             <li><strong>Bot Detection Services:</strong> risk assessment scores and verification tokens from Google reCAPTCHA v3</li>
             <li><strong>Mapping Services:</strong> geocoding data and location services from the Google Maps Platform</li>
           </ul>
@@ -111,7 +111,7 @@ export default function Privacy() {
           <ul>
             <li>Create, maintain, and administer your account</li>
             <li>Facilitate connections between users and food vendors</li>
-            <li>Process and manage vendor subscriptions through Stripe</li>
+            <li>Process and manage subscriptions through Apple App Store and Google Play in-app purchases</li>
             <li>Provide location-based food vendor discovery and recommendations</li>
             <li>Display vendor locations via Google Maps integration</li>
             <li>Deliver push notifications regarding vendors, events, and service updates</li>
@@ -162,7 +162,8 @@ export default function Privacy() {
           <p>We engage third-party service providers to perform functions on our behalf, subject to contractual obligations of confidentiality and data protection:</p>
           <ul>
             <li><strong>Supabase</strong> — authentication, database hosting, and backend infrastructure</li>
-            <li><strong>Stripe</strong> — payment processing and subscription management (Stripe&apos;s processing of payment data is governed by the Stripe Privacy Policy at <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">https://stripe.com/privacy</a>)</li>
+            <li><strong>Apple App Store</strong> — in-app purchase processing and subscription management for iOS devices (Apple&apos;s processing of payment data is governed by Apple&apos;s Privacy Policy at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/privacy/</a>)</li>
+            <li><strong>Google Play</strong> — in-app purchase processing and subscription management for Android devices (Google&apos;s processing of payment data is governed by Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>)</li>
             <li><strong>PostHog</strong> — product analytics, session recording, and user behavior analysis (PostHog&apos;s data processing is governed by the PostHog Privacy Policy at <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">https://posthog.com/privacy</a>)</li>
             <li><strong>Google (Maps Platform)</strong> — geocoding, mapping, and location-based services (subject to Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>)</li>
             <li><strong>Google (reCAPTCHA v3)</strong> — bot detection and abuse prevention (subject to Google&apos;s Privacy Policy and Terms of Service)</li>
@@ -308,9 +309,10 @@ export default function Privacy() {
             {' '}Google reCAPTCHA v3 may collect hardware and software information (including device and application data), and this data is used for improving reCAPTCHA and general security purposes.
           </p>
           <p>
-            Our payment processing is handled by Stripe, Inc. When you subscribe to paid services, your payment information is collected and processed directly by Stripe pursuant to Stripe&apos;s privacy policy at{' '}
-            <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">https://stripe.com/privacy</a>.
-            {' '}StreetFeast does not store, process, or have access to your full payment card numbers.
+            Our payment processing is handled through Apple App Store and Google Play in-app purchase systems. When you subscribe to paid services, your payment information is collected and processed directly by Apple or Google, depending on your device platform, pursuant to their respective privacy policies. StreetFeast does not store, process, or have access to your payment card numbers or billing details. Apple&apos;s privacy policy is available at{' '}
+            <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/privacy/</a>
+            {' '}and Google&apos;s privacy policy is available at{' '}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>.
           </p>
         </section>
 

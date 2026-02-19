@@ -122,7 +122,14 @@ export default function Terms() {
             BEVERAGES, AND RELATED PRODUCTS ARE PROVIDED SOLELY BY INDEPENDENT THIRD-PARTY
             VENDORS. STREETFEAST MAKES NO REPRESENTATIONS OR WARRANTIES REGARDING THE QUALITY,
             SAFETY, LEGALITY, OR SUITABILITY OF ANY FOOD, BEVERAGE, OR SERVICE OFFERED BY ANY
-            VENDOR, AND ASSUMES NO LIABILITY THEREFOR.
+            VENDOR, AND ASSUMES NO LIABILITY THEREFOR. BY USING THE SERVICE TO DISCOVER OR
+            PURCHASE FOOD FROM ANY VENDOR, YOU ASSUME ALL RISK ASSOCIATED WITH SUCH TRANSACTIONS,
+            INCLUDING WITHOUT LIMITATION RISKS RELATED TO FOOD QUALITY, FOOD SAFETY, ALLERGENS,
+            FOODBORNE ILLNESS, AND COMPLIANCE WITH DIETARY RESTRICTIONS. VENDORS ARE SOLELY
+            RESPONSIBLE FOR OBTAINING AND MAINTAINING ALL REQUIRED HEALTH PERMITS, FOOD HANDLER
+            CERTIFICATIONS, BUSINESS LICENSES, AND ANY OTHER PERMITS OR APPROVALS REQUIRED BY
+            APPLICABLE LOCAL, STATE, OR FEDERAL LAW. STREETFEAST DOES NOT VERIFY, MONITOR, OR
+            ENFORCE VENDOR COMPLIANCE WITH SUCH REQUIREMENTS.
           </p>
         </section>
 
@@ -191,31 +198,39 @@ export default function Terms() {
             platform and may be limited to one per User or device.
           </p>
           <p>
-            <strong>5.3 Billing and Renewal.</strong> All Vendor Subscriptions are billed in
-            advance on a recurring basis (monthly or annually, depending on the plan selected)
-            through the Apple App Store, Google Play Store, or such other payment platform as
-            StreetFeast may designate (&quot;Payment Platform&quot;). Your subscription will
-            automatically renew at the end of each billing period unless you cancel auto-renewal
-            at least twenty-four (24) hours prior to the end of the current billing period.
-            You acknowledge and agree that StreetFeast does not directly process payment
-            transactions and that all billing and payment processing is handled by the applicable
-            Payment Platform, subject to the terms and conditions of such Payment Platform.
+            <strong>5.3 Billing and Renewal.</strong> All Vendor Subscriptions are purchased
+            exclusively through Apple In-App Purchases (for iOS) or Google Play In-App Purchases
+            (for Android) (each, a &quot;Payment Platform&quot;). StreetFeast is not the payment
+            processor or merchant of record for any subscription transaction; Apple Inc. or
+            Google LLC (as applicable) serves as the merchant of record. All billing and payment
+            processing is handled entirely by the applicable Payment Platform, subject to the
+            terms and conditions of such Payment Platform. Subscriptions are billed in advance on
+            a recurring basis (monthly or annually, depending on the plan selected). Your
+            subscription will automatically renew at the end of each billing period unless you
+            cancel auto-renewal at least twenty-four (24) hours prior to the end of the current
+            billing period. Apple or Google (as applicable) manages all subscription renewal
+            and billing cycles.
           </p>
           <p>
             <strong>5.4 Cancellation.</strong> You may cancel your Vendor Subscription at any
-            time through your account settings within the App or through the subscription
-            management interface provided by the applicable Payment Platform (e.g., Apple App
-            Store or Google Play Store settings on your device). Cancellation will take effect
-            at the end of the current billing period, and you will retain access to Vendor
-            features until that date. No partial refunds will be issued for any unused portion
-            of a billing period.
+            time. Because subscriptions are managed by Apple or Google, cancellation must be
+            performed through the subscription management settings on your device: via the
+            Apple App Store (Settings &gt; Apple ID &gt; Subscriptions) for iOS users, or via
+            the Google Play Store (Google Play &gt; Payments &amp; subscriptions &gt; Subscriptions)
+            for Android users. Cancellation cannot be processed by StreetFeast directly.
+            Cancellation will take effect at the end of the current billing period, and you will
+            retain access to Vendor features until that date. Uninstalling the App does not
+            cancel your subscription.
           </p>
           <p>
-            <strong>5.5 Refunds.</strong> All subscription fees are non-refundable except as
-            required by applicable law or as otherwise determined by the applicable Payment
-            Platform. Requests for refunds must be directed to the applicable Payment Platform
-            in accordance with its refund policies. StreetFeast does not control and is not
-            responsible for the refund policies of any Payment Platform.
+            <strong>5.5 Refunds.</strong> Refunds are subject to Apple&apos;s and
+            Google&apos;s applicable refund policies. Because Apple and Google serve as the
+            merchant of record for all subscription transactions, all refund requests must be
+            directed to the applicable Payment Platform in accordance with its refund policies.
+            StreetFeast does not process payments or refunds directly and is not responsible for
+            the refund policies of any Payment Platform. For Apple, you may request a refund at
+            reportaproblem.apple.com. For Google, you may request a refund through the Google
+            Play Store.
           </p>
           <p>
             <strong>5.6 Platform Fees.</strong> You acknowledge that the applicable Payment
@@ -303,8 +318,15 @@ export default function Terms() {
             infringe, violate, or misappropriate any third-party intellectual property rights,
             privacy rights, publicity rights, or other personal or proprietary rights;
             (c) your User Content does not contain any material that is defamatory, obscene,
-            threatening, harassing, discriminatory, fraudulent, or otherwise unlawful; and
-            (d) your User Content complies with all applicable laws, rules, and regulations.
+            threatening, harassing, discriminatory, fraudulent, or otherwise unlawful;
+            (d) your User Content complies with all applicable laws, rules, and regulations; and
+            (e) your User Content does not violate any law or third-party rights, including
+            without limitation any intellectual property, privacy, or publicity rights. You agree
+            to indemnify and hold harmless StreetFeast and the StreetFeast Parties from and against
+            any and all claims, damages, losses, liabilities, costs, and expenses (including
+            reasonable attorneys&apos; fees) arising out of or in connection with your User Content,
+            including but not limited to any claim that your User Content infringes or violates
+            any third-party rights or applicable law.
           </p>
           <p>
             <strong>7.5 Content Moderation.</strong> StreetFeast reserves the right, but has no
@@ -453,6 +475,21 @@ export default function Terms() {
             <li>
               Circumvent, disable, or otherwise interfere with any security-related features of
               the Service or features that prevent or restrict use or copying of any content;
+            </li>
+            <li>
+              Misrepresent the location, operating schedule, availability, or any other material
+              information of a Vendor, food truck, or pop-up restaurant;
+            </li>
+            <li>
+              Post, upload, or transmit any content that is harmful, threatening, abusive,
+              harassing, tortious, defamatory, vulgar, obscene, libelous, or that promotes
+              violence, discrimination, illegal activities, or harm to any person or group;
+            </li>
+            <li>
+              Use any automated tools, bots, scripts, spiders, scrapers, crawlers, or similar
+              technology to access, scrape, extract, index, or manipulate data from the Service
+              or its underlying databases, whether for competitive purposes, data aggregation,
+              or any other purpose, without StreetFeast&apos;s express prior written consent;
             </li>
             <li>
               Manipulate Vendor analytics, engagement metrics, or any data tracked by the Service
@@ -697,16 +734,28 @@ export default function Terms() {
             arbitration provision.
           </p>
           <p>
-            The arbitration shall be conducted by a single arbitrator. You may elect to have the
-            arbitration conducted by telephone, based on written submissions, or in person in the
+            The arbitration shall be conducted by a single arbitrator selected in accordance with
+            the AAA Rules. You may elect to have the arbitration conducted by telephone, video
+            conference, or other remote means, based on written submissions, or in person in the
             county where you reside or at another mutually agreed location. The arbitration shall
-            be conducted in the English language. The arbitrator may award on an individual basis
-            any relief that would be available in a court, including injunctive or declaratory
-            relief, and must follow and enforce these Terms as a court would. Any arbitration
-            proceedings shall be confidential, and neither party may disclose the existence,
-            content, or results of any arbitration except as required by law or for purposes of
-            enforcement of the arbitration award. Judgment on any arbitration award may be entered
-            in any court of competent jurisdiction.
+            be conducted in the English language. Each party shall be responsible for paying its
+            own attorneys&apos; fees, costs, and expenses in connection with the arbitration,
+            unless otherwise required by applicable law or as determined by the arbitrator pursuant
+            to the AAA Rules. The arbitrator may award on an individual basis any relief that would
+            be available in a court, including injunctive or declaratory relief, and must follow and
+            enforce these Terms as a court would. The arbitrator shall issue a reasoned written
+            decision sufficient to explain the essential findings and conclusions on which the award
+            is based. Any arbitration proceedings shall be confidential, and neither party may
+            disclose the existence, content, or results of any arbitration except as required by law
+            or for purposes of enforcement of the arbitration award. Judgment on any arbitration
+            award may be entered in any court of competent jurisdiction.
+          </p>
+          <p>
+            <strong>17.2.1 Arbitration Fees.</strong> Payment of all filing, administration, and
+            arbitrator fees will be governed by the AAA Rules. If you demonstrate that the costs
+            of arbitration will be prohibitive as compared to the costs of litigation, StreetFeast
+            will pay as much of the filing, administration, and arbitrator fees as the arbitrator
+            deems necessary to prevent the arbitration from being cost-prohibitive.
           </p>
           <p>
             This arbitration provision is made pursuant to a transaction involving interstate

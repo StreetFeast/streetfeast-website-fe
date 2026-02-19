@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './HeroHeader.module.css';
+import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 
 export default function HeroHeader() {
   return (
@@ -15,7 +16,7 @@ export default function HeroHeader() {
           </p>
           <div className={styles.ctaButtons}>
             <a
-              href="https://apps.apple.com"
+              href={APP_STORE_LINK}
               className={styles.appStoreBtn}
               target="_blank"
               rel="noopener noreferrer"
@@ -28,7 +29,7 @@ export default function HeroHeader() {
               />
             </a>
             <a
-              href="https://play.google.com"
+              href={GOOGLE_PLAY_LINK}
               className={styles.playStoreBtn}
               target="_blank"
               rel="noopener noreferrer"
@@ -70,7 +71,7 @@ export default function HeroHeader() {
         </div>
         <div className={styles.ctaButtonsMobile}>
           <a
-            href="https://apps.apple.com"
+            href={APP_STORE_LINK}
             className={styles.appStoreBtn}
             target="_blank"
             rel="noopener noreferrer"
@@ -83,7 +84,7 @@ export default function HeroHeader() {
             />
           </a>
           <a
-            href="https://play.google.com"
+            href={GOOGLE_PLAY_LINK}
             className={styles.playStoreBtn}
             target="_blank"
             rel="noopener noreferrer"

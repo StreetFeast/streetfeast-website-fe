@@ -71,7 +71,7 @@ export default function Privacy() {
           <h3>3.2 Information Collected Automatically</h3>
           <p>When you access or use the Services, we automatically collect:</p>
           <ul>
-            <li><strong>Location Data:</strong> precise GPS coordinates (with your consent) to identify nearby food vendors and provide location-based recommendations; ZIP code-derived geographic coordinates for vendor registration</li>
+            <li><strong>Location Data:</strong> precise GPS coordinates (with your consent) to identify nearby food vendors and provide location-based recommendations; ZIP code-derived geographic coordinates for vendor registration. You may withdraw your consent to these location-based features of the Service by disabling the geolocation function on your mobile device. Please note that withdrawing consent may limit or eliminate certain functionality of the Services, including the ability to discover nearby vendors</li>
             <li><strong>Device Information:</strong> device type, operating system, operating system version, unique device identifiers, mobile network information, and user-agent strings</li>
             <li><strong>Device Fingerprint:</strong> we utilize device fingerprinting technology to generate a unique device identifier based on your browser and device attributes (including browser type, installed plugins, screen resolution, and hardware characteristics) for fraud prevention and security purposes</li>
             <li><strong>Usage Data:</strong> search queries, vendor interactions, pages and screens visited, features utilized, favorites saved, in-app activities, and navigation patterns</li>
@@ -264,7 +264,7 @@ export default function Privacy() {
           <p>The Services do not currently respond to &ldquo;Do Not Track&rdquo; (DNT) browser signals or similar mechanisms, as there is no industry-accepted standard for DNT signal interpretation.</p>
 
           <h3>9.9 Exercising Your Rights</h3>
-          <p>To exercise any of the rights described in this Section, please contact us as described in Section 16. We may require you to verify your identity before processing your request. We will respond to verifiable requests within the timeframes required by applicable law (generally within thirty (30) days for CCPA and thirty (30) days, extendable to sixty (60) days, for GDPR requests). We will not charge a fee for processing your request unless it is manifestly unfounded or excessive.</p>
+          <p>To exercise any of the rights described in this Section, please contact us as described in Section 16. We may require you to verify your identity before processing your request. We will respond to verifiable requests within the timeframes required by applicable law (generally within thirty (30) days for CCPA requests). We will not charge a fee for processing your request unless it is manifestly unfounded or excessive.</p>
         </section>
 
         {/* SECTION 10: COOKIES, LOCAL STORAGE, AND TRACKING TECHNOLOGIES */}
@@ -326,14 +326,11 @@ export default function Privacy() {
           </p>
         </section>
 
-        {/* SECTION 13: INTERNATIONAL DATA TRANSFERS */}
+        {/* SECTION 13: GEOGRAPHIC SCOPE */}
         <section className={styles.section}>
-          <h2>13. International Data Transfers</h2>
+          <h2>13. Geographic Scope</h2>
           <p>
-            Your Personal Information may be transferred to, stored in, and processed in the United States of America and other countries that may have data protection laws that differ from, and may be less protective than, the laws of your country of residence. By using the Services, you explicitly consent to the transfer, storage, and processing of your Personal Information in the United States and any other country in which StreetFeast or its service providers maintain facilities.
-          </p>
-          <p>
-            Where required by applicable law, we implement appropriate safeguards for international data transfers, which may include Standard Contractual Clauses approved by the European Commission, data processing agreements with our service providers, or reliance on an adequacy determination by the relevant regulatory authority.
+            StreetFeast is operated in the United States and is intended for users located within the United States. We do not knowingly offer services to individuals in the European Union or other jurisdictions outside the U.S. Your Personal Information is stored and processed in the United States, and by using the Services, you consent to the storage and processing of your information within the United States.
           </p>
         </section>
 
@@ -378,7 +375,7 @@ export default function Privacy() {
           <ul>
             <li>Investigate the nature and scope of the breach promptly</li>
             <li>Take reasonable steps to contain and remediate the breach</li>
-            <li>Notify affected individuals without unreasonable delay, and in no event later than the timeframes required by applicable law (e.g., seventy-two (72) hours under GDPR, as required under state breach notification laws in the United States)</li>
+            <li>Notify affected individuals without unreasonable delay, and in no event later than the timeframes required by applicable state breach notification laws in the United States</li>
             <li>Provide notification to applicable regulatory authorities as required by law</li>
             <li>Include in such notification a description of the nature of the breach, the categories and approximate number of individuals concerned, the likely consequences, and the measures taken or proposed to address the breach</li>
           </ul>
@@ -403,23 +400,9 @@ export default function Privacy() {
           </p>
         </section>
 
-        {/* SECTION 17: DISPUTE RESOLUTION AND GOVERNING LAW */}
+        {/* SECTION 17: UPDATES TO THIS PRIVACY POLICY */}
         <section className={styles.section}>
-          <h2>17. Dispute Resolution and Governing Law</h2>
-          <p>
-            This Privacy Policy shall be governed by and construed in accordance with the laws of the Commonwealth of Kentucky, without regard to its conflict of laws principles. Any dispute, claim, or controversy arising out of or relating to this Policy or the breach, termination, enforcement, interpretation, or validity thereof, including the determination of the scope or applicability of this agreement to arbitrate, shall be determined by binding arbitration in accordance with our Terms of Service.
-          </p>
-          <p>
-            <strong>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, YOU AND STREETFEAST EACH WAIVE THE RIGHT TO A JURY TRIAL AND THE RIGHT TO PARTICIPATE IN A CLASS ACTION, COLLECTIVE ACTION, PRIVATE ATTORNEY GENERAL ACTION, OR OTHER REPRESENTATIVE PROCEEDING OF ANY KIND.</strong>
-          </p>
-          <p>
-            Notwithstanding the foregoing, nothing in this Section shall preclude either party from seeking injunctive or equitable relief in a court of competent jurisdiction to prevent irreparable harm pending the completion of arbitration.
-          </p>
-        </section>
-
-        {/* SECTION 18: UPDATES TO THIS PRIVACY POLICY */}
-        <section className={styles.section}>
-          <h2>18. Updates to This Privacy Policy</h2>
+          <h2>17. Updates to This Privacy Policy</h2>
           <p>
             We reserve the right to modify this Privacy Policy at any time in our sole discretion. Amendments shall apply to information already collected as well as information collected after the effective date of the amendment. We will notify you of material changes by:
           </p>
@@ -433,17 +416,17 @@ export default function Privacy() {
           </p>
         </section>
 
-        {/* SECTION 19: SEVERABILITY */}
+        {/* SECTION 18: SEVERABILITY */}
         <section className={styles.section}>
-          <h2>19. Severability</h2>
+          <h2>18. Severability</h2>
           <p>
             If any provision of this Privacy Policy is held to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such invalidity, illegality, or unenforceability shall not affect any other provision of this Policy, and this Policy shall be construed as if such invalid, illegal, or unenforceable provision had never been contained herein. The remaining provisions shall continue in full force and effect.
           </p>
         </section>
 
-        {/* SECTION 20: ENTIRE AGREEMENT */}
+        {/* SECTION 19: ENTIRE AGREEMENT */}
         <section className={styles.section}>
-          <h2>20. Entire Agreement</h2>
+          <h2>19. Entire Agreement</h2>
           <p>
             This Privacy Policy, together with our Terms of Service and any other agreements expressly incorporated by reference herein, constitutes the entire agreement between you and StreetFeast with respect to the subject matter hereof and supersedes all prior or contemporaneous communications, representations, or agreements, whether oral or written, with respect to such subject matter.
           </p>

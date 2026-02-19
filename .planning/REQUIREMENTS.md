@@ -67,25 +67,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BNRR-01 | — | Pending |
-| BNRR-02 | — | Pending |
-| BNRR-03 | — | Pending |
-| BNRR-04 | — | Pending |
-| BNRR-05 | — | Pending |
-| BNRR-06 | — | Pending |
-| BNRR-07 | — | Pending |
-| SCRP-01 | — | Pending |
-| SCRP-02 | — | Pending |
-| SCRP-03 | — | Pending |
-| A11Y-01 | — | Pending |
-| A11Y-02 | — | Pending |
-| A11Y-03 | — | Pending |
+| BNRR-01 | Phase 2 | Pending |
+| BNRR-02 | Phase 2 | Pending |
+| BNRR-03 | Phase 2 | Pending |
+| BNRR-04 | Phase 2 | Pending |
+| BNRR-05 | Phase 1 | Pending |
+| BNRR-06 | Phase 2 | Pending |
+| BNRR-07 | Phase 2 | Pending |
+| SCRP-01 | Phase 3 | Pending |
+| SCRP-02 | Phase 3 | Pending |
+| SCRP-03 | Phase 3 | Pending |
+| A11Y-01 | Phase 2 | Pending |
+| A11Y-02 | Phase 2 | Pending |
+| A11Y-03 | Phase 2 | Pending |
 
 **Coverage:**
 - v1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-19*
-*Last updated: 2026-02-19 after initial definition*
+*Last updated: 2026-02-19 after roadmap creation*

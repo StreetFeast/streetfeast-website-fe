@@ -320,9 +320,9 @@ export default function Privacy() {
         <section className={styles.section}>
           <h2>12. Children&apos;s Privacy</h2>
           <p>
-            The Services are not directed to, and we do not knowingly collect Personal Information from, individuals under the age of sixteen (16). If you are under the age of sixteen (16), you may not use the Services or provide any Personal Information to us. If you are a parent or legal guardian and believe that your child under sixteen (16) has provided us with Personal Information, please contact us immediately at{' '}
+            The Services are not directed to, and we do not knowingly collect Personal Information from, individuals under the age of thirteen (13). If you are under the age of thirteen (13), you may not use the Services or provide any Personal Information to us. If you are a parent or legal guardian and believe that your child under thirteen (13) has provided us with Personal Information, please contact us immediately at{' '}
             <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a>.
-            {' '}Upon verification, we will take prompt steps to delete such information from our systems. If we become aware that we have collected Personal Information from a child under sixteen (16) without verification of parental consent, we will take commercially reasonable steps to delete that information.
+            {' '}Upon verification, we will take prompt steps to delete such information from our systems. If we become aware that we have collected Personal Information from a child under thirteen (13) without verification of parental consent, we will take commercially reasonable steps to delete that information.
           </p>
         </section>
 

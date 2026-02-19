@@ -12,7 +12,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://streetfeast.com'),
+  metadataBase: new URL('https://streetfeastapp.com'),
   title: {
     default: 'StreetFeast - Discover Amazing Street Food Near You',
     template: '%s | StreetFeast',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'StreetFeast - Discover Amazing Street Food Near You',
     description: 'Find the best food trucks, street vendors, and pop-up restaurants in your area. Real-time locations, reviews, and menus.',
-    url: 'https://streetfeast.com',
+    url: 'https://streetfeastapp.com',
     siteName: 'StreetFeast',
     images: [
       {

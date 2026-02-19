@@ -32,7 +32,7 @@ export default function Privacy() {
         <section className={styles.section}>
           <h2>1. Introduction</h2>
           <p className={styles.intro}>
-            StreetFeast, LLC (&ldquo;StreetFeast,&rdquo; &ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the StreetFeast mobile application (the &ldquo;App&rdquo;), the website located at streetfeastapp.com (the &ldquo;Website&rdquo;), and all related services, features, and content (collectively, the &ldquo;Services&rdquo;). This Privacy Policy (&ldquo;Policy&rdquo;) constitutes a legally binding agreement between you (&ldquo;User,&rdquo; &ldquo;you,&rdquo; or &ldquo;your&rdquo;) and StreetFeast governing the collection, use, disclosure, retention, and protection of your personal information.
+            StreetFeast, LLC (&ldquo;StreetFeast,&rdquo; &ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the StreetFeast mobile application (the &ldquo;App&rdquo;), the website located at streetfeastapp.com (the &ldquo;Website&rdquo;), and all related services, features, and content (collectively, the &ldquo;Services&rdquo;). This Privacy Policy describes how we collect, use, disclose, and protect your information.
           </p>
           <p>
             <strong>BY ACCESSING, DOWNLOADING, INSTALLING, OR USING THE SERVICES IN ANY MANNER, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THE TERMS OF THIS PRIVACY POLICY. IF YOU DO NOT AGREE TO THIS POLICY, YOU MUST IMMEDIATELY CEASE ALL USE OF THE SERVICES. YOUR CONTINUED USE OF THE SERVICES FOLLOWING THE POSTING OF ANY AMENDMENTS TO THIS POLICY SHALL CONSTITUTE YOUR ACCEPTANCE OF SUCH AMENDMENTS.</strong>
@@ -243,7 +243,7 @@ export default function Privacy() {
           <p>You may request deletion of your account and Personal Information through the App or by visiting our <Link href="/delete-my-data">Delete My Data</Link> page. You may also submit a deletion request by contacting us as described in Section 16. Note that we may retain certain information as required by law or as described in Section 7.</p>
 
           <h3>9.4 Restriction and Objection</h3>
-          <p>Where permitted by applicable law, you have the right to request restriction of processing of your Personal Information and to object to processing based on our legitimate interests. We will honor such requests unless we demonstrate compelling legitimate grounds for the processing that override your interests, rights, and freedoms.</p>
+          <p>Where permitted by applicable law, you have the right to request restriction of processing of your Personal Information and to object to processing based on our legitimate interests. Where required by applicable law, we will review and respond to such requests.</p>
 
           <h3>9.5 Consent Withdrawal</h3>
           <p>Where processing is based on your consent, you may withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal. Withdrawal of consent may limit the functionality of the Services available to you.</p>

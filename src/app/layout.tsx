@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     siteName: 'StreetFeast',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/social-media-logo.png',
+        width: 1352,
+        height: 632,
         alt: 'StreetFeast - Discover Amazing Street Food',
       },
     ],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'StreetFeast - Discover Amazing Street Food Near You',
     description: 'Find the best food trucks, street vendors, and pop-up restaurants in your area.',
-    images: ['/twitter-image.jpg'],
+    images: ['/social-media-logo.png'],
     creator: '@streetfeast',
   },
   robots: {

@@ -892,7 +892,7 @@ export default function Terms() {
           </p>
           <p>
             <strong>StreetFeast</strong><br />
-            Email: <a href="mailto:legal@streetfeast.com">customer-support@streetfeastapp.com</a><br />
+            Email: <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a><br />
             Website: <a href="https://www.streetfeastapp.com/contact">streetfeast.com/contact</a>
           </p>
           <p>

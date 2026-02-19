@@ -319,7 +319,7 @@ export default function Privacy() {
           <h2>12. Children&apos;s Privacy</h2>
           <p>
             The Services are not directed to, and we do not knowingly collect Personal Information from, individuals under the age of sixteen (16). If you are under the age of sixteen (16), you may not use the Services or provide any Personal Information to us. If you are a parent or legal guardian and believe that your child under sixteen (16) has provided us with Personal Information, please contact us immediately at{' '}
-            <a href="mailto:privacy@streetfeastapp.com">privacy@streetfeastapp.com</a>.
+            <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a>.
             {' '}Upon verification, we will take prompt steps to delete such information from our systems. If we become aware that we have collected Personal Information from a child under sixteen (16) without verification of parental consent, we will take commercially reasonable steps to delete that information.
           </p>
         </section>
@@ -364,7 +364,7 @@ export default function Privacy() {
           <h3>14.8 Exercising Your Rights</h3>
           <p>
             To exercise your CCPA rights, please contact us at{' '}
-            <a href="mailto:privacy@streetfeastapp.com">privacy@streetfeastapp.com</a>
+            <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a>
             {' '}with the subject line &ldquo;California Privacy Rights.&rdquo; You may also designate an authorized agent to submit a request on your behalf by providing written authorization. We will verify your identity before fulfilling any request. We will respond to verifiable requests within forty-five (45) calendar days.
           </p>
         </section>
@@ -396,7 +396,7 @@ export default function Privacy() {
           </div>
           <p>
             For data protection inquiries, privacy rights requests, or to exercise any rights described in this Policy, please email us at{' '}
-            <a href="mailto:privacy@streetfeastapp.com">privacy@streetfeastapp.com</a>
+            <a href="mailto:customer-support@streetfeastapp.com">customer-support@streetfeastapp.com</a>
             {' '}with &ldquo;Privacy Request&rdquo; in the subject line. We endeavor to respond to all legitimate requests within thirty (30) calendar days. In certain circumstances, we may require additional time, in which case we will notify you of the extension and the reasons therefor.
           </p>
         </section>

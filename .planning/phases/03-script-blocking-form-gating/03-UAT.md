@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 03-script-blocking-form-gating
 source: [03-01-SUMMARY.md]
 started: 2026-02-20T01:00:00Z
@@ -61,7 +61,10 @@ skipped: 0
   reason: "User reported: If cookies aren't accepted, the form shows and it can be filled out. It should be blocked until cookies are accepted. When cookies are declined it does block properly and when accepted the form works."
   severity: major
   test: 4
-  root_cause: ""
-  artifacts: []
-  missing: []
+  root_cause: "ContactForm branching logic at line 124 uses `hasConsented !== false` which treats null (undecided) same as true (accepted). Condition should be `hasConsented === true` to only show form when explicitly accepted."
+  artifacts:
+    - path: "src/components/ContactForm/ContactForm.tsx"
+      issue: "Line 124: `if (!isHydrated || hasConsented !== false)` should be `if (isHydrated && hasConsented === true)`"
+  missing:
+    - "Change ContactForm branching to show NoConsentAlternative for both null and false states, only showing ContactFormFull when hasConsented === true"
   debug_session: ""

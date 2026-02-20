@@ -71,10 +71,10 @@ Plans:
   4. When user accepts cookies, contact form loads with full reCAPTCHA and FingerprintJS spam prevention
   5. Application handles missing executeRecaptcha context gracefully without crashes when provider isn't mounted
 
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 03-01: TBD during planning
+- [ ] 03-01-PLAN.md — Consent-gated reCAPTCHA provider and contact form no-consent alternative
 
 ## Progress
 
@@ -85,8 +85,8 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. State Management Foundation | 1/1 | ✓ Complete | 2026-02-19 |
 | 2. Banner UI & User Controls | 1/1 | ✓ Complete | 2026-02-19 |
-| 3. Script Blocking & Form Gating | 0/TBD | Not started | - |
+| 3. Script Blocking & Form Gating | 0/1 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-19*
-*Last updated: 2026-02-19 (Phase 2 complete)*
+*Last updated: 2026-02-19 (Phase 3 planned)*

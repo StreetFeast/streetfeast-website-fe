@@ -92,6 +92,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         const fetchDefaultMenu = async () => {
             try {
                 const menu = await getTruckMenu(truckId, truckData.defaultMenuId!);
+                console.log(menu)
                 setDefaultMenu(menu);
             } catch (err) {
                 console.error('Error fetching default menu:', err);
@@ -222,8 +223,8 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         return phone;
     };
 
-    const formatPrice = (cents: number) => {
-        return `$${(cents / 100).toFixed(2)}`;
+    const formatPrice = (price: number) => {
+        return `$${price.toFixed(2)}`;
     };
 
     const formatScheduleDate = (dateString: string) => {
@@ -358,7 +359,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         today.setHours(0, 0, 0, 0);
         const occurrencesByDate = groupOccurrencesByDate();
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 15; i++) {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
             const dateStr = getDateString(date);
@@ -664,11 +665,27 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
 
                         {activeTab === 'menu' && (
                             <div className={styles.menuContent}>
+                                {menuCategories.length > 1 && (
+                                    <div className={styles.categoryNav}>
+                                        {menuCategories.map((category) => (
+                                            <button
+                                                key={category.id}
+                                                className={styles.categoryPill}
+                                                onClick={() => {
+                                                    const el = document.getElementById(`menu-category-${category.id}`);
+                                                    if (el) {
+                                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                    }
+                                                }}
+                                            >
+                                                {category.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
                                 {menuCategories.length > 0 ? (
                                     menuCategories.map((category) => (
-                                        <div key={category.id} className={styles.menuCategory}>
-                                            <button className={styles.categoryPill}>{category.name}</button>
-
+                                        <div key={category.id} id={`menu-category-${category.id}`} className={styles.menuCategory}>
                                             <h2 className={styles.categoryTitle}>{category.name}</h2>
 
                                             <div className={styles.menuItems}>

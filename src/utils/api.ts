@@ -25,8 +25,26 @@ export const getTruckDetails = async (truckId: string): Promise<TruckDetailRespo
  * This endpoint is public and does not require authentication
  */
 export const getTruckMenu = async (truckId: string, menuId: number): Promise<Menu> => {
-  const response = await apiClient.get<Menu>(`/api/v1/Truck/${truckId}/Menu/${menuId}`);
-  return response.data;
+  const response = await apiClient.get<Menu>(
+    `/api/v1/Truck/${truckId}/Menu`,
+    {
+      params: { menuId },
+      skipAuthRedirect: true,
+    } as import('axios').AxiosRequestConfig & { skipAuthRedirect?: boolean }
+  );
+  const data = response.data;
+  // API may return an array of categories directly instead of a Menu object
+  if (Array.isArray(data)) {
+    return {
+      id: menuId,
+      truckId: Number(truckId),
+      name: '',
+      description: null,
+      categories: data[0].categories,
+      isDefault: true,
+    };
+  }
+  return data;
 };
 
 /**

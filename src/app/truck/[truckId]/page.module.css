@@ -775,17 +775,45 @@
   gap: 1rem;
 }
 
+.categoryNav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #E2E8F0 transparent;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+  padding-top: 0.25rem;
+}
+
+.categoryNav::-webkit-scrollbar {
+  height: 4px;
+}
+
+.categoryNav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.categoryNav::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 2px;
+}
+
 .categoryPill {
   background: white;
   border: 2px solid #E2E8F0;
   border-radius: 24px;
   padding: 0.5rem 1.25rem;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #1E1E1F;
   cursor: pointer;
   transition: all 0.2s;
-  align-self: flex-start;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .categoryPill:hover {

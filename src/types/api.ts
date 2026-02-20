@@ -92,17 +92,26 @@ export interface Location {
   latitude: number;
 }
 
+export interface MenuItemImage {
+  id: number;
+  menuItemId: number;
+  imageUri?: string | null;
+  sortOrder: number;
+}
+
 export interface MenuItem {
-  truckMenuItemMapId: number;
+  menuItemMapId?: number;
+  truckMenuItemMapId?: number;
   sortOrder: number;
   price: number;
   id: number;
-  truckId: number;
+  truckId?: number;
   image?: string | null;
   name: string;
   description?: string | null;
   isActive: boolean;
-  images: TruckImageMap[];
+  defaultPrice?: number | null;
+  images: MenuItemImage[];
 }
 
 export interface MenuCategory {

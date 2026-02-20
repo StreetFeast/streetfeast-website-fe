@@ -48,10 +48,23 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean; skipAuthRedirect?: boolean };
 
     // If error is 401 and we haven't tried to refresh yet
     if (error.response?.status === 401 && !originalRequest._retry) {
+      // For public endpoints that don't need auth, skip token refresh and redirect
+      if (originalRequest.skipAuthRedirect) {
+        // Retry once without the Authorization header
+        if (!originalRequest._retry) {
+          originalRequest._retry = true;
+          if (originalRequest.headers) {
+            delete originalRequest.headers.Authorization;
+          }
+          return apiClient(originalRequest);
+        }
+        return Promise.reject(error);
+      }
+
       if (isRefreshing) {
         // If already refreshing, wait for the refresh to complete
         return new Promise((resolve) => {

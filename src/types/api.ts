@@ -92,17 +92,26 @@ export interface Location {
   latitude: number;
 }
 
+export interface MenuItemImage {
+  id: number;
+  menuItemId: number;
+  imageUri?: string | null;
+  sortOrder: number;
+}
+
 export interface MenuItem {
-  truckMenuItemMapId: number;
+  menuItemMapId?: number;
+  truckMenuItemMapId?: number;
   sortOrder: number;
   price: number;
   id: number;
-  truckId: number;
+  truckId?: number;
   image?: string | null;
   name: string;
   description?: string | null;
   isActive: boolean;
-  images: TruckImageMap[];
+  defaultPrice?: number | null;
+  images: MenuItemImage[];
 }
 
 export interface MenuCategory {
@@ -161,4 +170,8 @@ export interface TruckDetailResponse {
   images: TruckImageMap[];
   activeOccurrence?: TruckOccurrence | null;
   todaysOccurrences?: TruckOccurrence[] | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  tiktok?: string | null;
+  x?: string | null;
 }

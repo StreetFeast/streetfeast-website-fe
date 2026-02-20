@@ -1,4 +1,4 @@
-import { UserResponse, TruckDetailResponse } from '@/types/api';
+import { UserResponse, TruckDetailResponse, Menu } from '@/types/api';
 import { apiClient } from './axiosConfig';
 
 /**
@@ -18,6 +18,33 @@ export const getUserProfile = async (): Promise<UserResponse> => {
 export const getTruckDetails = async (truckId: string): Promise<TruckDetailResponse> => {
   const response = await apiClient.get<TruckDetailResponse>(`/api/v1/Truck/${truckId}`);
   return response.data;
+};
+
+/**
+ * Fetches a specific menu for a truck by menu ID
+ * This endpoint is public and does not require authentication
+ */
+export const getTruckMenu = async (truckId: string, menuId: number): Promise<Menu> => {
+  const response = await apiClient.get<Menu>(
+    `/api/v1/Truck/${truckId}/Menu`,
+    {
+      params: { menuId },
+      skipAuthRedirect: true,
+    } as import('axios').AxiosRequestConfig & { skipAuthRedirect?: boolean }
+  );
+  const data = response.data;
+  // API may return an array of categories directly instead of a Menu object
+  if (Array.isArray(data)) {
+    return {
+      id: menuId,
+      truckId: Number(truckId),
+      name: '',
+      description: null,
+      categories: data[0].categories,
+      isDefault: true,
+    };
+  }
+  return data;
 };
 
 /**

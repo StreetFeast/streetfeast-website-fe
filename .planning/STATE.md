@@ -13,7 +13,7 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 Phase: 3 of 3 (Script Blocking & Form Gating)
 Plan: 2 of 2 in current phase
 Status: Phase complete
-Last activity: 2026-02-20 — Phase 3 gap closure complete (ContactForm strict consent gating for null/undecided state)
+Last activity: 2026-02-20 - Completed quick task 1: Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links
 
 Progress: [██████████] 100%
 
@@ -69,6 +69,12 @@ None yet.
 
 **Backend coordination needed:**
 - Contact form without reCAPTCHA — Confirm backend API accepts submissions when recaptchaToken is null/missing for reject-consent path (affects Phase 3)
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links | 2026-02-20 | c1a3039 | [1-fix-truck-profile-rendering-header-image](./quick/1-fix-truck-profile-rendering-header-image/) |
 
 ## Session Continuity
 

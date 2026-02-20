@@ -187,8 +187,14 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         );
     }
 
+    const getImageUrl = (uri: string | null | undefined): string | null => {
+        if (!uri) return null;
+        if (uri.startsWith('http')) return uri;
+        return `https://streetfeastdevelopment.blob.core.windows.net${uri}`;
+    };
+
     const heroImage = truckData.images && truckData.images.length > 0
-        ? `https://streetfeastdevelopment.blob.core.windows.net${truckData.images[0].imageUri}`
+        ? getImageUrl(truckData.images[0].imageUri)
         : null;
 
     const isFavorited = truckData.favoriteId !== null;
@@ -439,7 +445,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                             backgroundPosition: 'center'
                         } : undefined}
                     >
-                        <button className={styles.reportButton} aria-label="Report" onClick={handleReportClick}>
+                        <button className={styles.reportButton} aria-label="Report" onClick={handleReportClick} style={{ zIndex: 2 }}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
@@ -616,12 +622,8 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
 
                                             <div className={styles.menuItems}>
                                                 {category.menuItems.map((item) => {
-                                                    const itemImage = item.image &&
-                                                        item.image
-                                                        ? `https://streetfeastdevelopment.blob.core.windows.net${item.image}`
-                                                        : null;
-
-                                                    console.log(item)
+                                                    const itemImageUri = item.image || (item.images && item.images.length > 0 ? item.images[0].imageUri : null);
+                                                    const itemImage = getImageUrl(itemImageUri);
 
                                                     return (
                                                         <div key={item.id} className={styles.menuItem}>

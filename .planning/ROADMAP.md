@@ -13,7 +13,7 @@ This roadmap delivers GDPR-compliant cookie consent for StreetFeast's Next.js we
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: State Management Foundation** - Zustand consent store with cookie persistence and SSR hydration handling
-- [ ] **Phase 2: Banner UI & User Controls** - Cookie consent banner with equal-prominence buttons, preference center, and accessibility
+- [x] **Phase 2: Banner UI & User Controls** - Cookie consent banner with equal-prominence buttons, preference center, and accessibility
 - [ ] **Phase 3: Script Blocking & Form Gating** - Conditional loading of reCAPTCHA and FingerprintJS based on consent state
 
 ## Phase Details
@@ -55,7 +55,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 02-01-PLAN.md — Cookie consent banner component and footer re-consent link
+- [x] 02-01-PLAN.md — Cookie consent banner component and footer re-consent link
 
 ### Phase 3: Script Blocking & Form Gating
 **Goal**: Third-party tracking scripts only load after user consent, and contact form provides alternative when consent is declined
@@ -84,9 +84,9 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. State Management Foundation | 1/1 | ✓ Complete | 2026-02-19 |
-| 2. Banner UI & User Controls | 0/1 | Planned | - |
+| 2. Banner UI & User Controls | 1/1 | ✓ Complete | 2026-02-19 |
 | 3. Script Blocking & Form Gating | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-19*
-*Last updated: 2026-02-19 (Phase 2 planned)*
+*Last updated: 2026-02-19 (Phase 2 complete)*

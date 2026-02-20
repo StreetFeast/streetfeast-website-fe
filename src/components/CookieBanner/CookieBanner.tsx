@@ -70,7 +70,7 @@ export default function CookieBanner() {
       <div className={styles.content}>
         <p id="cookie-banner-title" className={styles.title}>Cookie Preferences</p>
         <p id="cookie-banner-desc" className={styles.description}>
-          We use reCAPTCHA and FingerprintJS to prevent spam on our contact form. These services
+          We use reCAPTCHA to prevent spam on our contact form. These services
           may set cookies on your device. You can accept or decline their use.
         </p>
       </div>

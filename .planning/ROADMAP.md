@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: State Management Foundation** - Zustand consent store with cookie persistence and SSR hydration handling
 - [x] **Phase 2: Banner UI & User Controls** - Cookie consent banner with equal-prominence buttons, preference center, and accessibility
-- [x] **Phase 3: Script Blocking & Form Gating** - Conditional loading of reCAPTCHA and FingerprintJS based on consent state
+- [ ] **Phase 3: Script Blocking & Form Gating** - Conditional loading of reCAPTCHA and FingerprintJS based on consent state
 
 ## Phase Details
 
@@ -58,7 +58,7 @@ Plans:
 - [x] 02-01-PLAN.md — Cookie consent banner component and footer re-consent link
 
 ### Phase 3: Script Blocking & Form Gating
-**Goal**: Third-party tracking scripts only load after user consent, and contact form provides alternative when consent is declined
+**Goal**: Third-party tracking scripts only load after user consent, and contact form provides alternative when consent is declined or undecided
 
 **Depends on**: Phase 2
 
@@ -67,14 +67,15 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. When user declines cookies, no reCAPTCHA or FingerprintJS scripts load (verified in browser Network tab)
   2. When user accepts cookies, GoogleReCaptchaProvider mounts and reCAPTCHA scripts load successfully
-  3. When user declines cookies, contact form shows email link alternative instead of form (no cookie wall)
+  3. When user declines cookies OR has not yet made a choice, contact form shows email link alternative instead of form (no cookie wall)
   4. When user accepts cookies, contact form loads with full reCAPTCHA and FingerprintJS spam prevention
   5. Application handles missing executeRecaptcha context gracefully without crashes when provider isn't mounted
 
-**Plans:** 1 plan
+**Plans:** 2 plans
 
 Plans:
 - [x] 03-01-PLAN.md — Consent-gated reCAPTCHA provider and contact form no-consent alternative
+- [ ] 03-02-PLAN.md — Fix ContactForm consent branching to require explicit accept (gap closure)
 
 ## Progress
 
@@ -83,10 +84,10 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. State Management Foundation | 1/1 | ✓ Complete | 2026-02-19 |
-| 2. Banner UI & User Controls | 1/1 | ✓ Complete | 2026-02-19 |
-| 3. Script Blocking & Form Gating | 1/1 | ✓ Complete | 2026-02-19 |
+| 1. State Management Foundation | 1/1 | Complete | 2026-02-19 |
+| 2. Banner UI & User Controls | 1/1 | Complete | 2026-02-19 |
+| 3. Script Blocking & Form Gating | 1/2 | Gap closure | — |
 
 ---
 *Roadmap created: 2026-02-19*
-*Last updated: 2026-02-19 (Phase 3 complete)*
+*Last updated: 2026-02-20 (Phase 3 gap closure plan added)*

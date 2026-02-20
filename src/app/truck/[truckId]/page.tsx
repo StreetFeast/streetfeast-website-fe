@@ -6,6 +6,7 @@ import { getTruckDetails, getTruckOccurrences } from '@/utils/api';
 import { TruckDetailResponse, TruckOccurrence } from '@/types/api';
 import GoogleMap from '@/components/GoogleMap';
 import TruckProfileSkeleton from '@/components/TruckProfileSkeleton';
+import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 import styles from './page.module.css';
 
 interface TruckProfilePageProps {
@@ -114,7 +115,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                             <div className={styles.modalButtons}>
                                 {(userDevice === 'ios' || userDevice === 'unknown') && (
                                     <a
-                                        href="https://apps.apple.com"
+                                        href={APP_STORE_LINK}
                                         className={styles.appStoreButton}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -129,7 +130,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                                 )}
                                 {(userDevice === 'android' || userDevice === 'unknown') && (
                                     <a
-                                        href="https://play.google.com"
+                                        href={GOOGLE_PLAY_LINK}
                                         className={styles.playStoreButton}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -393,7 +394,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                         <div className={styles.modalButtons}>
                             {(userDevice === 'ios' || userDevice === 'unknown') && (
                                 <a
-                                    href="https://apps.apple.com"
+                                    href={APP_STORE_LINK}
                                     className={styles.appStoreButton}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -408,7 +409,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                             )}
                             {(userDevice === 'android' || userDevice === 'unknown') && (
                                 <a
-                                    href="https://play.google.com"
+                                    href={GOOGLE_PLAY_LINK}
                                     className={styles.playStoreButton}
                                     target="_blank"
                                     rel="noopener noreferrer"

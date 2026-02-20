@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
 import CookiePrefsButton from './CookiePrefsButton';
+import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 
 export default function Footer() {
   return (
@@ -15,9 +16,7 @@ export default function Footer() {
           <div className={styles.links}>
             <div className={styles.column}>
               <h4 className={styles.columnTitle}>Company</h4>
-              <Link href="/about" className={styles.link}>About Us</Link>
               <Link href="/contact" className={styles.link}>Contact</Link>
-              <Link href="/careers" className={styles.link}>Careers</Link>
             </div>
 
             <div className={styles.column}>
@@ -31,7 +30,7 @@ export default function Footer() {
             <div className={styles.column}>
               <h4 className={styles.columnTitle}>Download</h4>
               <a
-                href="https://apps.apple.com"
+                href={APP_STORE_LINK}
                 className={styles.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -39,7 +38,7 @@ export default function Footer() {
                 iOS App
               </a>
               <a
-                href="https://play.google.com"
+                href={GOOGLE_PLAY_LINK}
                 className={styles.link}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -121,7 +121,11 @@ function NoConsentAlternative() {
 export default function ContactForm() {
   const { hasConsented, isHydrated } = useConsentStore();
 
-  if (!isHydrated || hasConsented !== false) {
+  if (!isHydrated) {
+    return null;
+  }
+
+  if (hasConsented === true) {
     return <ContactFormFull />;
   }
 

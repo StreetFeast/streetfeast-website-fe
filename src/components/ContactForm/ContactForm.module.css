@@ -136,6 +136,57 @@
   margin: 0;
 }
 
+/* No-consent alternative */
+.alternative {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.alternative p {
+  font-size: 1.125rem;
+  color: #636363;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.alternative p:last-child {
+  margin-bottom: 0;
+}
+
+.emailLink {
+  color: #ED6A00;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.emailLink:hover {
+  color: #F2974D;
+  text-decoration: underline;
+}
+
+.consentPrompt {
+  font-size: 1rem;
+  color: #808080;
+}
+
+.consentButton {
+  background: none;
+  border: none;
+  color: #ED6A00;
+  font-weight: 600;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.consentButton:hover {
+  color: #F2974D;
+}
+
 @media (max-width: 1024px) {
   .container {
     padding: 2.5rem;
@@ -146,40 +197,48 @@
   .contactSection {
     padding: 6rem 1.5rem 3rem;
   }
-  
+
   .container {
     padding: 2rem;
     border-radius: 16px;
   }
-  
+
   .title {
     font-size: 2rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .subtitle {
     font-size: 1rem;
     margin-bottom: 2rem;
   }
-  
+
   .form {
     gap: 1.25rem;
   }
-  
+
   .label {
     font-size: 0.8rem;
   }
-  
+
   .input,
   .textarea {
     padding: 0.75rem 0.875rem;
     font-size: 0.975rem;
   }
-  
+
   .submitButton {
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
     margin-top: 0.5rem;
+  }
+
+  .alternative p {
+    font-size: 1rem;
+  }
+
+  .consentPrompt {
+    font-size: 0.875rem;
   }
 }
 
@@ -187,40 +246,52 @@
   .contactSection {
     padding: 5rem 1rem 2.5rem;
   }
-  
+
   .container {
     padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
-  
+
   .title {
     font-size: 1.75rem;
   }
-  
+
   .subtitle {
     font-size: 0.875rem;
   }
-  
+
   .input,
   .textarea {
     padding: 0.625rem 0.75rem;
     font-size: 0.9rem;
     border-radius: 6px;
   }
-  
+
   .textarea {
     min-height: 100px;
   }
-  
+
   .submitButton {
     padding: 0.75rem 1.25rem;
     font-size: 0.875rem;
     border-radius: 6px;
   }
-  
+
   .successMessage,
   .errorMessage {
     font-size: 0.875rem;
     padding: 0.75rem;
+  }
+
+  .alternative {
+    padding: 1.5rem 0;
+  }
+
+  .alternative p {
+    font-size: 0.875rem;
+  }
+
+  .consentPrompt {
+    font-size: 0.8rem;
   }
 }

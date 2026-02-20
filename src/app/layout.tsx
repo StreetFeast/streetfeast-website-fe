@@ -3,6 +3,7 @@ import { Lexend } from "next/font/google";
 import "./globals.css";
 import { LayoutContent } from "@/components/LayoutContent";
 import Providers from "@/components/Providers";
+import CookieBanner from "@/components/CookieBanner";
 
 
 const lexend = Lexend({
@@ -76,6 +77,7 @@ export default function RootLayout({
             {children}
           </LayoutContent>
         </Providers>
+        <CookieBanner />
       </body>
     </html>
   );

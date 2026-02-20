@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function Privacy() {
-  const lastUpdated = "February 18, 2026";
+  const lastUpdated = "February 19, 2026";
 
   return (
     <div className={styles.container}>
@@ -86,7 +86,7 @@ export default function Privacy() {
             <li><strong>Authentication Providers:</strong> account verification data from Supabase, our authentication infrastructure provider</li>
             <li><strong>Analytics Platforms:</strong> aggregated and individual usage metrics from PostHog, our product analytics platform</li>
             <li><strong>Payment Processors:</strong> transaction confirmation data, subscription status, and billing events from Apple App Store and Google Play in-app purchase systems</li>
-            <li><strong>Bot Detection Services:</strong> risk assessment scores and verification tokens from Google reCAPTCHA v3</li>
+            <li><strong>Bot Detection Services:</strong> risk assessment scores and verification tokens from Google reCAPTCHA v3 (processed as our data processor)</li>
             <li><strong>Mapping Services:</strong> geocoding data and location services from the Google Maps Platform</li>
           </ul>
         </section>
@@ -166,7 +166,7 @@ export default function Privacy() {
             <li><strong>Google Play</strong> — in-app purchase processing and subscription management for Android devices (Google&apos;s processing of payment data is governed by Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>)</li>
             <li><strong>PostHog</strong> — product analytics, session recording, and user behavior analysis (PostHog&apos;s data processing is governed by the PostHog Privacy Policy at <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">https://posthog.com/privacy</a>)</li>
             <li><strong>Google (Maps Platform)</strong> — geocoding, mapping, and location-based services (subject to Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>)</li>
-            <li><strong>Google (reCAPTCHA v3)</strong> — bot detection and abuse prevention (subject to Google&apos;s Privacy Policy and Terms of Service)</li>
+            <li><strong>Google (reCAPTCHA v3)</strong> — bot detection and abuse prevention as our data processor. StreetFeast is the data controller for all data processed by reCAPTCHA.</li>
             <li><strong>Push Notification Services</strong> — device token management and push notification delivery infrastructure</li>
             <li><strong>Fraud Prevention Services</strong> — device fingerprinting for security and abuse prevention</li>
           </ul>
@@ -302,11 +302,7 @@ export default function Privacy() {
             <a href="https://posthog.com/terms" target="_blank" rel="noopener noreferrer">https://posthog.com/terms</a>.
           </p>
           <p>
-            We also utilize Google services (Maps Platform and reCAPTCHA v3), which are governed by Google&apos;s Privacy Policy at{' '}
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>
-            {' '}and Google&apos;s Terms of Service at{' '}
-            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">https://policies.google.com/terms</a>.
-            {' '}Google reCAPTCHA v3 may collect hardware and software information (including device and application data), and this data is used for improving reCAPTCHA and general security purposes.
+            We utilize Google reCAPTCHA v3 as a data processor for bot detection and fraud prevention. StreetFeast is the data controller for all information processed by reCAPTCHA. reCAPTCHA may collect hardware and software information (including device and application data) to assess interaction risk. We also use Google Maps Platform for location services, governed by Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>.
           </p>
           <p>
             Our payment processing is handled through Apple App Store and Google Play in-app purchase systems. When you subscribe to paid services, your payment information is collected and processed directly by Apple or Google, depending on your device platform, pursuant to their respective privacy policies. StreetFeast does not store, process, or have access to your payment card numbers or billing details. Apple&apos;s privacy policy is available at{' '}

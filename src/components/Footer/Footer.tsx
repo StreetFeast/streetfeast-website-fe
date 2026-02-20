@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import CookiePrefsButton from './CookiePrefsButton';
 import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 
 export default function Footer() {
@@ -23,6 +24,7 @@ export default function Footer() {
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
               <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
               <Link href="/delete-my-data" className={styles.link}>Delete My Data</Link>
+              <CookiePrefsButton />
             </div>
 
             <div className={styles.column}>

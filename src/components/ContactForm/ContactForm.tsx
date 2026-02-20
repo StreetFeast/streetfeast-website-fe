@@ -1,9 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './ContactForm.module.css';
 import { useContactForm } from '@/hooks/useContactForm';
+import { useConsentStore } from '@/store/consentStore';
 
-export default function ContactForm() {
+function ContactFormFull() {
   const { formData, status, handleChange, handleSubmit } = useContactForm();
 
   return (
@@ -83,4 +85,49 @@ export default function ContactForm() {
       </div>
     </section>
   );
+}
+
+function NoConsentAlternative() {
+  const { clearConsent } = useConsentStore();
+
+  return (
+    <section className={styles.contactSection}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Contact Us</h2>
+        <p className={styles.subtitle}>
+          Our contact form uses cookies for spam prevention. Please choose an option below.
+        </p>
+        <div className={styles.alternative}>
+          <p>
+            Email us directly:{' '}
+            <a href="mailto:hello@streetfeastapp.com" className={styles.emailLink}>
+              hello@streetfeastapp.com
+            </a>
+          </p>
+          <p className={styles.consentPrompt}>
+            Or{' '}
+            <button onClick={clearConsent} className={styles.consentButton}>
+              update your cookie preferences
+            </button>
+            {' '}to enable the contact form. By accepting, you agree to our{' '}
+            <Link href="/terms">Terms of Service</Link>.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function ContactForm() {
+  const { hasConsented, isHydrated } = useConsentStore();
+
+  if (!isHydrated) {
+    return null;
+  }
+
+  if (hasConsented === true) {
+    return <ContactFormFull />;
+  }
+
+  return <NoConsentAlternative />;
 }

@@ -1,6 +1,4 @@
-"use client";
-
-import { useParams, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTutorialBySlug } from "@/constants/tutorials";
 import TableOfContents from "@/components/TableOfContents";
@@ -23,9 +21,12 @@ const tutorialComponents: Record<string, React.ComponentType> = {
   analytics: AnalyticsTutorial,
 };
 
-export default function TutorialPage() {
-  const params = useParams();
-  const slug = params.slug as string;
+export default async function TutorialPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   const tutorial = getTutorialBySlug(slug);
 
@@ -42,7 +43,7 @@ export default function TutorialPage() {
   return (
     <article className={styles.container}>
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-        <Link href="/profile/tutorials" className={styles.breadcrumbLink}>
+        <Link href="/tutorials" className={styles.breadcrumbLink}>
           Tutorials
         </Link>
         <span aria-hidden="true">/</span>
@@ -61,7 +62,7 @@ export default function TutorialPage() {
       </div>
 
       <footer className={styles.footer}>
-        <Link href="/profile/tutorials" className={styles.backLink}>
+        <Link href="/tutorials" className={styles.backLink}>
           ← Back to Tutorials
         </Link>
       </footer>

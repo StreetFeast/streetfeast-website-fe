@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback, useState } from 'react';
+import Link from 'next/link';
 import { useConsentStore } from '@/store/consentStore';
 import styles from './CookieBanner.module.css';
 
@@ -71,7 +72,11 @@ export default function CookieBanner() {
         <p id="cookie-banner-title" className={styles.title}>Cookie Preferences</p>
         <p id="cookie-banner-desc" className={styles.description}>
           We use reCAPTCHA to prevent spam on our contact form. These services
-          may set cookies on your device. You can accept or decline their use.
+          may set cookies on your device.
+        </p>
+        <p className={styles.links}>
+          See our <Link href="/terms" className={styles.link}>Terms of Service</Link> and{' '}
+          <Link href="/privacy" className={styles.link}>Privacy Policy</Link>.
         </p>
       </div>
       <div className={styles.actions}>

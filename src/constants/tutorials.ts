@@ -17,7 +17,7 @@ export const TUTORIAL_CATEGORIES = {
   "customer-communication": "Customer Communication",
   scheduling: "Scheduling",
   "menu-management": "Menu Management",
-  "business-intelligence": "Business Intelligence",
+  // "business-intelligence": "Business Intelligence",
 } as const;
 
 export const tutorials: Tutorial[] = [
@@ -128,26 +128,26 @@ export const tutorials: Tutorial[] = [
       { id: "important-notes", heading: "Important Notes" },
     ],
   },
-  {
-    slug: "analytics",
-    title: "View and Understand Analytics",
-    description:
-      "Discovery sources, push notification performance, customer engagement metrics, and using data to improve your business.",
-    category: "business-intelligence",
-    order: 7,
-    sections: [
-      { id: "overview", heading: "Overview" },
-      { id: "accessing-analytics", heading: "Accessing Analytics" },
-      { id: "discovery-sources", heading: "Discovery Sources" },
-      { id: "push-notification-metrics", heading: "Push Notification Metrics" },
-      { id: "engagement-metrics", heading: "Engagement Metrics" },
-      { id: "favorites", heading: "Favorites" },
-      { id: "filtering-by-time-period", heading: "Filtering by Time Period" },
-      { id: "understanding-your-data", heading: "Understanding Your Data" },
-      { id: "tips-for-improving-metrics", heading: "Tips for Improving Metrics" },
-      { id: "important-notes", heading: "Important Notes" },
-    ],
-  },
+  // {
+  //   slug: "analytics",
+  //   title: "View and Understand Analytics",
+  //   description:
+  //     "Discovery sources, push notification performance, customer engagement metrics, and using data to improve your business.",
+  //   category: "business-intelligence",
+  //   order: 7,
+  //   sections: [
+  //     { id: "overview", heading: "Overview" },
+  //     { id: "accessing-analytics", heading: "Accessing Analytics" },
+  //     { id: "discovery-sources", heading: "Discovery Sources" },
+  //     { id: "push-notification-metrics", heading: "Push Notification Metrics" },
+  //     { id: "engagement-metrics", heading: "Engagement Metrics" },
+  //     { id: "favorites", heading: "Favorites" },
+  //     { id: "filtering-by-time-period", heading: "Filtering by Time Period" },
+  //     { id: "understanding-your-data", heading: "Understanding Your Data" },
+  //     { id: "tips-for-improving-metrics", heading: "Tips for Improving Metrics" },
+  //     { id: "important-notes", heading: "Important Notes" },
+  //   ],
+  // },
 ];
 
 export function getTutorialBySlug(slug: string): Tutorial | undefined {

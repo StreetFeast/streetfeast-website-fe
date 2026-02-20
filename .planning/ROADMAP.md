@@ -52,10 +52,10 @@ Plans:
   6. Banner is fully responsive on mobile without obscuring primary page content
   7. Banner text meets WCAG 2.2 AA contrast requirements (4.5:1 minimum ratio)
 
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 02-01: TBD during planning
+- [ ] 02-01-PLAN.md — Cookie consent banner component and footer re-consent link
 
 ### Phase 3: Script Blocking & Form Gating
 **Goal**: Third-party tracking scripts only load after user consent, and contact form provides alternative when consent is declined
@@ -84,9 +84,9 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. State Management Foundation | 1/1 | ✓ Complete | 2026-02-19 |
-| 2. Banner UI & User Controls | 0/TBD | Not started | - |
+| 2. Banner UI & User Controls | 0/1 | Planned | - |
 | 3. Script Blocking & Form Gating | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-19*
-*Last updated: 2026-02-19 (Phase 1 complete)*
+*Last updated: 2026-02-19 (Phase 2 planned)*

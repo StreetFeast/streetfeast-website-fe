@@ -161,4 +161,8 @@ export interface TruckDetailResponse {
   images: TruckImageMap[];
   activeOccurrence?: TruckOccurrence | null;
   todaysOccurrences?: TruckOccurrence[] | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  tiktok?: string | null;
+  x?: string | null;
 }

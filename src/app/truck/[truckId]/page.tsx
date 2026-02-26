@@ -205,7 +205,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
     const getImageUrl = (uri: string | null | undefined): string | null => {
         if (!uri) return null;
         if (uri.startsWith('http')) return uri;
-        return `https://streetfeastdevelopment.blob.core.windows.net${uri}`;
+        return `${process.env.NEXT_PUBLIC_STORAGE_PREFIX}${uri}`;
     };
 
     const heroImage = truckData.images && truckData.images.length > 0

@@ -13,7 +13,7 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 Phase: 3 of 3 (Script Blocking & Form Gating)
 Plan: 2 of 2 in current phase
 Status: Phase complete
-Last activity: 2026-02-20 - Completed quick task 1: Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links
+Last activity: 2026-02-26 - Completed quick task 2: Update privacy policy page to match final privacy policy text
 
 Progress: [██████████] 100%
 

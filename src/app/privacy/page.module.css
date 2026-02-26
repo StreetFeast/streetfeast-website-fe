@@ -86,6 +86,41 @@
   margin: 1.5rem 0 0.75rem 0;
 }
 
+.section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1E1E1F;
+  margin: 1.25rem 0 0.5rem 0;
+}
+
+.dataProcessingEntry {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  background: rgba(255, 237, 194, 0.2);
+}
+
+.dataProcessingEntry h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ED6A00;
+  margin: 0 0 0.75rem 0;
+}
+
+.dataProcessingDetails {
+  padding-left: 0.5rem;
+  border-left: 3px solid rgba(237, 106, 0, 0.2);
+  margin-top: 0.5rem;
+}
+
+.dataProcessingDetails p {
+  margin: 0.35rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #636363;
+}
+
 .intro {
   font-size: 1rem;
   line-height: 1.8;
@@ -177,13 +212,26 @@
     font-size: 1rem;
     margin: 1.25rem 0 0.5rem 0;
   }
-  
+
+  .section h4 {
+    font-size: 0.9375rem;
+    margin: 1rem 0 0.4rem 0;
+  }
+
+  .dataProcessingEntry {
+    padding: 0.875rem 1rem;
+  }
+
+  .dataProcessingDetails p {
+    font-size: 0.8125rem;
+  }
+
   .intro {
     font-size: 0.9rem;
     line-height: 1.65;
     margin-bottom: 1.5rem;
   }
-  
+
   .contactInfo {
     padding: 1.25rem;
   }

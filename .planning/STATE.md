@@ -75,11 +75,12 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 1 | Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links | 2026-02-20 | c1a3039 | [1-fix-truck-profile-rendering-header-image](./quick/1-fix-truck-profile-rendering-header-image/) |
+| 2 | Update privacy policy page to match finalized legal document (21 sections, 22 state rights, 14-service data processing inventory) | 2026-02-26 | e6742ca | [2-update-privacy-policy-page-to-match-fina](./quick/2-update-privacy-policy-page-to-match-fina/) |
 
 ## Session Continuity
 
-Last session: 2026-02-20
-Stopped at: Completed 03-02-PLAN.md — Gap closure complete, all UAT issues resolved
+Last session: 2026-02-26
+Stopped at: Completed quick task 2: Update privacy policy page to match Final txt (21 sections, 22 state rights, 14-service inventory)
 Resume file: None
 
 ---

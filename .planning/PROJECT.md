@@ -24,30 +24,41 @@ Food truck owners can register, manage their profiles, and be discovered by hung
 - ✓ SEO optimization (sitemap, robots, OG tags) — existing
 - ✓ Privacy policy and Terms of Service pages — existing
 - ✓ GDPR data deletion page — existing
+- ✓ Cookie consent banner with accept/reject and conditional script loading — v1.0
+- ✓ Cookie preference persistence via Zustand + localStorage — v1.0
+- ✓ Contact form gating with no-consent email alternative — v1.0
+- ✓ Footer "Cookie Preferences" link for re-consent — v1.0
+- ✓ Conditional reCAPTCHA/FingerprintJS loading based on consent — v1.0
 
 ### Active
 
-- [ ] Cookie consent banner for reCAPTCHA 3 and FingerprintJS
-- [ ] Cookie preference persistence in localStorage
-- [ ] Contact Us form disabled when cookies are declined
-- [ ] Modal overlay on Contact Us requiring cookie acceptance and ToS acknowledgment
-- [ ] Cookie Preferences link in footer to re-open consent banner
-- [ ] Conditional loading of reCAPTCHA and FingerprintJS based on cookie consent
+- [ ] Smart app download page at /download with device detection and auto-redirect
+- [ ] Fallback landing page with both store badges when device is undetected
+- [ ] SEO-optimized metadata and OG tags for the download page
 
 ### Out of Scope
 
-- Backend changes — frontend-only cookie consent implementation
-- GDPR-level cookie management with per-category granular controls — simple accept/decline is sufficient
-- Third-party cookie consent platforms (OneTrust, CookieBot) — building in-house to match existing design
+- Backend changes — frontend-only
+- App store submission or mobile app changes — website only
+- Custom app store badge design — use official Apple/Google badges
+
+## Current Milestone: v1.1 App Download Page
+
+**Goal:** Provide a shareable, SEO-optimized download page that auto-redirects mobile users to the correct app store and shows a fallback page with both store badges for desktop/unknown devices.
+
+**Target features:**
+- Device detection via user-agent with auto-redirect to iOS App Store or Google Play
+- Minimal fallback page with StreetFeast branding and both store badge buttons
+- SEO optimization (metadata, OG tags, structured data)
+- Clean shareable URL at /download
 
 ## Context
 
-- reCAPTCHA v3 is currently always loaded via `GoogleReCaptchaProvider` in `Providers.tsx`
-- FingerprintJS is loaded on-demand in `useContactForm.ts` when the contact form is submitted
-- Both are used exclusively for the Contact Us form (`POST /api/v1/Business/ContactUs`)
-- The existing Providers component wraps the entire app with reCAPTCHA — this will need to become conditional based on cookie consent
-- There is an existing Terms of Service page at `/terms`
-- The Footer component exists and will need a "Cookie Preferences" link added
+- App store URLs centralized in `src/constants/links.ts`
+- Existing `/m/` route handles deep links for Universal Links / App Links
+- Site uses Next.js 15 App Router with server-side rendering
+- Existing SEO patterns: sitemap.ts, robots.ts, metadata exports in page files
+- Cookie consent banner and conditional script loading already implemented (v1.0)
 
 ## Constraints
 
@@ -60,11 +71,14 @@ Food truck owners can register, manage their profiles, and be discovered by hung
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Bottom bar banner (not modal) | Non-blocking UX, user can browse while deciding | — Pending |
-| localStorage for persistence | Matches existing Zustand + localStorage pattern in authStore | — Pending |
-| Replace form entirely when cookies declined | Cleaner UX than grayed-out form behind modal | — Pending |
-| Footer link for re-consent | Users can change their mind without clearing browser data | — Pending |
-| ToS link in modal (no checkbox) | Simpler UX — clicking "Accept" implies agreement | — Pending |
+| Bottom bar banner (not modal) | Non-blocking UX, user can browse while deciding | ✓ Good |
+| localStorage for persistence | Matches existing Zustand + localStorage pattern in authStore | ✓ Good |
+| Replace form entirely when cookies declined | Cleaner UX than grayed-out form behind modal | ✓ Good |
+| Footer link for re-consent | Users can change their mind without clearing browser data | ✓ Good |
+| ToS link in no-consent alternative (not banner) | Simpler UX — shown only in relevant context | ✓ Good |
+| Auto-redirect for /download on mobile | Fastest path to app store for mobile users | — Pending |
+| Fallback page with both store badges | Covers desktop and hidden user-agent cases | — Pending |
+| User-agent detection for device routing | Standard approach, with fallback when undetectable | — Pending |
 
 ---
-*Last updated: 2026-02-19 after initialization*
+*Last updated: 2026-02-27 after milestone v1.1 started*

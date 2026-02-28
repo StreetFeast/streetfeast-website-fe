@@ -9,11 +9,11 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 ### Device Detection & Redirect
 
-- [ ] **RDIR-01**: iOS user visiting /download is auto-redirected to the App Store via 307 temporary redirect
-- [ ] **RDIR-02**: Android user visiting /download is auto-redirected to Google Play via 307 temporary redirect
-- [ ] **RDIR-03**: Search engine crawlers (Googlebot, etc.) bypass redirect and see the fallback page
-- [ ] **RDIR-04**: iPadOS users (macOS user-agent) see the fallback page with both store options
-- [ ] **RDIR-05**: Device detection runs in Next.js middleware before page renders
+- [x] **RDIR-01**: iOS user visiting /download is auto-redirected to the App Store via 307 temporary redirect
+- [x] **RDIR-02**: Android user visiting /download is auto-redirected to Google Play via 307 temporary redirect
+- [x] **RDIR-03**: Search engine crawlers (Googlebot, etc.) bypass redirect and see the fallback page
+- [x] **RDIR-04**: iPadOS users (macOS user-agent) see the fallback page with both store options
+- [x] **RDIR-05**: Device detection runs in Next.js middleware before page renders
 
 ### Fallback Page
 
@@ -56,11 +56,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RDIR-01 | Phase 4 | Pending |
-| RDIR-02 | Phase 4 | Pending |
-| RDIR-03 | Phase 4 | Pending |
-| RDIR-04 | Phase 4 | Pending |
-| RDIR-05 | Phase 4 | Pending |
+| RDIR-01 | Phase 4 | Complete |
+| RDIR-02 | Phase 4 | Complete |
+| RDIR-03 | Phase 4 | Complete |
+| RDIR-04 | Phase 4 | Complete |
+| RDIR-05 | Phase 4 | Complete |
 | PAGE-01 | Phase 5 | Pending |
 | PAGE-02 | Phase 5 | Pending |
 | PAGE-03 | Phase 5 | Pending |

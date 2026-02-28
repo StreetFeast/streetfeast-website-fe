@@ -68,7 +68,7 @@ export default function DownloadPage() {
             src="/logowithtext.png"
             alt="StreetFeast"
             width={200}
-            height={60}
+            height={90}
             priority
           />
         </div>

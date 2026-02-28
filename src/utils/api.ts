@@ -42,6 +42,7 @@ export const getTruckMenu = async (truckId: string, menuId: number): Promise<Men
       description: null,
       categories: data[0].categories,
       isDefault: true,
+      imageUri: data[0].imageUri,
     };
   }
   return data;

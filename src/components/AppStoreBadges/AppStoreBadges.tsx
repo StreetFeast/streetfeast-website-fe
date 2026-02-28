@@ -19,7 +19,7 @@ export default function AppStoreBadges({ className }: AppStoreBadgesProps) {
       </a>
       <a href={GOOGLE_PLAY_LINK} target="_blank" rel="noopener noreferrer">
         <Image
-          src="/google-play-badge.png"
+          src="/google-play-badge.svg"
           alt="Get it on Google Play"
           width={180}
           height={63}

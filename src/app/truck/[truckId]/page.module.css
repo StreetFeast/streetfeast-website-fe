@@ -762,132 +762,6 @@
   font-size: 0.875rem;
 }
 
-/* Menu Content */
-.menuContent {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.menuCategory {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.categoryNav {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: #E2E8F0 transparent;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 5;
-  padding-top: 0.25rem;
-}
-
-.categoryNav::-webkit-scrollbar {
-  height: 4px;
-}
-
-.categoryNav::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.categoryNav::-webkit-scrollbar-thumb {
-  background: #E2E8F0;
-  border-radius: 2px;
-}
-
-.categoryPill {
-  background: white;
-  border: 2px solid #E2E8F0;
-  border-radius: 24px;
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #1E1E1F;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.categoryPill:hover {
-  border-color: #ED6A00;
-  color: #ED6A00;
-}
-
-.categoryTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1E1E1F;
-  margin: 0;
-}
-
-.menuItems {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.menuItem {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #F5F5F5;
-  transition: all 0.2s;
-}
-
-.menuItem:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: #E2E8F0;
-}
-
-.menuItemImage {
-  width: 100px;
-  height: 100px;
-  background: #636363;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
-.menuItemInfo {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.menuItemName {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1E1E1F;
-  margin: 0 0 0.25rem 0;
-  line-height: 1.4;
-}
-
-.menuItemPrice {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #1E1E1F;
-  margin: 0;
-}
-
-.menuItemDescription {
-  font-size: 0.875rem;
-  color: #636363;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.4;
-}
-
 /* Responsive */
 @media (max-width: 1200px) {
   .leftPanel {
@@ -937,11 +811,6 @@
     max-width: 70px;
     padding: 0.75rem 0.5rem;
   }
-
-  .menuItemImage {
-    width: 80px;
-    height: 80px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -969,11 +838,6 @@
 
   .scheduleTime {
     font-size: 0.875rem;
-  }
-
-  .menuItemImage {
-    width: 70px;
-    height: 70px;
   }
 
   .mapSection {

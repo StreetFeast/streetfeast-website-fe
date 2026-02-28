@@ -35,7 +35,7 @@ export default function HeroHeader() {
               rel="noopener noreferrer"
             >
               <Image
-                src="/google-play-badge.png"
+                src="/google-play-badge.svg"
                 alt="Get it on Google Play"
                 width={180}
                 height={63}
@@ -90,7 +90,7 @@ export default function HeroHeader() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/google-play-badge.png"
+              src="/google-play-badge.svg"
               alt="Get it on Google Play"
               width={200}
               height={70}

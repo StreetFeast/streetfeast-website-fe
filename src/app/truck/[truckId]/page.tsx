@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getTruckDetails, getTruckOccurrences, getTruckMenu } from '@/utils/api';
 import { TruckDetailResponse, TruckOccurrence, Menu } from '@/types/api';
 import GoogleMap from '@/components/GoogleMap';
+import TruckMenu from '@/components/TruckMenu';
 import TruckProfileSkeleton from '@/components/TruckProfileSkeleton';
 import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 import styles from './page.module.css';
@@ -92,7 +93,6 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
         const fetchDefaultMenu = async () => {
             try {
                 const menu = await getTruckMenu(truckId, truckData.defaultMenuId!);
-                console.log(menu)
                 setDefaultMenu(menu);
             } catch (err) {
                 console.error('Error fetching default menu:', err);
@@ -151,7 +151,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                                         rel="noopener noreferrer"
                                     >
                                         <Image
-                                            src="/google-play-badge.png"
+                                            src="/google-play-badge.svg"
                                             alt="Get it on Google Play"
                                             width={162}
                                             height={48}
@@ -221,10 +221,6 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
             return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
         }
         return phone;
-    };
-
-    const formatPrice = (price: number) => {
-        return `$${price.toFixed(2)}`;
     };
 
     const formatScheduleDate = (dateString: string) => {
@@ -436,7 +432,7 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                                     rel="noopener noreferrer"
                                 >
                                     <Image
-                                        src="/google-play-badge.png"
+                                        src="/google-play-badge.svg"
                                         alt="Get it on Google Play"
                                         width={162}
                                         height={48}
@@ -456,8 +452,9 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                         className={styles.heroSection}
                         style={heroImage ? {
                             backgroundImage: `url(${heroImage})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
                         } : undefined}
                     >
                         <button className={styles.reportButton} aria-label="Report" onClick={handleReportClick} style={{ zIndex: 2 }}>
@@ -664,63 +661,11 @@ function TruckProfilePage({ params }: TruckProfilePageProps) {
                         )}
 
                         {activeTab === 'menu' && (
-                            <div className={styles.menuContent}>
-                                {menuCategories.length > 1 && (
-                                    <div className={styles.categoryNav}>
-                                        {menuCategories.map((category) => (
-                                            <button
-                                                key={category.id}
-                                                className={styles.categoryPill}
-                                                onClick={() => {
-                                                    const el = document.getElementById(`menu-category-${category.id}`);
-                                                    if (el) {
-                                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                                    }
-                                                }}
-                                            >
-                                                {category.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                                {menuCategories.length > 0 ? (
-                                    menuCategories.map((category) => (
-                                        <div key={category.id} id={`menu-category-${category.id}`} className={styles.menuCategory}>
-                                            <h2 className={styles.categoryTitle}>{category.name}</h2>
-
-                                            <div className={styles.menuItems}>
-                                                {category.menuItems.map((item) => {
-                                                    const itemImageUri = item.image || (item.images && item.images.length > 0 ? item.images[0].imageUri : null);
-                                                    const itemImage = getImageUrl(itemImageUri);
-
-                                                    return (
-                                                        <div key={item.id} className={styles.menuItem}>
-                                                            <div
-                                                                className={styles.menuItemImage}
-                                                                style={itemImage ? {
-                                                                    backgroundImage: `url(${itemImage})`,
-                                                                    backgroundSize: 'cover',
-                                                                    backgroundPosition: 'center',
-                                                                    backgroundColor: 'transparent'
-                                                                } : undefined}
-                                                            />
-                                                            <div className={styles.menuItemInfo}>
-                                                                <h3 className={styles.menuItemName}>{item.name}</h3>
-                                                                {item.description && (
-                                                                    <p className={styles.menuItemDescription}>{item.description}</p>
-                                                                )}
-                                                                <p className={styles.menuItemPrice}>{formatPrice(item.price)}</p>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className={styles.noData}>No menu available</div>
-                                )}
-                            </div>
+                            <TruckMenu
+                                menuCategories={menuCategories}
+                                menuImageUri={selectedSchedule?.menu?.imageUri || defaultMenu?.imageUri || null}
+                                storagePrefix={process.env.NEXT_PUBLIC_STORAGE_PREFIX || ''}
+                            />
                         )}
                     </div>
                 </div>

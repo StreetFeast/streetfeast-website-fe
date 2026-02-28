@@ -113,17 +113,20 @@ Plans:
 - [ ] 05-01-PLAN.md — AppStoreBadges reusable component and /download fallback page with Smart App Banner
 
 #### Phase 6: SEO & Sitemap
-**Goal**: The /download page is discoverable by search engines, previews correctly when shared on social platforms, and is eligible for Google rich results
+**Goal**: The /download page is discoverable by search engines, previews correctly when shared on social platforms, is eligible for Google rich results, and is accessible in production regardless of launch gate configuration
 
 **Depends on**: Phase 5
 
 **Requirements**: SEO-01, SEO-02, SEO-03, SEO-04
+
+**Gap Closure:** Closes gaps from v1.1 audit — 4 orphaned SEO requirements + LayoutContent integration fix
 
 **Success Criteria** (what must be TRUE):
   1. Sharing /download in iMessage, Slack, or social media shows a preview card with title, description, and OG image
   2. The page has a canonical URL tag and Twitter card meta tags
   3. The page includes MobileApplication JSON-LD structured data visible to Google
   4. /download appears in sitemap.xml so search engines can discover and index it
+  5. /download is accessible in production even when NEXT_PUBLIC_IS_LAUNCHED is unset (added to LayoutContent allowedPaths)
 
 **Plans**: TBD
 

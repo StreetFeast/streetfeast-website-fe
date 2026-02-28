@@ -17,10 +17,10 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 ### Fallback Page
 
-- [ ] **PAGE-01**: Desktop/unknown users see a minimal page with StreetFeast branding and both App Store and Google Play badges
-- [ ] **PAGE-02**: Page renders as a pure server component with no client-side JavaScript
-- [ ] **PAGE-03**: Page includes Apple Smart App Banner meta tag for iOS Safari users
-- [ ] **PAGE-04**: Page uses existing badge assets from /public/ and store URLs from constants/links.ts
+- [x] **PAGE-01**: Desktop/unknown users see a minimal page with StreetFeast branding and both App Store and Google Play badges
+- [x] **PAGE-02**: Page renders as a pure server component with no client-side JavaScript
+- [x] **PAGE-03**: Page includes Apple Smart App Banner meta tag for iOS Safari users
+- [x] **PAGE-04**: Page uses existing badge assets from /public/ and store URLs from constants/links.ts
 
 ### SEO & Discoverability
 
@@ -61,10 +61,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RDIR-03 | Phase 4 | Complete |
 | RDIR-04 | Phase 4 | Complete |
 | RDIR-05 | Phase 4 | Complete |
-| PAGE-01 | Phase 5 | Pending |
-| PAGE-02 | Phase 5 | Pending |
-| PAGE-03 | Phase 5 | Pending |
-| PAGE-04 | Phase 5 | Pending |
+| PAGE-01 | Phase 5 | Complete |
+| PAGE-02 | Phase 5 | Complete |
+| PAGE-03 | Phase 5 | Complete |
+| PAGE-04 | Phase 5 | Complete |
 | SEO-01 | Phase 6 | Pending |
 | SEO-02 | Phase 6 | Pending |
 | SEO-03 | Phase 6 | Pending |

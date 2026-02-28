@@ -107,7 +107,7 @@ Plans:
   3. An iOS Safari user visiting /download on desktop sees the Apple Smart App Banner at the top of the browser
   4. The page renders without any client-side JavaScript (pure server component, no hydration)
 
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
 - [ ] 05-01-PLAN.md — AppStoreBadges reusable component and /download fallback page with Smart App Banner
@@ -140,7 +140,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Banner UI & User Controls | v1.0 | 1/1 | Complete | 2026-02-19 |
 | 3. Script Blocking & Form Gating | v1.0 | 2/2 | Complete | 2026-02-19 |
 | 4. Device Detection & Middleware | 1/1 | Complete   | 2026-02-28 | - |
-| 5. Fallback Page & Component | v1.1 | 0/1 | Not started | - |
+| 5. Fallback Page & Component | 1/1 | Complete   | 2026-02-28 | - |
 | 6. SEO & Sitemap | v1.1 | 0/TBD | Not started | - |
 
 ---

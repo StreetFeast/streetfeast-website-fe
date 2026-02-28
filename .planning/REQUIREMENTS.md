@@ -56,25 +56,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RDIR-01 | — | Pending |
-| RDIR-02 | — | Pending |
-| RDIR-03 | — | Pending |
-| RDIR-04 | — | Pending |
-| RDIR-05 | — | Pending |
-| PAGE-01 | — | Pending |
-| PAGE-02 | — | Pending |
-| PAGE-03 | — | Pending |
-| PAGE-04 | — | Pending |
-| SEO-01 | — | Pending |
-| SEO-02 | — | Pending |
-| SEO-03 | — | Pending |
-| SEO-04 | — | Pending |
+| RDIR-01 | Phase 4 | Pending |
+| RDIR-02 | Phase 4 | Pending |
+| RDIR-03 | Phase 4 | Pending |
+| RDIR-04 | Phase 4 | Pending |
+| RDIR-05 | Phase 4 | Pending |
+| PAGE-01 | Phase 5 | Pending |
+| PAGE-02 | Phase 5 | Pending |
+| PAGE-03 | Phase 5 | Pending |
+| PAGE-04 | Phase 5 | Pending |
+| SEO-01 | Phase 6 | Pending |
+| SEO-02 | Phase 6 | Pending |
+| SEO-03 | Phase 6 | Pending |
+| SEO-04 | Phase 6 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 after initial definition*
+*Last updated: 2026-02-27 — traceability complete (phases 4–6 assigned)*

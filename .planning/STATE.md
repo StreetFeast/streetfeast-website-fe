@@ -5,15 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-27)
 
 **Core value:** Food truck owners can register, manage their profiles, and be discovered by hungry customers through a polished, fast web experience.
-
-**Current focus:** Milestone v1.1 — App Download Page
+**Current focus:** Phase 4 — Device Detection & Middleware (v1.1)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-27 — Milestone v1.1 started
+Phase: 4 of 6 (Device Detection & Middleware)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-27 — v1.1 roadmap created, phases 4–6 defined
+
+Progress: [███░░░░░░░] 30% (v1.0 complete, v1.1 not started)
 
 ## Performance Metrics
 
@@ -41,28 +42,35 @@ Last activity: 2026-02-27 — Milestone v1.1 started
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
+Recent decisions affecting current work:
+
+- [v1.1]: Middleware-first — redirect logic lives in middleware.ts, never in page component; keeps Googlebot from being sent to App Store
+- [v1.1]: 307 temporary redirects to app stores — never 308; permanent redirects cache in browsers and cannot be undone
+- [v1.1]: iPadOS sees fallback page — iPad reports macOS user-agent (iPadOS 13+); accepted limitation, both badges remain available
+- [v1.1]: Fallback page is pure server component — no client JS, no useEffect, no hydration, no flash of content
 
 ### Pending Todos
 
-None yet.
+None.
 
 ### Blockers/Concerns
 
-None.
+- [Phase 4]: Verify src/constants/links.ts is safe to import in middleware (confirm no Node.js-only modules that break Edge Runtime)
+- [Phase 4]: Confirm APP_STORE_LINK and GOOGLE_PLAY_LINK resolve to live app on real devices before launch
 
 ### Quick Tasks Completed
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 1 | Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links | 2026-02-20 | c1a3039 | [1-fix-truck-profile-rendering-header-image](./quick/1-fix-truck-profile-rendering-header-image/) |
-| 2 | Update privacy policy page to match finalized legal document (21 sections, 22 state rights, 14-service data processing inventory) | 2026-02-26 | e6742ca | [2-update-privacy-policy-page-to-match-fina](./quick/2-update-privacy-policy-page-to-match-fina/) |
+| 2 | Update privacy policy page to match finalized legal document | 2026-02-26 | e6742ca | [2-update-privacy-policy-page-to-match-fina](./quick/2-update-privacy-policy-page-to-match-fina/) |
 
 ## Session Continuity
 
 Last session: 2026-02-27
-Stopped at: Milestone v1.1 initialization
+Stopped at: v1.1 roadmap created — ready to plan Phase 4 (Device Detection & Middleware)
 Resume file: None
 
 ---
 *State initialized: 2026-02-19*
-*Last updated: 2026-02-27*
+*Last updated: 2026-02-27 (v1.1 roadmap created)*

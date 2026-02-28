@@ -89,7 +89,10 @@ Plans:
   4. An iPadOS user visiting /download sees the fallback page with both store options (not auto-redirected)
   5. Redirect logic runs in Next.js middleware before any React rendering occurs
 
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 04-01-PLAN.md — Bot patterns constants and /download middleware redirect logic
 
 #### Phase 5: Fallback Page & Component
 **Goal**: Desktop users and undetected devices see a complete, branded landing page with both app store download options
@@ -133,7 +136,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. State Management Foundation | v1.0 | 1/1 | Complete | 2026-02-19 |
 | 2. Banner UI & User Controls | v1.0 | 1/1 | Complete | 2026-02-19 |
 | 3. Script Blocking & Form Gating | v1.0 | 2/2 | Complete | 2026-02-19 |
-| 4. Device Detection & Middleware | v1.1 | 0/TBD | Not started | - |
+| 4. Device Detection & Middleware | v1.1 | 0/1 | Not started | - |
 | 5. Fallback Page & Component | v1.1 | 0/TBD | Not started | - |
 | 6. SEO & Sitemap | v1.1 | 0/TBD | Not started | - |
 

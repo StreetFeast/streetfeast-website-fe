@@ -1,93 +1,41 @@
-# Roadmap: StreetFeast Cookie Consent
+# Roadmap: StreetFeast Website Frontend
 
-## Overview
+## Milestones
 
-This roadmap delivers GDPR-compliant cookie consent for StreetFeast's Next.js website by implementing a custom consent banner, persistent state management, and conditional script loading that blocks reCAPTCHA and FingerprintJS until user approval. The three-phase journey builds from legal compliance foundation (state management, privacy updates) through user-facing consent UI to technical enforcement that prevents third-party scripts from executing before consent is granted.
+- ✅ **v1.0 Cookie Consent** — Phases 1–3 (shipped 2026-02-19)
+- ✅ **v1.1 App Download Page** — Phases 4–6 (shipped 2026-02-28)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+<details>
+<summary>✅ v1.0 Cookie Consent (Phases 1–3) — SHIPPED 2026-02-19</summary>
 
-Decimal phases appear between their surrounding integers in numeric order.
+- [x] Phase 1: State Management Foundation (1/1 plans) — completed 2026-02-19
+- [x] Phase 2: Banner UI & User Controls (1/1 plans) — completed 2026-02-19
+- [x] Phase 3: Script Blocking & Form Gating (2/2 plans) — completed 2026-02-19
 
-- [x] **Phase 1: State Management Foundation** - Zustand consent store with cookie persistence and SSR hydration handling
-- [x] **Phase 2: Banner UI & User Controls** - Cookie consent banner with equal-prominence buttons, preference center, and accessibility
-- [x] **Phase 3: Script Blocking & Form Gating** - Conditional loading of reCAPTCHA and FingerprintJS based on consent state
+</details>
 
-## Phase Details
+<details>
+<summary>✅ v1.1 App Download Page (Phases 4–6) — SHIPPED 2026-02-28</summary>
 
-### Phase 1: State Management Foundation
-**Goal**: Consent state is managed, persisted, and accessible throughout the application without SSR/hydration errors
+- [x] Phase 4: Device Detection & Middleware (1/1 plans) — completed 2026-02-28
+- [x] Phase 5: Fallback Page & Component (1/1 plans) — completed 2026-02-28
+- [x] Phase 6: SEO & Sitemap (1/1 plans) — completed 2026-02-28
 
-**Depends on**: Nothing (first phase)
-
-**Requirements**: BNRR-05
-
-**Success Criteria** (what must be TRUE):
-  1. User's consent choice (accept/reject/unset) persists across browser sessions via localStorage
-  2. Application can read consent state on client without hydration mismatch errors
-  3. Privacy policy is updated to reflect Google's April 2, 2026 data controller shift for reCAPTCHA compliance
-  4. Zustand consent store integrates with existing state management patterns (matches authStore architecture)
-
-**Plans:** 1 plan
-
-Plans:
-- [x] 01-01-PLAN.md — Consent store creation and privacy policy update
-
-### Phase 2: Banner UI & User Controls
-**Goal**: Users see a compliant cookie consent banner on first visit and can manage preferences anytime
-
-**Depends on**: Phase 1
-
-**Requirements**: BNRR-01, BNRR-02, BNRR-03, BNRR-04, BNRR-06, BNRR-07, A11Y-01, A11Y-02, A11Y-03
-
-**Success Criteria** (what must be TRUE):
-  1. User sees bottom-bar cookie banner on first visit before any non-essential scripts load
-  2. User can click "Accept All" or "Reject All" with equal visual prominence (identical size, color, position)
-  3. User can navigate the banner using keyboard only (Tab, Enter, Escape) with proper focus management
-  4. User sees clear, plain language explaining reCAPTCHA and FingerprintJS purposes (spam prevention)
-  5. User can reopen the banner via "Cookie Preferences" link in the footer to change their mind
-  6. Banner is fully responsive on mobile without obscuring primary page content
-  7. Banner text meets WCAG 2.2 AA contrast requirements (4.5:1 minimum ratio)
-
-**Plans:** 1 plan
-
-Plans:
-- [x] 02-01-PLAN.md — Cookie consent banner component and footer re-consent link
-
-### Phase 3: Script Blocking & Form Gating
-**Goal**: Third-party tracking scripts only load after user consent, and contact form provides alternative when consent is declined or undecided
-
-**Depends on**: Phase 2
-
-**Requirements**: SCRP-01, SCRP-02, SCRP-03
-
-**Success Criteria** (what must be TRUE):
-  1. When user declines cookies, no reCAPTCHA or FingerprintJS scripts load (verified in browser Network tab)
-  2. When user accepts cookies, GoogleReCaptchaProvider mounts and reCAPTCHA scripts load successfully
-  3. When user declines cookies OR has not yet made a choice, contact form shows email link alternative instead of form (no cookie wall)
-  4. When user accepts cookies, contact form loads with full reCAPTCHA and FingerprintJS spam prevention
-  5. Application handles missing executeRecaptcha context gracefully without crashes when provider isn't mounted
-
-**Plans:** 2 plans
-
-Plans:
-- [x] 03-01-PLAN.md — Consent-gated reCAPTCHA provider and contact form no-consent alternative
-- [x] 03-02-PLAN.md — Fix ContactForm consent branching to require explicit accept (gap closure)
+</details>
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
-
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. State Management Foundation | 1/1 | Complete | 2026-02-19 |
-| 2. Banner UI & User Controls | 1/1 | Complete | 2026-02-19 |
-| 3. Script Blocking & Form Gating | 2/2 | Complete | 2026-02-19 |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. State Management Foundation | v1.0 | 1/1 | Complete | 2026-02-19 |
+| 2. Banner UI & User Controls | v1.0 | 1/1 | Complete | 2026-02-19 |
+| 3. Script Blocking & Form Gating | v1.0 | 2/2 | Complete | 2026-02-19 |
+| 4. Device Detection & Middleware | v1.1 | 1/1 | Complete | 2026-02-28 |
+| 5. Fallback Page & Component | v1.1 | 1/1 | Complete | 2026-02-28 |
+| 6. SEO & Sitemap | v1.1 | 1/1 | Complete | 2026-02-28 |
 
 ---
-*Roadmap created: 2026-02-19*
-*Last updated: 2026-02-19 (Phase 3 complete — gap closure verified)*
+*Roadmap created: 2026-02-19 (v1.0)*
+*Updated: 2026-02-28 (v1.1 shipped)*

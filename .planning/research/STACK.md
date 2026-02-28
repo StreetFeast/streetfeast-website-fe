@@ -1,279 +1,266 @@
-# Stack Research: Cookie Consent Implementation
+# Stack Research: App Download Page (v1.1)
 
-**Domain:** Cookie consent / privacy compliance for Next.js website
-**Researched:** 2026-02-19
+**Domain:** Smart mobile redirect page with device detection, app store deep-link, and SEO metadata
+**Researched:** 2026-02-27
 **Confidence:** HIGH
 
 ## Executive Summary
 
-For implementing cookie consent on a Next.js 15 App Router website with reCAPTCHA v3 and FingerprintJS, the standard 2025/2026 approach prioritizes **custom client-side implementation** over third-party libraries. This gives full control over conditional script loading, integrates seamlessly with existing Zustand state management, and avoids bundle bloat. The key architectural shift is moving from always-loaded providers to **conditionally-rendered providers** based on user consent stored in cookies (not localStorage, which has GDPR implications).
+The `/download` page requires three technical capabilities: device detection for auto-redirect, SEO metadata (OG tags + structured data), and a fallback landing page for desktop/unknown devices. All three can be implemented using **only what is already in the stack** — Next.js 15 built-ins cover every requirement. No new npm packages are needed.
 
-**Critical Insight:** FingerprintJS used for fraud prevention typically qualifies as "legitimate interest" under GDPR and may NOT require explicit consent, unlike reCAPTCHA v3 which does require consent due to behavioral tracking and data transfers to Google.
+The project already has a working middleware in `src/middleware.ts` that reads `user-agent` from `request.headers` for the `/truck/:path*` route. The same pattern extended with a `/download` matcher delivers the auto-redirect before any React renders. App store URLs are already centralized in `src/constants/links.ts`.
 
-## Recommended Stack
+---
 
-### Core Technologies
+## What Is New (and What Already Exists)
 
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| **Custom Cookie Banner** | N/A (DIY) | GDPR-compliant consent UI | Full control over UX/UI, no bundle bloat, integrates with existing CSS Modules pattern, easier to maintain than third-party library updates |
-| **Cookie Storage** | Native `document.cookie` | Store consent preferences | Server-side accessible (unlike localStorage), GDPR-compliant for consent, works with Next.js server/client boundary |
-| **Zustand** | 5.0.8 (existing) | Consent state management | Already in stack, client-side reactive state, can sync with cookie storage via custom middleware |
+| Capability | Status | How |
+|------------|--------|-----|
+| User-agent string access | **Already exists** in `src/middleware.ts` | `request.headers.get('user-agent')` |
+| iOS/Android regex detection | **Already exists** in middleware and `truck/[truckId]/page.tsx` | `/iPhone\|iPad\|iPod\|Android/i` |
+| App store URL constants | **Already exists** | `src/constants/links.ts` |
+| Static `metadata` export | **Already exists** (used in `privacy/page.tsx`) | `export const metadata: Metadata = {...}` |
+| OG image | **Already exists** | `/social-media-logo.png` (1352x632) |
+| `metadataBase` | **Already set** in root `layout.tsx` | `new URL('https://streetfeastapp.com')` |
+| Middleware matcher config | **Already in use** | `export const config = { matcher: [...] }` |
+| JSON-LD script tag | **New — trivial** | Inline `<script type="application/ld+json">` in server component |
+| `/download` page component | **New** | `src/app/download/page.tsx` |
 
-### Supporting Utilities
+---
 
-| Utility | Purpose | Implementation |
-|---------|---------|----------------|
-| **js-cookie** | Cookie manipulation | Optional helper library for easier cookie read/write/delete operations (3KB gzipped) |
-| **Consent Hook** | Centralized consent logic | Custom `useConsent` hook to encapsulate get/set/check consent state |
-| **Conditional Provider Wrapper** | Conditional GoogleReCaptchaProvider | Client component that only renders provider when consent granted |
+## Recommended Stack (Additions Only)
 
-### Development Pattern
+### No New Dependencies Required
 
-| Pattern | Description | Why This Approach |
-|---------|-------------|-------------------|
-| **Cookie-based Storage** | Store consent in `cookie_consent` cookie, not localStorage | Server-accessible, GDPR-compliant, persists across sessions, available in middleware |
-| **Client Component Wrapper** | Wrap `GoogleReCaptchaProvider` in conditional client component | Prevents reCAPTCHA script load until consent granted, maintains Next.js static optimization |
-| **On-demand FingerprintJS** | Keep FingerprintJS lazy-loaded in hook | Already optimal - only loads on form submission, may not require consent (fraud prevention = legitimate interest) |
+Zero new npm packages. Everything needed is already installed or built into Next.js 15.
 
-## Installation
+| Technology | Version | Purpose | Why No Library Needed |
+|------------|---------|---------|----------------------|
+| **Next.js Middleware** | 15.5.7 (existing) | Auto-redirect iOS/Android before page renders | `userAgent` from `next/server` is already the project pattern in `src/middleware.ts` |
+| **Next.js `metadata` export** | 15.5.7 (existing) | OG tags, Twitter card, `apple-itunes-app` meta, canonical URL | Static export used across all pages already; no dynamic data needed |
+| **Next.js JSON-LD pattern** | 15.5.7 (existing) | `SoftwareApplication` structured data for Google Search | Inline `<script dangerouslySetInnerHTML>` in server component — no library |
+| **CSS Modules** | Existing | Fallback landing page styles | Matches site-wide pattern |
 
-```bash
-# Optional: Cookie utility library (recommended for cleaner code)
-npm install js-cookie
-npm install --save-dev @types/js-cookie
+---
 
-# No other dependencies needed - custom implementation
-```
+## Implementation Approach
 
-## Implementation Architecture
+### Approach: Middleware Redirect (Not Server Component `redirect()`)
 
-### 1. Cookie Storage Schema
+Use **middleware** for the auto-redirect, not `headers()` in a server component. Reason: middleware executes before any React rendering, delivering the redirect at the edge with zero page load. The project already does this exact pattern for truck profile pages.
 
-```typescript
-// Consent categories stored in single cookie
-interface ConsentPreferences {
-  necessary: boolean;      // Always true (can't be disabled)
-  analytics: boolean;      // For reCAPTCHA v3
-  functional: boolean;     // For FingerprintJS (may not need consent)
-  timestamp: number;       // When consent was given
-  version: string;         // Consent policy version
-}
+The server-rendered `/download` page (`page.tsx`) serves as the **fallback** for desktop and unknown user-agents — middleware already excluded those from redirecting.
 
-// Stored as JSON string in cookie: "cookie_consent"
-// Max-Age: 365 days
-// SameSite: Lax
-// Secure: true (production only)
-```
+**Decision: Do NOT put redirect logic in `page.tsx`.** Middleware handles redirect; page handles fallback. Clean separation.
 
-### 2. Consent State Management (Zustand)
+### Middleware Extension
+
+Extend `src/middleware.ts` — do not create a new file. Add `/download` to the matcher and add an iOS/Android branch that redirects to the respective app store URL.
 
 ```typescript
-// src/store/consentStore.ts
-import { create } from 'zustand';
-import Cookies from 'js-cookie';
+// src/middleware.ts — extend existing file
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
 
-interface ConsentState {
-  preferences: ConsentPreferences | null;
-  showBanner: boolean;
-  acceptAll: () => void;
-  acceptSelected: (prefs: Partial<ConsentPreferences>) => void;
-  rejectAll: () => void;
-  getConsent: (category: keyof ConsentPreferences) => boolean;
-}
+export function middleware(request: NextRequest) {
+  const userAgent = request.headers.get('user-agent') || '';
+  const { pathname } = request.nextUrl;
 
-// Sync with cookie on mount, save to cookie on change
-```
-
-### 3. Conditional Provider Pattern
-
-```typescript
-// src/components/Providers/ConditionalReCaptchaProvider.tsx
-'use client';
-
-import { useEffect, useState } from 'react';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import { useConsentStore } from '@/store/consentStore';
-
-export function ConditionalReCaptchaProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  const analyticsConsent = useConsentStore(state => state.getConsent('analytics'));
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Don't render provider on server (hydration mismatch)
-  if (!mounted) {
-    return <>{children}</>;
+  // Existing: truck deep-link redirect
+  const truckMatch = pathname.match(/^\/truck\/([^\/]+)$/);
+  if (truckMatch && /iPhone|iPad|iPod|Android/i.test(userAgent)) {
+    const truckId = truckMatch[1];
+    const url = request.nextUrl.clone();
+    url.pathname = `/m/truck/${truckId}`;
+    return NextResponse.redirect(url);
   }
 
-  // Only render provider if consent granted
-  if (!analyticsConsent) {
-    return <>{children}</>;
+  // New: /download auto-redirect for mobile users
+  if (pathname === '/download') {
+    if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      return NextResponse.redirect(APP_STORE_LINK);
+    }
+    if (/Android/i.test(userAgent)) {
+      return NextResponse.redirect(GOOGLE_PLAY_LINK);
+    }
+    // Desktop/unknown: fall through to page.tsx fallback
   }
 
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    '/truck/:path*',
+    '/download',
+  ],
+};
+```
+
+### Fallback Page (`src/app/download/page.tsx`)
+
+Server Component (no `'use client'` needed). Exports static `metadata` and renders both store badges. No state, no effects.
+
+```typescript
+// src/app/download/page.tsx
+import type { Metadata } from 'next';
+import { APP_STORE_LINK, GOOGLE_PLAY_LINK } from '@/constants/links';
+import styles from './page.module.css';
+
+export const metadata: Metadata = {
+  title: 'Download StreetFeast',
+  description: 'Download the StreetFeast app to discover food trucks, street vendors, and pop-up restaurants near you. Available on iOS and Android.',
+  alternates: {
+    canonical: '/download',
+  },
+  openGraph: {
+    title: 'Download StreetFeast',
+    description: 'Discover food trucks, street vendors, and pop-up restaurants near you.',
+    url: 'https://streetfeastapp.com/download',
+    images: [
+      {
+        url: '/social-media-logo.png', // existing asset
+        width: 1352,
+        height: 632,
+        alt: 'StreetFeast - Download the App',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Download StreetFeast',
+    description: 'Discover food trucks and street food near you.',
+    images: ['/social-media-logo.png'],
+  },
+  // Smart banner for iOS Safari — prompts app install without redirect
+  itunes: {
+    appId: '6749815073',
+  },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'StreetFeast',
+  description: 'Discover food trucks, street vendors, and pop-up restaurants near you.',
+  operatingSystem: 'iOS, ANDROID',
+  applicationCategory: 'FoodApplication',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  url: 'https://streetfeastapp.com/download',
+};
+
+export default function DownloadPage() {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
-      {children}
-    </GoogleReCaptchaProvider>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      {/* Fallback UI: both store badges */}
+    </>
   );
 }
 ```
 
-### 4. Modified Contact Form Hook
+### Metadata Notes
 
-```typescript
-// src/hooks/useContactForm.ts
-// Add consent check before executing reCAPTCHA
-const { executeRecaptcha } = useGoogleReCaptcha();
-const analyticsConsent = useConsentStore(state => state.getConsent('analytics'));
+| Field | Value | Rationale |
+|-------|-------|-----------|
+| `metadata.itunes.appId` | `'6749815073'` | App ID from existing `APP_STORE_LINK` URL — adds iOS Smart App Banner to mobile Safari on desktop |
+| `openGraph.type` | Inherited `'website'` from root layout | Correct for a download landing page (not `article`) |
+| `alternates.canonical` | `'/download'` | Prevents duplicate content issues if page is accessed via multiple paths |
+| JSON-LD `@type` | `MobileApplication` | Google's recommended subtype for iOS/Android apps; more specific than `SoftwareApplication` |
+| JSON-LD `offers.price` | `'0'` | Required by Google for rich results; free app |
+| JSON-LD `applicationCategory` | `'FoodApplication'` | Correct schema.org value for food discovery apps |
 
-if (!analyticsConsent || !executeRecaptcha) {
-  // Handle gracefully: either block submission or allow without reCAPTCHA
-  // (backend should still validate)
-}
-```
+---
 
 ## Alternatives Considered
 
-| Recommended | Alternative | When to Use Alternative |
-|-------------|-------------|-------------------------|
-| **Custom Implementation** | `react-cookie-consent` library | If you need a drop-in solution quickly and don't mind 15KB+ bundle size, or lack design requirements |
-| **Custom Implementation** | `vanilla-cookieconsent` (orestbida) | If you need multilingual support out-of-box, advanced consent modes, or don't mind vanilla JS integration complexity |
-| **Cookie Storage** | localStorage | NEVER for consent - not server-accessible, GDPR compliance issues, can't be scanned by compliance tools |
-| **Zustand** | React Context | If you don't already have Zustand - but Zustand is already in the stack |
+| Recommended | Alternative | Why Not |
+|-------------|-------------|---------|
+| **Middleware redirect** | `redirect()` in server component via `headers()` | Middleware runs at the edge before any rendering — faster, cleaner separation. `headers()` would require the page to be dynamically rendered and execute after server component starts. |
+| **Inline JSON-LD** | `schema-dts` npm package for TypeScript types | Adds a dependency for a single static object. Typing benefit does not justify the package. |
+| **Inline JSON-LD** | `next-seo` library | Adds significant bundle weight (React components) for what is three lines of inline script. Not used anywhere else in the project. |
+| **Existing `/social-media-logo.png`** | New OG image for download page | The existing 1352x632 image is correctly sized for OG. Creating a new image is not justified without design input. |
+| **`userAgent()` from `next/server`** in middleware | `ua` property from `userAgent()` helper | The project's existing middleware uses `request.headers.get('user-agent')` directly with regex, which is simpler and already validated working. No reason to change the pattern. |
 
-## What NOT to Use
+---
+
+## What NOT to Add
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| **localStorage for consent** | Not accessible server-side in middleware, considered tracking storage by GDPR tools, can't be read in Server Components | Cookies with proper SameSite/Secure flags |
-| **Always-loaded reCAPTCHA** | GDPR violation - loads tracking scripts before consent, French authorities have fined companies €125,000 for this | Conditional provider wrapping |
-| **Third-party consent platforms** (Cookiebot, OneTrust) | Expensive ($300+/month), overkill for simple use case, adds external dependencies | Custom implementation (this is a single-form use case) |
-| **reCAPTCHA free version** | Sends data to Google for ad targeting, harder to be GDPR-compliant, migrated to Google Cloud in 2026 | Continue with v3 but ensure proper consent, or consider alternatives like hCaptcha/Turnstile for full compliance |
-| **`@next/third-parties/google` GoogleAnalytics** | Does not support dynamic consent updates without GTM workarounds | Not applicable (you're not using GA, just reCAPTCHA) |
+| `ua-parser-js` or `next-useragent` npm packages | Unnecessary for three regex checks; adds 40KB+ to the bundle | Inline regex in middleware (already the project pattern) |
+| `schema-dts` | Unnecessary type complexity for a static JSON-LD block | Plain TypeScript object |
+| `next-seo` | Heavyweight abstraction over Next.js built-in metadata API | Native `metadata` export (already used across the project) |
+| `'use client'` on the download page | Desktop fallback has no interactive state; marking client would disable SSR | Keep as server component |
+| Client-side `navigator.userAgent` detection on `/download` | Causes flash of wrong content and defeats the purpose of middleware redirect | Middleware redirect (runs before any client JS) |
+
+---
 
 ## Stack Patterns by Scenario
 
-### Scenario 1: Fraud Prevention Only (Current State)
-**If FingerprintJS is only used for fraud detection:**
-- May NOT require consent (legitimate interest under GDPR)
-- Keep current lazy-load implementation
-- Document in Privacy Policy but no consent banner needed
-- **Action:** Consult legal team to confirm
+**If mobile user visits `/download`:**
+- Middleware fires before React renders
+- Regex matches iPhone/iPad/iPod → `NextResponse.redirect(APP_STORE_LINK)`
+- Regex matches Android → `NextResponse.redirect(GOOGLE_PLAY_LINK)`
+- Zero page render, immediate external redirect
 
-### Scenario 2: GDPR Compliance Required (Recommended)
-**If serving EU users or want full compliance:**
-- Implement custom cookie consent banner
-- Use cookie storage for preferences
-- Conditionally wrap GoogleReCaptchaProvider
-- Categories: Necessary (always on), Analytics (reCAPTCHA)
-- Optional: Functional category for FingerprintJS if legal requires it
+**If desktop user (or unknown user-agent) visits `/download`:**
+- Middleware calls `NextResponse.next()`
+- `page.tsx` server component renders fallback landing page
+- Both App Store and Google Play badges shown
+- SEO metadata and JSON-LD included in rendered HTML
 
-### Scenario 3: US-Only Audience
-**If only serving US users:**
-- Lighter consent approach (informational banner)
-- Still conditionally load reCAPTCHA (best practice)
-- Document cookie usage in Privacy Policy
-- No explicit consent required (but recommended for transparency)
+**If bot/crawler visits `/download`:**
+- Middleware lets through (bots rarely match iPhone/Android regex)
+- Full page renders with complete metadata for indexing
+- JSON-LD structured data available for Google rich results
 
-## Key Implementation Steps
+---
 
-1. **Create Consent Store** (Zustand + cookie sync)
-2. **Build Cookie Banner Component** (CSS Modules, match existing design)
-3. **Add Conditional Provider Wrapper** (replace direct GoogleReCaptchaProvider)
-4. **Update Providers Component** (use ConditionalReCaptchaProvider)
-5. **Modify Contact Form Hook** (handle no-consent state gracefully)
-6. **Add Consent Management UI** (footer link to manage preferences)
-7. **Test Scenarios** (accept, reject, partial consent)
+## Sitemap Update Required
 
-## Critical GDPR Compliance Notes
+Add `/download` to `src/app/sitemap.ts` — currently only `/`, `/privacy`, and `/terms` are listed:
 
-### reCAPTCHA v3 Requirements
-- **MUST obtain consent** before loading script
-- Collects: IP address, mouse movements, keystroke timing, browser fingerprints, device settings, cookies
-- Data transferred to Google (US) - requires consent under GDPR
-- French authorities fined companies €125,000 for loading reCAPTCHA without consent
-- Script must be **fully blocked** until consent, not just visually disabled
+```typescript
+{
+  url: `${baseUrl}/download`,
+  lastModified: new Date(),
+  changeFrequency: 'monthly',
+  priority: 0.8,  // High priority — primary conversion page
+}
+```
 
-### FingerprintJS @fingerprintjs/fingerprintjs (Open Source)
-- **Likely does NOT require consent** for fraud prevention (legitimate interest)
-- Stateless, creates hash from public browser details
-- No cookies, no persistent storage
-- If used for attribution/personalization: REQUIRES consent
-- If used for fraud prevention: Legitimate interest (document in Privacy Policy)
-- **Action:** Verify with legal team based on specific use case
-
-### Cookie Categories
-
-| Category | Required | Description | Applies To |
-|----------|----------|-------------|------------|
-| **Necessary** | Yes (always on) | Essential for site functionality | Session cookies, CSRF tokens |
-| **Analytics** | No (opt-in) | Tracking, behavioral analysis | reCAPTCHA v3 |
-| **Functional** | Maybe (depends on legal) | Fraud prevention, preferences | FingerprintJS (if categorized here) |
+---
 
 ## Version Compatibility
 
-| Package | Current Version | Notes |
-|---------|----------------|-------|
-| react-google-recaptcha-v3 | 1.11.0 | Compatible with conditional rendering pattern |
-| @fingerprintjs/fingerprintjs | 5.0.1 | Already optimal (lazy-loaded) |
-| zustand | 5.0.8 | Supports custom storage middleware for cookie sync |
-| next | 15.5.7 | App Router client component patterns fully supported |
-| js-cookie | 3.0.5 (if added) | TypeScript types available via @types/js-cookie |
+| Package | Current Version | Status |
+|---------|----------------|--------|
+| `next` | 15.5.7 | `userAgent` from `next/server` stable; `metadata` export stable; JSON-LD pattern stable |
+| `typescript` | 5.x | `Metadata` type from `next` fully typed; no additional type packages needed |
 
-## Migration Path
-
-### Current State
-```tsx
-// src/components/Providers/Providers.tsx
-<GoogleReCaptchaProvider reCaptchaKey={siteKey}>
-  {children}
-</GoogleReCaptchaProvider>
-```
-
-### After Implementation
-```tsx
-// src/components/Providers/Providers.tsx
-<ConditionalReCaptchaProvider>
-  {children}
-</ConditionalReCaptchaProvider>
-
-// Only loads reCAPTCHA script when consent.analytics === true
-```
-
-## Performance Impact
-
-| Metric | Before | After | Impact |
-|--------|--------|-------|--------|
-| **Initial Bundle** | ~85KB (reCAPTCHA always loaded) | ~85KB (same, but conditional) | Neutral |
-| **No-consent Bundle** | ~85KB | ~2KB (banner only) | -83KB for users who decline |
-| **Time to Interactive** | Same | Same (reCAPTCHA lazy-loads) | Neutral |
-| **Cookie Banner** | 0 | ~3-5KB | +3-5KB (custom implementation, tiny) |
-
-**Net Impact:** Improved for users who decline consent, neutral for users who accept.
+---
 
 ## Sources
 
-### High Confidence (Official Docs & Technical Guides)
-- [Next.js Cookie Consent Banner: Build GDPR-Compliant System (No Libraries) | Build with Matija](https://www.buildwithmatija.com/blog/build-cookie-consent-banner-nextjs-15-server-client) - Next.js 15 server/client patterns
-- [Configuring Google Cookies Consent with Next.js 15 | Medium](https://medium.com/@sdanvudi/configuring-google-cookies-consent-with-next-js-15-ca159a2bea13) - Conditional provider approach
-- [Privacy and compliance - Fingerprint Documentation](https://dev.fingerprint.com/docs/privacy-and-compliance) - Official FingerprintJS GDPR guidance
-- [reCAPTCHA Privacy – How to Stay GDPR Compliant in 2026](https://capmonster.cloud/en/blog/recaptcha-privacy-how-to-stay-gdpr-compliant-in-2026) - Updated 2026 reCAPTCHA compliance
-
-### Medium Confidence (Community Best Practices)
-- [React Cookie Consent: GDPR Implementation Guide for Next.js - Cookietrust](https://www.cookietrust.io/react-nextjs-cookie-consent-gdpr-guide/) - Implementation patterns
-- [How to Build a GDPR Cookie Banner in Next.js 15+ | Frontend Weekly](https://medium.com/front-end-weekly/how-to-build-a-gdpr-cookie-banner-in-next-js-15-ga4-consent-mode-cloudfront-geo-detection-aae0961e89c5) - GA4 consent mode patterns
-- [Next.js Server and Client Components Composition Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns) - Official provider patterns
-- [Cookies vs. Local Storage in Next.js | Medium](https://mgshamalidilrukshi.medium.com/cookies-vs-local-storage-in-next-js-which-is-best-for-your-website-b3c45199de40) - Storage comparison
-
-### Regulatory & Legal
-- [Is Google reCAPTCHA GDPR Compliant? - Friendly Captcha](https://friendlycaptcha.com/insights/recaptcha-gdpr/) - GDPR compliance analysis
-- [Google reCAPTCHA and the GDPR - Complianz](https://complianz.io/google-recaptcha-and-the-gdpr-a-possible-conflict/) - Legal conflicts and fines
-- [Device digital fingerprint tracking in the post-GDPR era - Piwik PRO](https://piwik.pro/blog/device-fingerprint-tracking-in-the-post-gdpr-era/) - Fingerprinting compliance
+- [Next.js `userAgent` API Reference](https://nextjs.org/docs/app/api-reference/functions/userAgent) — HIGH confidence, official docs fetched 2026-02-27; confirmed `userAgent` is imported from `next/server`, works in middleware
+- [Next.js `headers()` API Reference](https://nextjs.org/docs/app/api-reference/functions/headers) — HIGH confidence, official docs fetched 2026-02-27; confirmed `headers()` is now async in Next.js 15
+- [Next.js `generateMetadata` API Reference](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) — HIGH confidence, official docs fetched 2026-02-27; confirmed `itunes`, `appLinks`, `alternates.canonical` are supported fields
+- [Next.js JSON-LD Guide](https://nextjs.org/docs/app/guides/json-ld) — HIGH confidence, official docs fetched 2026-02-27; confirmed inline `<script>` pattern with `replace(/</g, '\\u003c')` XSS prevention
+- [Google Structured Data: Software App](https://developers.google.com/search/docs/appearance/structured-data/software-app) — HIGH confidence, official Google Search docs fetched 2026-02-27; confirmed required fields: `name`, `offers.price`; supported type: `MobileApplication`
+- [DEV.to: Redirecting mobile users to App or Play Store in NextJS](https://dev.to/andreasbergstrom/redirecting-mobile-users-to-app-or-play-store-using-nextjs-3pp1) — MEDIUM confidence, community article; confirmed middleware approach with `userAgent` helper from `next/server`
 
 ---
-*Stack research for: Cookie Consent Implementation*
-*Researched: 2026-02-19*
-*Next Steps: Create roadmap phases for implementation*
+
+*Stack research for: Smart App Download Page (v1.1)*
+*Researched: 2026-02-27*

@@ -13,11 +13,19 @@ export default function Roadmap() {
 
         <section className={styles.section}>
           <h2 className={`${styles.sectionTitle} ${styles.sectionTitleHighlighted}`}>Up Next</h2>
-          <div className={`${styles.card} ${styles.cardHighlighted}`}>
-            <h3 className={styles.cardTitle}>Toast and Square</h3>
-            <p className={styles.cardDescription}>
-              We are working diligently to integrate with Toast and Square to allow you to pull your menu into the app automatically and even eventually support mobile sales from the app.
-            </p>
+          <div className={styles.cardsGrid}>
+            <div className={`${styles.card} ${styles.cardHighlighted}`}>
+              <h3 className={styles.cardTitle}>Toast and Square</h3>
+              <p className={styles.cardDescription}>
+                We are working diligently to integrate with Toast and Square to allow you to pull your menu into the app automatically and even eventually support mobile sales from the app.
+              </p>
+            </div>
+            <div className={`${styles.card} ${styles.cardHighlighted}`}>
+              <h3 className={styles.cardTitle}>Social Media Integration</h3>
+              <p className={styles.cardDescription}>
+                Connect your social media pages and post your schedule directly from the app to all your platforms at once. Keep your followers updated without the hassle.
+              </p>
+            </div>
           </div>
         </section>
 

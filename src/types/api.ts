@@ -129,6 +129,7 @@ export interface Menu {
   description?: string | null;
   categories: MenuCategory[];
   isDefault: boolean;
+  imageUri?: string | null;
 }
 
 export interface TruckOccurrence {

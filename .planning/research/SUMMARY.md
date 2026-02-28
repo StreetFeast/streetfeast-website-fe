@@ -1,272 +1,201 @@
 # Project Research Summary
 
-**Project:** Cookie Consent / Privacy Compliance Implementation
-**Domain:** GDPR-compliant cookie consent for Next.js website with third-party tracking
-**Researched:** 2026-02-19
+**Project:** StreetFeast Website Frontend — Smart App Download Page (v1.1)
+**Domain:** Next.js 15 smart download page with device detection, app store redirect, and SEO
+**Researched:** 2026-02-27
 **Confidence:** HIGH
 
 ## Executive Summary
 
-StreetFeast's Next.js 15 website currently violates GDPR by loading reCAPTCHA v3 and FingerprintJS before obtaining user consent. The research reveals that modern 2026 compliance requires a custom client-side implementation prioritizing conditional script loading over cosmetic consent banners. The standard approach uses Zustand for state management (already in the stack), cookie storage for consent preferences, and conditional provider rendering to prevent third-party scripts from executing until consent is granted.
+This project adds a `/download` route to the existing StreetFeast Next.js 15 website. The page serves one primary job: get mobile visitors to the right app store immediately, while giving desktop users and search crawlers a proper landing page. All four research streams agree on a two-layer architecture — middleware handles the redirect before any rendering occurs, and a static server component fallback serves desktop users and bots. No new dependencies are required; every capability needed already exists in Next.js 15.5.7 and in the current codebase.
 
-The critical architectural insight is that most implementations fail by treating consent as a UI problem rather than a script-loading problem. Simply showing a banner while reCAPTCHA loads in the background is a GDPR violation that has resulted in €125,000 fines. The solution requires moving from always-loaded providers to conditionally-rendered providers based on user consent, with special attention to Next.js SSR/hydration challenges.
+The recommended approach extends the existing `src/middleware.ts` with a `/download` matcher and iOS/Android regex detection (the same pattern the project already uses for truck profile deep links). The fallback `src/app/download/page.tsx` is a pure server component that exports metadata and renders both store badges using assets already present in `/public/`. The only genuinely new files are the download route, the `DownloadPage` presentational component, and one entry added to `sitemap.ts`. Implementation scope is deliberately small.
 
-A secondary legal complexity emerges from Google's April 2, 2026 data controller policy shift, making StreetFeast fully liable for reCAPTCHA GDPR compliance. Additionally, FingerprintJS used for fraud prevention may qualify as "legitimate interest" and not require explicit consent, though this requires legal validation. The implementation must avoid dark patterns (asymmetric buttons, cookie walls, pre-checked boxes) that invalidate consent under European enforcement guidelines.
+The critical risk is architectural: placing redirect logic in the page component instead of middleware. This causes Googlebot to be redirected to the App Store, removing `/download` from Google's index entirely. A secondary risk is using a permanent redirect (308) to the app store, which browsers cache indefinitely and cannot be undone. Both risks are avoided entirely by committing to the middleware-redirect pattern from the start. A known browser limitation — iPadOS 13+ reports itself as macOS — means iPad users will see the desktop fallback page rather than auto-redirecting; this is documented as acceptable behavior since both store badges remain available.
+
+---
 
 ## Key Findings
 
 ### Recommended Stack
 
-The standard 2025/2026 approach favors custom implementation over third-party consent libraries, providing full control over conditional script loading while integrating seamlessly with existing Zustand state management. This avoids bundle bloat and library update maintenance burden.
+The stack requires zero new npm packages. Next.js 15.5.7 built-ins cover every requirement. The project's existing middleware pattern, metadata export pattern, and CSS Modules conventions are directly reused. The only "new" capability is an inline JSON-LD `<script>` block in the server component, which is a trivial addition using Next.js's documented pattern.
 
 **Core technologies:**
-- **Custom Cookie Banner** (DIY component) — Full UX/UI control, no bundle bloat, integrates with existing CSS Modules pattern, easier to maintain than third-party library updates
-- **Cookie Storage** (`document.cookie`) — Server-side accessible (unlike localStorage), GDPR-compliant for consent, works across Next.js server/client boundary
-- **Zustand** (5.0.8, existing) — Already in stack for state management, client-side reactive state with localStorage persistence via middleware
-- **js-cookie** (optional, 3KB) — Helper library for cleaner cookie read/write/delete operations
-
-**Implementation pattern:**
-- **Cookie-based Storage** — Store consent in `cookie_consent` cookie (not localStorage) for server accessibility and GDPR compliance
-- **Conditional Provider Wrapper** — Wrap `GoogleReCaptchaProvider` in client component that only renders when consent granted, preventing script load until approved
-- **On-demand FingerprintJS** — Keep existing lazy-load pattern in hook, potentially classify as legitimate interest (fraud prevention) to avoid consent requirement
+- **Next.js Middleware (existing):** Device detection and redirect — runs at the edge before any React rendering, zero cost for redirected users
+- **Next.js `metadata` export (existing):** OG tags, Twitter card, canonical URL, iOS Smart App Banner — already used across all pages
+- **Next.js JSON-LD inline script (new, trivial):** `MobileApplication` structured data for Google rich results — three lines, no library needed
+- **CSS Modules (existing):** Fallback page styles — matches site-wide pattern
+- **`src/constants/links.ts` (existing):** `APP_STORE_LINK` and `GOOGLE_PLAY_LINK` already defined — single source of truth for both middleware and page
 
 ### Expected Features
 
-Research confirms GDPR compliance features are non-negotiable table stakes, while UX differentiators center on privacy-first messaging and minimal disruption.
-
 **Must have (table stakes):**
-- Banner on first visit with prior consent blocking (scripts cannot load before consent)
-- Accept All and Reject All buttons with equal visual prominence (Austria high court 2025 ruling)
-- Cookie categories (minimum: Necessary, Analytics/Security)
-- Preference center with category-by-category toggles
-- Persistent footer link to manage/withdraw consent anytime
-- Mobile responsive design with WCAG 2.2 accessibility
-- Contact form gating with alternative UI when consent declined
-- Clear service disclosure (explicitly name reCAPTCHA, FingerprintJS, their purposes)
+- Middleware device detection with auto-redirect to iOS App Store or Google Play — users expect a "download" link to send them directly to the store
+- Fallback page with both store badges for desktop and unknown devices — required for desktop users, QR code scanners, and Googlebot
+- SEO metadata (title, OG tags, Twitter card, canonical) — shareable URL must preview correctly in iMessage, Slack, and social apps
 
-**Should have (competitive differentiators):**
-- Privacy-first messaging explaining why specific tracking is needed ("prevent spam" vs generic privacy text)
-- Smooth animations with bottom-aligned banner (doesn't block primary content)
-- No cookie wall — allow browsing without consent, only gate contact form
-- Transparent service list naming third parties explicitly
-- Contextual consent triggering (show banner when user navigates to Contact page, not homepage)
+**Should have (competitive):**
+- Sitemap entry for `/download` — ensures Google indexes the page; add immediately after the page exists, not a v2 item
+- MobileApplication JSON-LD structured data — enables Google rich results for app search queries; low effort, add in same milestone
+- StreetFeast branding on fallback page — builds trust for users arriving without the app installed
 
 **Defer (v2+):**
-- Route-based banner triggering (only show before Contact page access)
-- Consent analytics dashboard tracking acceptance rates
-- Multi-language support (add when traffic shows international need)
-- Consent audit logs with timestamps (enterprise compliance feature)
-- Geolocation-based rules (defer — apply strictest standard globally initially)
-- IAB TCF 2.3 compliance (not relevant — no programmatic advertising)
+- Escape hatch via `?skip=1` param to bypass redirect — only if user research shows friction
+- Deferred deep linking (open specific in-app screen after install) — requires Branch or Appsflyer, significant dependency
 
 ### Architecture Approach
 
-The recommended architecture uses a hybrid Context + Zustand pattern matching the existing authStore implementation. Zustand handles state persistence and hydration, while React Context provides component tree access without prop drilling. The key pattern is conditional provider rendering — GoogleReCaptchaProvider only mounts when analytics consent is granted.
+The architecture follows a strict two-layer separation: middleware intercepts at the edge before any React rendering and routes mobile users to the appropriate store, while the page component serves as a purely static fallback. The `DownloadPage` component is presentational only — no state, no effects, no client boundary. Store URLs flow from a single constant source (`links.ts`) to both middleware and the page component, ensuring no duplication. Googlebot, which uses a desktop user-agent, naturally passes through middleware and indexes the full fallback HTML.
 
 **Major components:**
-1. **CookieConsentProvider** (Context + Zustand) — Manages global consent state, hydration, and persistence with localStorage sync
-2. **CookieBanner** — Displays consent UI, captures user choice, unmounts when consent decision exists
-3. **ConditionalReCaptchaProvider** — Wraps children with GoogleReCaptchaProvider only when `hasConsent('all')` returns true
-4. **Modified ContactForm** — Renders full form with tracking OR fallback UI with email link based on consent state
-5. **useCookieConsent** — Custom hook for accessing consent state throughout component tree
-
-**Critical patterns:**
-- **Hydration handling** — Use `skipHydration: true` in Zustand persist config, manually rehydrate in useEffect to prevent SSR/CSR mismatch
-- **Conditional provider mounting** — Don't load GoogleReCaptchaProvider until consent granted (prevents script execution entirely)
-- **Fallback UI** — Show email link when consent declined instead of blocking access (GDPR "freely given" requirement)
-- **Lazy script loading** — FingerprintJS already uses dynamic import on form submission, add consent check before execution
+1. `src/middleware.ts` (modified) — reads User-Agent, redirects iOS to App Store and Android to Google Play via 307, passes desktop and bots through
+2. `src/app/download/page.tsx` (new) — exports static `metadata`, renders `DownloadPage` component; no dynamic APIs called
+3. `src/components/DownloadPage/` (new) — purely presentational fallback UI with both store badges; follows existing component folder convention
+4. `src/app/sitemap.ts` (modified) — add `/download` entry at priority 0.8
+5. `src/constants/links.ts` (unchanged) — existing `APP_STORE_LINK` and `GOOGLE_PLAY_LINK` remain the single source of truth
 
 ### Critical Pitfalls
 
-Research identified seven critical pitfalls with regulatory and technical consequences:
+1. **Redirect logic in page component instead of middleware** — causes Googlebot to be redirected to the App Store, removing `/download` from Google's index; keep all device-based redirects in `middleware.ts`
+2. **Permanent redirect (308) to app store** — browsers cache this indefinitely; if the app store URL ever changes, mobile users are stranded with a cached redirect to a dead link; always use 307 for external app store redirects
+3. **`device.type === 'desktop'` condition** — `ua-parser-js` never returns `'desktop'`; desktop is represented as `undefined`; use the `device.type || 'desktop'` pattern or check for absence of mobile/tablet type
+4. **Skipping `isBot` check in middleware** — redirecting Googlebot to the App Store kills SEO for the page; check `isBot` from `userAgent(request)` and call `NextResponse.next()` for all bots
+5. **iPadOS 13+ reported as macOS** — iPad users will see the desktop fallback instead of auto-redirecting; document this as an intentional design decision, not a bug, so future developers do not attempt to "fix" it and introduce complexity
 
-1. **reCAPTCHA loads before consent (GDPR violation)** — Current implementation renders GoogleReCaptchaProvider unconditionally at root, loading Google scripts immediately. French authorities fined Cityscoot €125,000 for this. **Prevention:** Conditionally render provider only when `hasConsent('all') === true`, verify Network tab shows no google.com/recaptcha requests before user clicks Accept.
-
-2. **Conditional provider breaks useGoogleReCaptcha hook** — When provider isn't mounted (user declined), hook throws "Context has not yet been implemented" errors, crashing forms. **Prevention:** Check if `executeRecaptcha` exists before use, implement fallback UI when undefined, consider honeypot-only validation as graceful degradation.
-
-3. **SSR/hydration mismatch with localStorage** — Reading localStorage during server render causes "Hydration failed" errors and visual flash. **Prevention:** Use `skipHydration: true` in Zustand persist config, call `.persist.rehydrate()` in useEffect, add `suppressHydrationWarning` to elements with client/server differences.
-
-4. **FingerprintJS consent gray area** — Currently loads unconditionally without consent or disclosure. While fraud detection may qualify as "legitimate interest," browser fingerprinting in contact form has weak justification. **Prevention:** Document legitimate interest assessment, update privacy policy to disclose fingerprinting, consider gating behind consent, or remove if contact form is primary use case.
-
-5. **Cookie walls violate GDPR** — Blocking functionality with "Accept cookies or leave" invalidates consent (not freely given). Denmark's DPA announced cookie consent enforcement as priority for 2026. **Prevention:** Provide equally prominent Reject All button, ensure core functionality works without non-essential cookies, offer email alternative for contact.
-
-6. **Dark patterns invalidate consent** — Asymmetric buttons (bright Accept, gray Reject), pre-checked boxes, multi-click rejection paths are regulatory violations. **Prevention:** Make Accept All and Reject All identical in size, color, position, and click count; no pre-checked boxes; test both paths require same effort.
-
-7. **Google's 2026 data controller shift** — As of April 2, 2026, StreetFeast becomes data controller for reCAPTCHA, fully liable for GDPR compliance. **Prevention:** Update privacy policy before deadline, remove references to Google as controller, detail what reCAPTCHA collects, ensure DPA with Google is in place.
+---
 
 ## Implications for Roadmap
 
-Based on research, implementation should follow a three-phase structure prioritizing compliance foundation before features:
+Based on research, this feature is a single, coherent milestone with clear internal ordering. The dependency chain is tight and short: middleware must be aware of the route before the route exists, but the route must exist for the fallback to render. The suggested implementation order follows these dependencies.
 
-### Phase 1: Foundation & Compliance Core
-**Rationale:** Legal compliance is non-negotiable and must be architected correctly from the start to avoid complete rewrite. SSR hydration handling, consent state management, and privacy policy updates have zero dependencies and enable all subsequent work.
+### Phase 1: Middleware Extension and Route Scaffold
 
-**Delivers:**
-- Zustand consent store with cookie persistence
-- CookieConsentContext provider wrapping app
-- TypeScript types for consent levels
-- Updated privacy policy for Google data controller shift (pre-April 2, 2026)
-- SSR hydration strategy preventing mismatch errors
+**Rationale:** Middleware must be extended first so that when the page is created, mobile redirect behavior is already in place. This also forces a conscious decision about the `isBot` check and redirect status code (307 vs 308) before any UI work begins — getting these decisions right at the start avoids the most severe pitfalls.
 
-**Addresses features:**
-- Cookie categories (Necessary, Analytics/Security)
-- Consent persistence across sessions
-- Foundation for all tracking consent checks
+**Delivers:** Working mobile redirect for iOS and Android; desktop and bot traffic falls through to a 404 until Phase 2 is complete
 
-**Avoids pitfalls:**
-- SSR/hydration mismatch (Pitfall #3)
-- Google 2026 data controller liability (Pitfall #7)
-- FingerprintJS consent gray area requires legal review (Pitfall #4)
+**Addresses:** Device detection and auto-redirect (table stakes P1 feature)
 
-**Research needed:** None — standard Zustand patterns well-documented in existing codebase (authStore, profileStore).
+**Avoids:** Permanent redirect pitfall, bot redirect pitfall, `userAgent()` misuse pitfall
 
----
+**Implementation details:**
+- Extend `src/middleware.ts`: add `/download` to `matcher`, add iOS/Android detection block with `isBot` guard and 307 status
+- Import `APP_STORE_LINK` and `GOOGLE_PLAY_LINK` from `src/constants/links.ts` (verify no Node-only imports that break Edge Runtime)
+- Use regex `request.headers.get('user-agent')` pattern matching the existing truck redirect — not `device.type` from `userAgent()` helper, which returns `undefined` for desktop
 
-### Phase 2: Banner UI & Consent Flow
-**Rationale:** With state management foundation in place, UI layer can consume context without architectural dependencies. Banner design must address dark pattern avoidance from the start — fixing asymmetric buttons post-launch is compliance risk.
+### Phase 2: Fallback Page and Component
 
-**Delivers:**
-- CookieBanner component with Accept All/Reject All buttons
-- Preference center with category toggles
-- Persistent footer link to reopen preferences
-- Mobile responsive design with WCAG 2.2 accessibility
-- Equal visual prominence for Accept/Reject (Austria ruling compliance)
+**Rationale:** With middleware in place, the fallback page can be built as a pure static server component. The DownloadPage component follows the established component folder convention (`ComponentName/ComponentName.tsx`, `.module.css`, `index.ts`) and reuses existing badge assets from `/public/`.
 
-**Addresses features:**
-- Banner on first visit (table stakes)
-- Equal visual prominence (mandatory)
-- Customize/manage preferences (GDPR requirement)
-- Persistent preferences link (GDPR Article 7.3)
-- Mobile responsive (compliance requirement)
+**Delivers:** Complete user-facing flow — mobile redirects to correct store, desktop sees both badges with StreetFeast branding
 
-**Avoids pitfalls:**
-- Cookie walls (Pitfall #5) — Both buttons equally prominent, no blocking
-- Dark patterns (Pitfall #6) — Symmetric design, no pre-checked boxes
+**Addresses:** Fallback page with store badges (P1), StreetFeast branding on fallback (P2)
 
-**Research needed:** None — standard CSS Modules banner implementation, existing design system patterns apply.
+**Avoids:** Client-side flash pitfall, `headers()` in page forcing dynamic render, `'use client'` on a stateless component
 
----
+**Implementation details:**
+- Create `src/components/DownloadPage/DownloadPage.tsx` — renders both badge images using existing `/public/app-store-badge.svg` and `/public/google-play-badge.png`
+- Create `src/components/DownloadPage/DownloadPage.module.css` — Lexend font, existing color palette, no new CSS variables
+- Create `src/components/DownloadPage/index.ts` — re-export
+- Create `src/app/download/page.tsx` — server component, no `headers()` or dynamic APIs, renders `<DownloadPage />`
 
-### Phase 3: Conditional Script Loading
-**Rationale:** This is the most technically complex phase addressing the core GDPR violation. Requires modifying Providers component and contact form hook to conditionally load third-party scripts based on consent state. Must come after Phases 1-2 so consent state and UI are available.
+### Phase 3: Metadata, SEO, and Structured Data
 
-**Delivers:**
-- ConditionalReCaptchaProvider wrapper component
-- Modified Providers.tsx to conditionally mount GoogleReCaptchaProvider
-- Modified useContactForm.ts to check consent before FingerprintJS execution
-- Null checks for `executeRecaptcha` to prevent hook context errors
-- Contact form fallback UI showing email link when consent declined
+**Rationale:** Metadata and JSON-LD are added to the page component created in Phase 2. This is grouped separately because it is distinct from the UI work and has its own verification requirements (Google Search Console, social preview tools). Adding it after the page exists means it can be tested against the live route.
 
-**Addresses features:**
-- Prior consent blocking (critical table stakes)
-- Contact form gating (required)
-- No cookie wall (allow email alternative)
+**Delivers:** Correct social previews when `/download` is shared; Google rich result eligibility; canonical URL set to prevent duplicate content
 
-**Avoids pitfalls:**
-- reCAPTCHA loads before consent (Pitfall #1) — Script blocked until approved
-- Conditional provider breaks hooks (Pitfall #2) — Null checks prevent crashes
-- FingerprintJS consent (Pitfall #4) — Gated behind consent check
+**Addresses:** SEO metadata (P1), MobileApplication JSON-LD (P2), canonical tag, iOS Smart App Banner via `itunes.appId`
 
-**Research needed:** None — standard conditional provider pattern documented in research, matches Next.js composition patterns.
+**Avoids:** Missing OG metadata pitfall, bot redirect killing SEO
 
----
+**Implementation details:**
+- Add `export const metadata: Metadata` to `src/app/download/page.tsx`: title, description, `openGraph`, `twitter`, `alternates.canonical`, `itunes.appId: '6749815073'`
+- Add inline JSON-LD `<script>` block in page component with `MobileApplication` schema, `applicationCategory: 'FoodApplication'`, `offers.price: '0'`
+- Reuse existing `/public/social-media-logo.png` (1352x632) as OG image
+
+### Phase 4: Sitemap Update and Verification
+
+**Rationale:** The sitemap update is the final step because it signals to crawlers that the page is ready to index. Adding it before the page and metadata are complete would cause crawlers to index an incomplete page. Verification confirms all pitfalls have been avoided before the milestone is closed.
+
+**Delivers:** Google-discoverable `/download` page; complete "looks done but isn't" checklist verified
+
+**Addresses:** Sitemap inclusion (P1), discoverability
+
+**Avoids:** Page never being indexed because sitemap entry is missing
+
+**Implementation details:**
+- Add `/download` to `src/app/sitemap.ts` at priority 0.8, changeFrequency: 'monthly'
+- Verify via Google Search Console URL Inspection that Googlebot sees the fallback page (not a redirect)
+- Test both app store URLs resolve to the correct app on real iOS and Android devices
+- Confirm middleware matcher excludes `_next/static`, `_next/image`, `favicon.ico` to avoid unnecessary overhead
 
 ### Phase Ordering Rationale
 
-**Dependencies drive sequence:**
-1. **Phase 1 first** — Zustand store and Context must exist before banner can consume state
-2. **Phase 2 second** — Banner UI needs to read/write consent state from Phase 1
-3. **Phase 3 last** — Conditional providers need consent state from Phase 1 to decide mounting
-
-**Risk mitigation:**
-- Phase 1 addresses SSR hydration (non-trivial debugging if deferred)
-- Phase 2 prevents dark pattern violations at design stage
-- Phase 3 tackles GDPR violation creating immediate regulatory exposure
-
-**Iterative validation:**
-- Phase 1: Unit test store persistence, hydration timing
-- Phase 2: Integration test banner appearance, button parity
-- Phase 3: E2E test full flow (decline → email link, accept → form works)
+- Middleware-first ordering prevents the worst pitfall (Googlebot redirect) from ever shipping, even briefly
+- Component before metadata ensures there is a rendered page to attach metadata to, and that social preview testing can be done against real rendered HTML
+- Sitemap last ensures crawlers are only directed to a complete, correct page
+- The four phases map to four logical commits, each independently verifiable
 
 ### Research Flags
 
-**Phases with standard patterns (skip research-phase):**
-- **Phase 1:** Zustand + Context hybrid matches existing authStore pattern exactly
-- **Phase 2:** CSS Modules banner follows existing component structure (CookieBanner folder with .tsx + .module.css + index.ts)
-- **Phase 3:** Conditional provider pattern documented extensively in Next.js composition guides
+No phases require deeper research during planning. The research is comprehensive enough to implement directly.
 
-**Validation needed during planning:**
-- **Phase 1:** Legal team review of FingerprintJS legitimate interest claim (may avoid consent requirement if classified as fraud prevention)
-- **Phase 1:** Privacy policy text review for April 2, 2026 Google data controller compliance
-- **Phase 3:** Backend team confirmation that contact form API accepts submissions without reCAPTCHA token (for reject-consent path)
+Phases with well-documented patterns (no additional research needed):
+- **Phase 1 (Middleware):** Exact code pattern is documented in official Next.js docs and already exists in this codebase for truck deep links; copy and adapt
+- **Phase 2 (Fallback Page):** Follows identical pattern to existing `HeroHeader` component; badge assets already in `/public/`; no new patterns introduced
+- **Phase 3 (Metadata):** Pattern is established in `src/app/layout.tsx` and existing privacy/terms pages; JSON-LD pattern is documented in Next.js official guides
+- **Phase 4 (Sitemap):** One-liner addition to existing `sitemap.ts`
+
+---
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | Custom implementation with Zustand is 2025/2026 standard, multiple Next.js 15 guides converge on same pattern, js-cookie widely adopted |
-| Features | HIGH | GDPR requirements well-defined by EDPB guidelines, table stakes features verified across compliance sources, dark pattern avoidance codified in 2025 Austria ruling |
-| Architecture | HIGH | Conditional provider pattern documented in official Next.js composition docs, Context + Zustand hybrid matches existing authStore implementation, SSR hydration strategies proven |
-| Pitfalls | HIGH | reCAPTCHA GDPR violations have regulatory precedent (€125,000 Cityscoot fine), hydration errors common Next.js issue with known solutions, Google 2026 shift official policy |
+| Stack | HIGH | All sources are official Next.js 15 documentation verified 2026-02-27; zero new packages means zero dependency uncertainty |
+| Features | HIGH | Feature set is minimal and well-understood; app store badge guidelines verified against official Apple and Google documentation |
+| Architecture | HIGH | Two-layer middleware + server component pattern is Next.js's canonical approach, documented in official guides with working code examples |
+| Pitfalls | HIGH | Pitfalls sourced from official docs, confirmed GitHub issues, and a critical CVE (patched in current version 15.5.7) |
 
 **Overall confidence:** HIGH
 
-Research draws from official documentation (Next.js, Zustand, reCAPTCHA), regulatory sources (EDPB guidelines, court rulings), and recent 2025/2026 compliance updates. The custom implementation approach is industry standard for simple use cases (2-3 tracking services) vs. enterprise consent platforms (OneTrust, Cookiebot).
-
 ### Gaps to Address
 
-**Legal validation required:**
-- **FingerprintJS legitimate interest assessment** — Research suggests fraud prevention qualifies, but contact form fingerprinting has weaker justification than payment fraud detection. Needs legal team confirmation of whether consent is required or legitimate interest applies. **Resolution:** Phase 1 planning includes legal review checkpoint before implementation decisions.
+- **iPadOS detection decision:** Research recommends accepting the limitation (iPad users see the desktop fallback page) rather than adding client-side supplement logic. This should be explicitly confirmed as the product decision before implementation, so it is documented in code comments rather than discovered as a bug post-launch.
+- **OG image specificity:** Reusing `/public/social-media-logo.png` is acceptable but a download-context-specific image (showing both platform badges) would improve conversion when the URL is shared. This is a design decision that needs input from the StreetFeast team if conversion optimization is a goal.
+- **App store URL verification:** Both `APP_STORE_LINK` and `GOOGLE_PLAY_LINK` in `src/constants/links.ts` should be tested on real devices before launch to confirm they resolve to the live app, not a 404 or the store homepage.
+- **`links.ts` Edge Runtime safety:** Verify that importing from `src/constants/links.ts` in middleware does not pull in any Node.js-only modules that would break the Edge Runtime. The file currently appears to be pure string constants, which is safe, but this should be confirmed.
 
-**Backend coordination needed:**
-- **Contact form without reCAPTCHA** — Reject-consent path requires form to work without reCAPTCHA token. Backend must accept submissions with honeypot-only validation or alternative spam prevention. **Resolution:** Phase 3 planning includes backend team confirmation of API behavior when `recaptchaToken` is null/missing.
-
-**Browser compatibility edge case:**
-- **localStorage quota exceeded** — Rare but possible if user has 5MB+ data stored for domain. Research provides recovery strategy (try/catch + error handling). **Resolution:** Phase 2 implementation includes `try/catch` around `localStorage.setItem()` per performance trap guidance.
-
-**Future regulatory changes:**
-- **Geolocation-based consent** — Current approach applies strictest standard (GDPR) globally. If US-only traffic dominates, could simplify to informational banner. **Resolution:** Defer to v2 based on analytics post-launch, not a Phase 1 concern.
+---
 
 ## Sources
 
 ### Primary (HIGH confidence)
 
-**Next.js 15 Implementation:**
-- [Next.js Cookie Consent Banner: Build GDPR-Compliant System (No Libraries)](https://www.buildwithmatija.com/blog/build-cookie-consent-banner-nextjs-15-server-client) — Next.js 15 server/client patterns, conditional rendering approach
-- [Configuring Google Cookies Consent with Next.js 15](https://medium.com/@sdanvudi/configuring-google-cookies-consent-with-next-js-15-ca159a2bea13) — Conditional provider architecture
-- [Next.js Server and Client Components Composition Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns) — Official provider patterns
-
-**GDPR Legal Requirements:**
-- [reCAPTCHA Privacy – How to Stay GDPR Compliant in 2026](https://capmonster.cloud/en/blog/recaptcha-privacy-how-to-stay-gdpr-compliant-in-2026) — Updated 2026 compliance analysis, Google data controller shift
-- [Cookie Banner Design 2026 | Compliance & UX Best Practices](https://secureprivacy.ai/blog/cookie-banner-design-2026) — Dark pattern avoidance, button parity requirements
-- [5 GDPR-compliant Cookie Banner Guidelines from the EDPB](https://www.onetrust.com/resources/5-gdpr-compliant-cookie-banner-guidelines-from-the-edpb-infographic/) — Official EDPB regulatory guidance
-
-**Technical Integration:**
-- [Privacy and compliance - Fingerprint Documentation](https://dev.fingerprint.com/docs/privacy-and-compliance) — Official FingerprintJS GDPR guidance, legitimate interest discussion
-- [Zustand Persist Documentation](https://github.com/pmndrs/zustand) — Hydration handling with `skipHydration`, localStorage middleware
+- [Next.js `userAgent` API Reference](https://nextjs.org/docs/app/api-reference/functions/userAgent) — `device.type` values, `isBot` field, middleware-only constraint; verified 2026-02-27
+- [Next.js `generateMetadata` API Reference](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) — `itunes`, `alternates.canonical`, OG/Twitter metadata fields; verified 2026-02-27
+- [Next.js JSON-LD Guide](https://nextjs.org/docs/app/guides/json-ld) — inline `<script>` pattern with XSS prevention; verified 2026-02-27
+- [Next.js Redirecting Guide](https://nextjs.org/docs/app/guides/redirecting) — redirect methods, status codes, middleware vs server component; verified 2026-02-27
+- [Next.js `headers()` API Reference](https://nextjs.org/docs/app/api-reference/functions/headers) — confirmed `headers()` is async in Next.js 15 and opts page into dynamic rendering; verified 2026-02-27
+- [Google Structured Data: Software App](https://developers.google.com/search/docs/appearance/structured-data/software-app) — required fields for `MobileApplication`, `offers.price`; verified 2026-02-27
+- [Google Spam Policies — cloaking definition](https://developers.google.com/search/docs/essentials/spam-policies) — confirmed that redirecting Googlebot differently from users is a spam violation; verified 2026-02-27
+- [Apple App Store Marketing Guidelines](https://developer.apple.com/app-store/marketing/guidelines/) — official badge usage requirements
+- [Google Play Badge Guidelines](https://partnermarketinghub.withgoogle.com/brands/google-play/visual-identity/badge-guidelines/) — official badge usage requirements
+- [Apple Smart App Banners Documentation](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners) — `apple-itunes-app` meta tag and App ID format
+- [GitHub Issue #87236](https://github.com/vercel/next.js/issues/87236) — confirms `device.type` is `undefined` for desktop (expected behavior, not a bug)
+- [CVE-2025-29927](https://projectdiscovery.io/blog/nextjs-middleware-authorization-bypass) — middleware bypass vulnerability; confirmed patched in current version 15.5.7
+- [iPadOS User-Agent — Apple Developer Forums](https://developer.apple.com/forums/thread/119186) — confirms iPadOS 13+ sends macOS user-agent
 
 ### Secondary (MEDIUM confidence)
 
-**Enforcement & Precedents:**
-- [Cookie Compliance in 2026: Where GDPR Enforcement Stands Now](https://www.gerrishlegal.com/blog/cookie-compliance-in-2026-where-gdpr-enforcement-stands-now) — Denmark DPA 2026 priorities, Cityscoot €125,000 fine
-- [Dark Patterns in Cookie Consent: How to Avoid Them](https://www.cookieyes.com/blog/dark-patterns-in-cookie-consent/) — Austria high court ruling on button parity
-- [Cookie Walls and GDPR](https://www.cookieyes.com/blog/cookie-wall/) — "Freely given" consent interpretation
-
-**Implementation Patterns:**
-- [React Cookie Consent: GDPR Implementation Guide for Next.js](https://www.cookietrust.io/react-nextjs-cookie-consent-gdpr-guide/) — Community best practices
-- [Cookies vs. Local Storage in Next.js](https://mgshamalidilrukshi.medium.com/cookies-vs-local-storage-in-next-js-which-is-best-for-your-website-b3c45199de40) — Storage comparison for consent state
-
-### Tertiary (context validation)
-
-**Hydration Issues:**
-- [Text Content Hydration Errors - Next.js Docs](https://nextjs.org/docs/messages/react-hydration-error) — Official debugging guide
-- [Resolving Hydration Mismatch Errors - LogRocket](https://blog.logrocket.com/resolving-hydration-mismatch-errors-next-js/) — Community solutions
-
-**Security:**
-- [Always Catch localStorage Errors](http://crocodillon.com/blog/always-catch-localstorage-security-and-quota-exceeded-errors) — Quota exceeded handling
-- [GDPR Cookie Compliance XSS Vulnerability](https://research.cleantalk.org/cve-2025-1622/) — WordPress plugin vulnerability case study
+- [DEV.to: Redirecting mobile users to App or Play Store in NextJS](https://dev.to/andreasbergstrom/redirecting-mobile-users-to-app-or-play-store-using-nextjs-3pp1) — community pattern; verified against official docs
+- [Vercel Edge Functions User-Agent Template](https://vercel.com/templates/next.js/edge-functions-user-agent-based-rendering) — confirmed middleware approach
+- [seo.ai: 301 vs 302 vs 307 redirects](https://seo.ai/blog/301-vs-302-vs-307) — SEO implications of redirect status codes
+- [MobileApplication — Schema.org](https://schema.org/MobileApplication) — confirmed correct schema type for iOS/Android apps
+- [GitHub Discussion #21413 — Redirect based on user-agent with ISR](https://github.com/vercel/next.js/discussions/21413) — community discussion on correct layer for UA-based redirects
 
 ---
-
-*Research completed: 2026-02-19*
+*Research completed: 2026-02-27*
 *Ready for roadmap: yes*

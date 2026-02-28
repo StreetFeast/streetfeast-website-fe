@@ -1,9 +1,9 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
+milestone: v1.1
 milestone_name: App Download Page
-status: unknown
-last_updated: "2026-02-28T06:29:32.815Z"
+status: complete
+last_updated: "2026-02-28T06:40:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 6
@@ -15,26 +15,25 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-27)
+See: .planning/PROJECT.md (updated 2026-02-28)
 
 **Core value:** Food truck owners can register, manage their profiles, and be discovered by hungry customers through a polished, fast web experience.
-**Current focus:** Phase 6 — SEO and Sitemap
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 6 of 6 (SEO and Sitemap)
-Plan: 1 of 1 in current phase — COMPLETE
-Status: Phase 6 complete
-Last activity: 2026-02-28 — 06-01 complete: OG/Twitter metadata, MobileApplication JSON-LD, sitemap entry, and LayoutContent launch gate bypass for /download
+Phase: All complete
+Status: v1.1 App Download Page shipped
+Last activity: 2026-02-28 — v1.1 milestone archived
 
-Progress: [██████████] 100% (v1.2 complete — all phases done)
+Progress: [██████████] 100% (v1.1 complete — milestone shipped)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 1.5 min
-- Total execution time: 0.1 hours
+- Total plans completed: 7
+- Average duration: 2 min
+- Total execution time: 14 min
 
 **By Phase:**
 
@@ -47,10 +46,6 @@ Progress: [██████████] 100% (v1.2 complete — all phases do
 | 05-fallback-page-component | 1 | 2 min | 2 min |
 | 06-seo-sitemap | 1 | 2 min | 2 min |
 
-**Recent Trend:**
-- Last 5 plans: 03-01 (2 min), 03-02 (1 min), 04-01 (4 min), 05-01 (2 min), 06-01 (2 min)
-- Trend: Stable ~1-4 min/plan
-
 *Updated after each plan completion*
 
 ## Accumulated Context
@@ -58,23 +53,6 @@ Progress: [██████████] 100% (v1.2 complete — all phases do
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
-
-- [v1.1]: Middleware-first — redirect logic lives in middleware.ts, never in page component; keeps Googlebot from being sent to App Store
-- [v1.1]: 307 temporary redirects to app stores — never 308; permanent redirects cache in browsers and cannot be undone
-- [v1.1]: iPadOS sees fallback page — iPad reports macOS user-agent (iPadOS 13+); accepted limitation, both badges remain available
-- [v1.1]: Fallback page is pure server component — no client JS, no useEffect, no hydration, no flash of content
-- [04-01]: Bot-first gate in middleware — isBot || BOT_PATTERNS.test(ua) runs before device detection so crawlers always see page HTML
-- [04-01]: device.type === 'mobile' as primary redirect gate — naturally excludes iPadOS (type=undefined) and tablets (type=tablet)
-- [04-01]: BOT_PATTERNS supplements isBot to cover Next.js isBot gaps (GitHub #75032) and social media preview crawlers (Slack, Discord, etc.)
-- [05-01]: Metadata itunes.appId exported from page.tsx (not layout) so Smart App Banner only applies to /download route
-- [05-01]: AppStoreBadges accepts optional className prop for parent spacing control — avoids style leakage
-- [05-01]: No Header/Footer on download page — standalone minimal landing for non-redirected users
-- [06-01]: OG type stays 'website' not MobileApplication — OG protocol has no MobileApplication type; JSON-LD carries the structured app data
-- [06-01]: metadataBase inherited from root layout (not redefined in page) — relative URLs resolve to absolute automatically
-- [06-01]: Native script tag for JSON-LD, not next/script — next/script is for external scripts only
-- [06-01]: /download priority 0.8 in sitemap — primary CTA above legal pages (0.5) but below homepage (1.0)
-- [06-01]: '/download' added to LayoutContent allowedPaths — page renders content (not ComingSoon) regardless of NEXT_PUBLIC_IS_LAUNCHED
 
 ### Pending Todos
 
@@ -82,8 +60,7 @@ None.
 
 ### Blockers/Concerns
 
-- [Phase 4]: Confirm APP_STORE_LINK and GOOGLE_PLAY_LINK resolve to live app on real devices before launch
-- Note: src/constants/links.ts Edge Runtime safety confirmed — build passed successfully with the import
+None.
 
 ### Quick Tasks Completed
 
@@ -95,9 +72,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-28
-Stopped at: Completed 06-01-PLAN.md — OG/Twitter metadata, MobileApplication JSON-LD, sitemap entry, LayoutContent launch gate bypass for /download
+Stopped at: v1.1 milestone archived
 Resume file: None
 
 ---
 *State initialized: 2026-02-19*
-*Last updated: 2026-02-28 (06-01 complete: SEO metadata, JSON-LD, sitemap, LayoutContent allowedPaths for /download)*
+*Last updated: 2026-02-28 (v1.1 milestone archived)*

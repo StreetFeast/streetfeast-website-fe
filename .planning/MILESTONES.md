@@ -22,3 +22,22 @@
 
 ---
 *Last phase completed: Phase 3*
+
+## v1.1 — App Download Page
+
+**Completed:** 2026-02-28
+**Phases:** 4–6
+
+**What shipped:**
+- Edge middleware device detection with bot-first gate — iOS phones redirect to App Store, Android phones to Google Play via 307
+- Zero-JS server component fallback page with both app store badges for desktop/unknown users
+- Apple Smart App Banner meta tag for iOS Safari users
+- OG/Twitter card metadata, canonical URL, and rich social preview cards
+- MobileApplication JSON-LD structured data for Google rich results
+- Sitemap entry and LayoutContent launch gate bypass for /download
+
+**Requirements delivered:** 13/13 (RDIR-01–05, PAGE-01–04, SEO-01–04)
+
+---
+*Last phase completed: Phase 6*
+

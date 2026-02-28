@@ -128,7 +128,10 @@ Plans:
   4. /download appears in sitemap.xml so search engines can discover and index it
   5. /download is accessible in production even when NEXT_PUBLIC_IS_LAUNCHED is unset (added to LayoutContent allowedPaths)
 
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 06-01-PLAN.md — SEO metadata (OG, Twitter, canonical), JSON-LD structured data, sitemap entry, and LayoutContent allowedPaths fix
 
 ---
 
@@ -144,7 +147,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Script Blocking & Form Gating | v1.0 | 2/2 | Complete | 2026-02-19 |
 | 4. Device Detection & Middleware | 1/1 | Complete   | 2026-02-28 | - |
 | 5. Fallback Page & Component | 1/1 | Complete   | 2026-02-28 | - |
-| 6. SEO & Sitemap | v1.1 | 0/TBD | Not started | - |
+| 6. SEO & Sitemap | v1.1 | 0/1 | Planned | - |
 
 ---
 *Roadmap created: 2026-02-19 (v1.0)*

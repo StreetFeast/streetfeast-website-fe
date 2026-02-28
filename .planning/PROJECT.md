@@ -29,30 +29,36 @@ Food truck owners can register, manage their profiles, and be discovered by hung
 - ✓ Contact form gating with no-consent email alternative — v1.0
 - ✓ Footer "Cookie Preferences" link for re-consent — v1.0
 - ✓ Conditional reCAPTCHA/FingerprintJS loading based on consent — v1.0
-- ✓ Device-aware /download page with middleware auto-redirect to app stores — v1.1
-- ✓ Zero-JS fallback page with both app store badges — v1.1
-- ✓ SEO-optimized download page (OG, Twitter, JSON-LD, sitemap) — v1.1
 
 ### Active
 
-(None — planning next milestone)
+- [ ] Smart app download page at /download with device detection and auto-redirect
+- [ ] Fallback landing page with both store badges when device is undetected
+- [ ] SEO-optimized metadata and OG tags for the download page
 
 ### Out of Scope
 
 - Backend changes — frontend-only
 - App store submission or mobile app changes — website only
 - Custom app store badge design — use official Apple/Google badges
-- Client-side device detection via useEffect — middleware is correct approach
-- 301/308 permanent redirects for /download — would remove from search index
+
+## Current Milestone: v1.1 App Download Page
+
+**Goal:** Provide a shareable, SEO-optimized download page that auto-redirects mobile users to the correct app store and shows a fallback page with both store badges for desktop/unknown devices.
+
+**Target features:**
+- Device detection via user-agent with auto-redirect to iOS App Store or Google Play
+- Minimal fallback page with StreetFeast branding and both store badge buttons
+- SEO optimization (metadata, OG tags, structured data)
+- Clean shareable URL at /download
 
 ## Context
 
-Shipped v1.1 with 16,182 LOC TypeScript.
-Tech stack: Next.js 15, TypeScript, CSS Modules, Zustand, Supabase Auth.
-App store URLs centralized in `src/constants/links.ts`.
-Existing `/m/` route handles deep links for Universal Links / App Links.
-Cookie consent banner and conditional script loading (v1.0).
-Device-aware /download page with middleware redirects and SEO (v1.1).
+- App store URLs centralized in `src/constants/links.ts`
+- Existing `/m/` route handles deep links for Universal Links / App Links
+- Site uses Next.js 15 App Router with server-side rendering
+- Existing SEO patterns: sitemap.ts, robots.ts, metadata exports in page files
+- Cookie consent banner and conditional script loading already implemented (v1.0)
 
 ## Constraints
 
@@ -70,13 +76,9 @@ Device-aware /download page with middleware redirects and SEO (v1.1).
 | Replace form entirely when cookies declined | Cleaner UX than grayed-out form behind modal | ✓ Good |
 | Footer link for re-consent | Users can change their mind without clearing browser data | ✓ Good |
 | ToS link in no-consent alternative (not banner) | Simpler UX — shown only in relevant context | ✓ Good |
-| Auto-redirect for /download on mobile | Fastest path to app store for mobile users | ✓ Good |
-| Fallback page with both store badges | Covers desktop and hidden user-agent cases | ✓ Good |
-| User-agent detection for device routing | Standard approach, with fallback when undetectable | ✓ Good |
-| Bot-first gate in middleware | Crawlers always see page HTML, never get redirected | ✓ Good |
-| 307 temporary redirects to app stores | Prevents browser cache lock-in from permanent redirects | ✓ Good |
-| Pure server component for /download | Zero client JS, no hydration, no flash of content | ✓ Good |
-| JSON-LD for structured data (not OG type) | OG protocol has no MobileApplication type | ✓ Good |
+| Auto-redirect for /download on mobile | Fastest path to app store for mobile users | — Pending |
+| Fallback page with both store badges | Covers desktop and hidden user-agent cases | — Pending |
+| User-agent detection for device routing | Standard approach, with fallback when undetectable | — Pending |
 
 ---
-*Last updated: 2026-02-28 after v1.1 milestone*
+*Last updated: 2026-02-27 after milestone v1.1 started*

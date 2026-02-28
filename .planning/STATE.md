@@ -15,18 +15,18 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-28)
+See: .planning/PROJECT.md (updated 2026-02-27)
 
 **Core value:** Food truck owners can register, manage their profiles, and be discovered by hungry customers through a polished, fast web experience.
-**Current focus:** Planning next milestone
+
+**Current focus:** Milestone v1.1 — App Download Page
 
 ## Current Position
 
-Phase: All complete
-Status: v1.1 App Download Page shipped
-Last activity: 2026-02-28 — v1.1 milestone archived
-
-Progress: [██████████] 100% (v1.1 complete — milestone shipped)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-27 — Milestone v1.1 started
 
 ## Performance Metrics
 
@@ -67,14 +67,27 @@ None.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 1 | Fix truck profile rendering: header image, report button, menu, menu item photos, website/social links | 2026-02-20 | c1a3039 | [1-fix-truck-profile-rendering-header-image](./quick/1-fix-truck-profile-rendering-header-image/) |
+<<<<<<< HEAD
 | 2 | Update privacy policy page to match finalized legal document | 2026-02-26 | e6742ca | [2-update-privacy-policy-page-to-match-fina](./quick/2-update-privacy-policy-page-to-match-fina/) |
 
 ## Session Continuity
 
 Last session: 2026-02-28
 Stopped at: v1.1 milestone archived
+=======
+| 2 | Update privacy policy page to match finalized legal document (21 sections, 22 state rights, 14-service data processing inventory) | 2026-02-26 | e6742ca | [2-update-privacy-policy-page-to-match-fina](./quick/2-update-privacy-policy-page-to-match-fina/) |
+
+## Session Continuity
+
+Last session: 2026-02-27
+Stopped at: Milestone v1.1 initialization
+>>>>>>> main
 Resume file: None
 
 ---
 *State initialized: 2026-02-19*
+<<<<<<< HEAD
 *Last updated: 2026-02-28 (v1.1 milestone archived)*
+=======
+*Last updated: 2026-02-27*
+>>>>>>> main

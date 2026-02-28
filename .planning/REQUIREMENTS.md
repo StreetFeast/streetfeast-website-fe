@@ -24,10 +24,10 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 ### SEO & Discoverability
 
-- [ ] **SEO-01**: Page exports Next.js metadata with title, description, and OG tags
-- [ ] **SEO-02**: Page has canonical URL and Twitter card meta tags
-- [ ] **SEO-03**: Page includes inline JSON-LD MobileApplication structured data
-- [ ] **SEO-04**: /download is added to sitemap.ts with appropriate priority
+- [x] **SEO-01**: Page exports Next.js metadata with title, description, and OG tags
+- [x] **SEO-02**: Page has canonical URL and Twitter card meta tags
+- [x] **SEO-03**: Page includes inline JSON-LD MobileApplication structured data
+- [x] **SEO-04**: /download is added to sitemap.ts with appropriate priority
 
 ## Future Requirements
 
@@ -65,10 +65,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-02 | Phase 5 | Complete |
 | PAGE-03 | Phase 5 | Complete |
 | PAGE-04 | Phase 5 | Complete |
-| SEO-01 | Phase 6 | Pending |
-| SEO-02 | Phase 6 | Pending |
-| SEO-03 | Phase 6 | Pending |
-| SEO-04 | Phase 6 | Pending |
+| SEO-01 | Phase 6 | Complete |
+| SEO-02 | Phase 6 | Complete |
+| SEO-03 | Phase 6 | Complete |
+| SEO-04 | Phase 6 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 13 total

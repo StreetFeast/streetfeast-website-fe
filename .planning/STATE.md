@@ -1,14 +1,14 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: App Download Page
-status: unknown
-last_updated: "2026-02-28T05:58:07.836Z"
+milestone: v1.2
+milestone_name: SEO and Sitemap
+status: active
+last_updated: "2026-02-28T06:27:00.000Z"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 6
-  completed_plans: 6
+  total_phases: 6
+  completed_phases: 6
+  total_plans: 7
+  completed_plans: 7
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-02-27)
 
 **Core value:** Food truck owners can register, manage their profiles, and be discovered by hungry customers through a polished, fast web experience.
-**Current focus:** Phase 5 — Fallback Page Component (v1.1)
+**Current focus:** Phase 6 — SEO and Sitemap
 
 ## Current Position
 
-Phase: 5 of 5 (Fallback Page Component)
+Phase: 6 of 6 (SEO and Sitemap)
 Plan: 1 of 1 in current phase — COMPLETE
-Status: Phase 5 complete
-Last activity: 2026-02-28 — 05-01 complete: /download fallback page with AppStoreBadges component and Apple Smart App Banner
+Status: Phase 6 complete
+Last activity: 2026-02-28 — 06-01 complete: OG/Twitter metadata, MobileApplication JSON-LD, sitemap entry, and LayoutContent launch gate bypass for /download
 
-Progress: [██████████] 100% (v1.1 complete — all phases done)
+Progress: [██████████] 100% (v1.2 complete — all phases done)
 
 ## Performance Metrics
 
@@ -45,9 +45,10 @@ Progress: [██████████] 100% (v1.1 complete — all phases do
 | 03-script-blocking-form-gating | 2 | 3 min | 1.5 min |
 | 04-device-detection-middleware | 1 | 4 min | 4 min |
 | 05-fallback-page-component | 1 | 2 min | 2 min |
+| 06-seo-sitemap | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (2 min), 03-01 (2 min), 03-02 (1 min), 04-01 (4 min), 05-01 (2 min)
+- Last 5 plans: 03-01 (2 min), 03-02 (1 min), 04-01 (4 min), 05-01 (2 min), 06-01 (2 min)
 - Trend: Stable ~1-4 min/plan
 
 *Updated after each plan completion*
@@ -69,6 +70,11 @@ Recent decisions affecting current work:
 - [05-01]: Metadata itunes.appId exported from page.tsx (not layout) so Smart App Banner only applies to /download route
 - [05-01]: AppStoreBadges accepts optional className prop for parent spacing control — avoids style leakage
 - [05-01]: No Header/Footer on download page — standalone minimal landing for non-redirected users
+- [06-01]: OG type stays 'website' not MobileApplication — OG protocol has no MobileApplication type; JSON-LD carries the structured app data
+- [06-01]: metadataBase inherited from root layout (not redefined in page) — relative URLs resolve to absolute automatically
+- [06-01]: Native script tag for JSON-LD, not next/script — next/script is for external scripts only
+- [06-01]: /download priority 0.8 in sitemap — primary CTA above legal pages (0.5) but below homepage (1.0)
+- [06-01]: '/download' added to LayoutContent allowedPaths — page renders content (not ComingSoon) regardless of NEXT_PUBLIC_IS_LAUNCHED
 
 ### Pending Todos
 
@@ -89,9 +95,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-28
-Stopped at: Completed 05-01-PLAN.md — /download fallback page with AppStoreBadges component and Apple Smart App Banner
+Stopped at: Completed 06-01-PLAN.md — OG/Twitter metadata, MobileApplication JSON-LD, sitemap entry, LayoutContent launch gate bypass for /download
 Resume file: None
 
 ---
 *State initialized: 2026-02-19*
-*Last updated: 2026-02-28 (05-01 complete: /download fallback page, AppStoreBadges component)*
+*Last updated: 2026-02-28 (06-01 complete: SEO metadata, JSON-LD, sitemap, LayoutContent allowedPaths for /download)*

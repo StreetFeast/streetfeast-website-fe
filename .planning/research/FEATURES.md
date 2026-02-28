@@ -1,31 +1,22 @@
 # Feature Research
 
-**Domain:** Cookie Consent / Privacy Compliance
-**Researched:** 2026-02-19
+**Domain:** Smart app download page with device detection and auto-redirect
+**Researched:** 2026-02-27
 **Confidence:** HIGH
 
 ## Feature Landscape
 
 ### Table Stakes (Users Expect These)
 
-Features users assume exist. Missing these = product feels incomplete or creates legal liability.
+Features users assume exist. Missing these = product feels incomplete.
 
 | Feature | Why Expected | Complexity | Notes |
 |---------|--------------|------------|-------|
-| Banner on First Visit | Legal requirement (GDPR, ePrivacy) - consent needed before tracking | LOW | Must appear before any non-essential cookies/tracking |
-| Accept All Button | Required one-click consent path | LOW | Must be equally prominent to Reject |
-| Reject All Button | Mandatory one-click rejection (2026 enforcement) | LOW | Must be same size/color/prominence as Accept |
-| Customize/Manage Preferences | Granular consent requirement | MEDIUM | Must allow category-by-category selection |
-| Equal Visual Prominence | Austria high court ruling 2025 - button parity required | LOW | "Accept" and "Reject" must be identical in size, color, contrast |
-| Persistent Preferences Link | Users must be able to change consent anytime | LOW | Typically in footer, reopens preference center |
-| Cookie Categories | Granular consent by purpose (GDPR requirement) | MEDIUM | Minimum: Necessary, Analytics, Marketing/Advertising |
-| Prior Consent Blocking | Non-essential cookies/scripts blocked until consent given | HIGH | Must prevent reCAPTCHA/Fingerprint from loading pre-consent |
-| Consent Persistence | Remember user choice across sessions | LOW | Use localStorage (not cookies) to avoid circular dependency |
-| Clear Language | Plain language explanations (not legalese) | LOW | 2026 trend away from legal jargon toward conversational |
-| Mobile Responsive | Mobile-first design is compliance requirement | MEDIUM | Different layouts for mobile vs desktop |
-| Withdraw Consent | As easy to withdraw as to give (GDPR Article 7.3) | MEDIUM | Via preference center, must delete/block tracking immediately |
-| Information About Tracking | Users must know what's tracked and why (informed consent) | MEDIUM | List services: reCAPTCHA, FingerprintJS, Supabase auth |
-| WCAG 2.2 Accessibility | European Accessibility Act requirement (June 28, 2025) | MEDIUM | Keyboard nav, 4.5:1 contrast, screen reader support |
+| Device detection and auto-redirect to correct store | Any link labeled "download" on mobile should go straight to the right store — friction at this point kills conversions | LOW | Use Next.js middleware with `userAgent` from `next/server`; regex on `os.name` for "iOS" or "Android"; redirect before page renders |
+| Fallback page with both store badges for desktop/unknown | Desktop users and crawlers cannot be redirected to a store; they need a page with explicit badge links | LOW | Server component renders two badges; no client JS required; existing `/public/app-store-badge.svg` and `/public/google-play-badge.png` already in repo |
+| SEO metadata for the /download route | Shareable URL must preview correctly in iMessage, Twitter, Slack; needs a title and image | LOW | `export const metadata` in `src/app/download/page.tsx` following existing pattern from `layout.tsx` and truck profile pages |
+| Clean shareable URL at /download | Marketing materials, QR codes, social posts all need one stable URL | NONE | File-based routing: create `src/app/download/page.tsx` |
+| Official store badge assets | Apple and Google mandate use of official badges; using unofficial images violates brand guidelines | NONE | Assets already exist: `/public/app-store-badge.svg` (Apple, 144x48), `/public/google-play-badge.png` (Google, 162x48) |
 
 ### Differentiators (Competitive Advantage)
 
@@ -33,15 +24,10 @@ Features that set the product apart. Not required, but valuable.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| No Banner for Non-Tracking Users | Better UX - if user never visits Contact page, no banner needed | MEDIUM | Route-based banner triggering (show only before Contact form) |
-| Privacy-First Messaging | Build trust by explaining why we need specific tracking | LOW | "We use reCAPTCHA to prevent spam" rather than generic privacy text |
-| Contextual Consent | Ask for consent when relevant, not on homepage | MEDIUM | Show banner when user navigates to Contact page |
-| Minimal Cookie Categories | Only categories actually used (not a long list) | LOW | 2 categories: Necessary (Supabase), Analytics/Security (reCAPTCHA + Fingerprint) |
-| Smooth Animation | Professional feel with subtle fade-in (not aggressive popup) | LOW | Bottom-aligned banner that doesn't cover primary content |
-| No Cookie Wall | Allow browsing without consent (only block Contact form) | LOW | Better UX than blocking entire site |
-| Transparent Service List | Explicitly name third parties (Google reCAPTCHA, FingerprintJS) | LOW | Builds trust vs vague "partners" language |
-| Quick Accept Flow | Accept All → instant dismissal, no unnecessary steps | LOW | Optimize for users who just want to proceed |
-| Preference Memory Indicator | Subtle visual cue that preferences are remembered | LOW | Small checkmark or text "Your privacy choices are saved" |
+| MobileApplication JSON-LD structured data | Allows Google to display rich results for the app (name, rating, price); improves search appearance beyond just indexing the page | LOW | Add `<script type="application/ld+json">` block in the download page; schema.org `MobileApplication` type; required fields: `name`, `offers.price`; recommended: `operatingSystem`, `applicationCategory`, `aggregateRating` |
+| StreetFeast branding on fallback page | Reinforces brand trust when user lands without the app installed; not just a generic store redirect | LOW | Use existing logo assets (`/public/streetfeastlogowhite.png`, `/public/logowithtext.png`); apply existing CSS Modules patterns |
+| OG image tuned for "download" context | A screenshot or branded image with "Download StreetFeast" framing converts better when the URL is shared on social | LOW | `/public/social-media-logo.png` already exists and can be reused; or use `/public/app-screenshot.png` for higher conversion |
+| Sitemap inclusion | Ensures Google indexes the page; supports discoverability for "streetfeast app download" searches | NONE | Add `/download` entry to `src/app/sitemap.ts` following the existing pattern |
 
 ### Anti-Features (Commonly Requested, Often Problematic)
 
@@ -49,185 +35,120 @@ Features that seem good but create problems.
 
 | Feature | Why Requested | Why Problematic | Alternative |
 |---------|---------------|-----------------|-------------|
-| Pre-ticked Checkboxes | Faster to implement, higher consent rates | Illegal under GDPR - consent must be affirmative action | All checkboxes unchecked by default |
-| Colored Accept vs Gray Reject | Marketing wants higher accept rates | Austria high court ruled this violates GDPR button parity | Equal visual styling for both buttons |
-| Hide Reject Button | Desire for higher consent rates | Dark pattern - violates GDPR "freely given" requirement | First-layer Reject All button |
-| Bundled Consent | One toggle for all tracking | Violates "specific" consent requirement | Category-by-category toggles |
-| Cookie Walls | Force consent to view site | Violates "freely given" - coercion invalidates consent | Allow browsing, block only features requiring tracking |
-| Assume Consent from Browsing | Simpler implementation | Invalid under GDPR - requires affirmative action | Explicit Accept/Reject buttons |
-| Full-Screen Modal | Grabs attention effectively | Pressure tactic, accessibility issues, poor mobile UX | Bottom banner or top bar |
-| Guilt-Trip Language | "Help us improve" instead of "Marketing" | Deceptive - violates "informed" consent requirement | Clear, honest category labels |
-| Multi-Step Reject Process | Protects acceptance rates | Dark pattern - withdrawal must be "as easy" as giving consent | One-click Reject All on first layer |
-| Auto-Consent After Timer | "Deemed accepted" after countdown | Invalid consent - must be explicit action | No timer, wait for user action |
-| Consent via Close Button | Assume X button means consent | Invalid - must be affirmative, unambiguous action | X button dismisses without saving choice |
-| Detailed Preference Center Only | Full cookie policy in modal | Overwhelming, reduces informed consent in practice | Simple first layer + optional details link |
+| Client-side JS redirect on the download page | Seems simpler — run navigator.userAgent check in a useEffect | Googlebot and social crawlers see a blank page before hydration; the fallback content they need to index is never rendered; also introduces a flash of content before redirect | Use Next.js middleware for server-side redirect; fallback page is a server component with no client JS |
+| Redirect Googlebot to the App Store | Might seem like a good SEO signal | This is textbook cloaking — serving different destinations to crawlers vs users based on user-agent is a Google spam policy violation | Let Googlebot hit the fallback page normally via `isBot` check in middleware |
+| Third-party smart link service (Branch, Appsflyer OneLink) | One URL handles everything including deferred deep linking | Adds external dependency, vendor lock-in, and a network round-trip; for a simple download redirect without deferred deep linking this is overengineering | Self-hosted middleware redirect is ~10 lines of code with no external dependency |
+| User-agent-based redirect inside the page component (not middleware) | Seems like it avoids middleware complexity | User-agent via `headers()` in a server component works but fires after the route matches; middleware fires before any rendering and is the canonical Next.js pattern for this | Implement redirect in `middleware.ts` scoped to `matcher: '/download'` |
+| Animated loading state while redirect happens | Makes the redirect feel polished | Redirect happens server-side before any HTML is sent; the user never sees a page render; adding a loading animation requires client JS and defeats the purpose | Server-side redirect is instantaneous; no loading state needed |
+| "No thanks, stay on web" button on mobile | Gives user an escape hatch | The redirect happens before the page renders — there is no page to add a button to | If an escape hatch is desired later, append `?skip=1` param to bypass redirect in middleware; this is a v2 concern |
 
 ## Feature Dependencies
 
 ```
-[Banner Display]
-    └──requires──> [Consent State Management] (check localStorage)
-                       └──requires──> [Cookie Categories Definition]
+[Middleware redirect to correct store]
+    └──requires──> [/download route file exists]
+    └──requires──> [APP_STORE_LINK, GOOGLE_PLAY_LINK constants]
+                       (already satisfied — src/constants/links.ts)
 
-[Accept All]
-    └──triggers──> [Set All Categories to Accepted]
-                       └──triggers──> [Allow Scripts to Load]
+[Fallback page with store badges]
+    └──requires──> [/download route exists as server component]
+    └──requires──> [Badge assets in /public/]
+                       (already satisfied — both badge files exist)
 
-[Reject All]
-    └──triggers──> [Set All Non-Essential to Rejected]
-                       └──triggers──> [Block Scripts from Loading]
+[SEO metadata for /download]
+    └──requires──> [/download is a server component with metadata export]
+    └──enhances──> [Fallback page with store badges]
 
-[Customize Preferences]
-    └──requires──> [Preference Center Component]
-                       └──requires──> [Category-by-Category Toggles]
-                       └──requires──> [Save Preferences Action]
+[MobileApplication JSON-LD]
+    └──requires──> [Fallback page is a server component]
+    └──enhances──> [SEO metadata for /download]
 
-[Prior Consent Blocking] ──requires──> [Script Wrapper/Gate]
-                                    └──prevents──> [reCAPTCHA Load]
-                                    └──prevents──> [FingerprintJS Load]
-
-[Withdraw Consent] ──requires──> [Persistent Preferences Link]
-                               └──triggers──> [Delete Tracking Cookies]
-                               └──triggers──> [Block Scripts]
-
-[Contact Form Access] ──requires──> [Consent Check]
-                                 └──if_rejected──> [Replacement Screen]
-                                                       └──requires──> [Re-consent Flow]
-                                                       └──requires──> [ToS Acknowledgment]
+[Sitemap inclusion]
+    └──requires──> [/download route is indexable by Googlebot]
+    └──requires──> [Middleware does NOT redirect Googlebot to App Store]
+                       (middleware must use isBot check to pass crawlers through)
 ```
 
 ### Dependency Notes
 
-- **Banner Display requires Consent State Management:** Must check localStorage on page load to determine if banner should show
-- **Prior Consent Blocking requires Script Wrapper:** Cannot use standard script tags - need conditional loading based on consent state
-- **Contact Form Access requires Consent Check:** If user previously rejected, show replacement screen asking them to reconsider
-- **Preference Center enhances all flows:** Provides granular control for power users while simple users use Accept/Reject All
-- **Persistent Link conflicts with "hide forever":** Must always be accessible, cannot be permanently dismissed
+- **Middleware requires the /download route file:** Middleware intercepts requests before the page renders, but `page.tsx` must exist so the fallback response has something to render for non-mobile visitors and bots.
+- **MobileApplication JSON-LD requires server component:** JSON-LD structured data must be in the initial HTML, not injected by client JS; since the fallback page needs no interactivity, a server component is the right choice and makes this free.
+- **Sitemap requires bot passthrough in middleware:** If middleware redirects all user-agents including Googlebot, the page will never be indexed. The middleware must check `userAgent(request).isBot` and let crawlers fall through to the page.
 
 ## MVP Definition
 
-### Launch With (v1)
+### Launch With (v1 — this milestone)
 
-Minimum viable product — what's needed to validate the concept and maintain legal compliance.
+Minimum viable product for the /download page.
 
-- [x] **Banner on First Visit** — Legal requirement, must block tracking before consent
-- [x] **Accept All Button** — Required consent path, equal prominence
-- [x] **Reject All Button** — Mandatory one-click rejection (2026 enforcement)
-- [x] **Equal Visual Prominence** — Austria ruling compliance, prevents dark patterns
-- [x] **Consent Persistence in localStorage** — Remember user choice across sessions
-- [x] **Cookie Categories (2 minimum)** — Necessary (Supabase), Analytics/Security (reCAPTCHA + Fingerprint)
-- [x] **Prior Consent Blocking** — Block reCAPTCHA and FingerprintJS until consent given
-- [x] **Persistent Footer Link** — Allow users to change preferences anytime
-- [x] **Clear Service Disclosure** — List reCAPTCHA and FingerprintJS by name with purposes
-- [x] **Preference Center** — Category-by-category toggles with descriptions
-- [x] **Mobile Responsive Design** — Mobile-first compliance requirement
-- [x] **Contact Form Gating** — If rejected, show replacement screen with re-consent flow
-- [x] **Basic Accessibility** — Keyboard navigation, screen reader support
+- [ ] Next.js middleware at `matcher: '/download'` that reads `userAgent(request)`, skips bots via `isBot`, redirects iOS to App Store, Android to Google Play, and passes desktop through — the primary purpose of the page
+- [ ] Server component fallback page at `src/app/download/page.tsx` with both store badges and StreetFeast branding — required for desktop users, QR code scanners on undetected devices, and Googlebot
+- [ ] `export const metadata` with title, description, OG tags, and Twitter card on the download page — shareable URL must preview correctly in social/messaging apps
 
 ### Add After Validation (v1.x)
 
-Features to add once core is working and if user feedback indicates need.
+Features to add once core is working.
 
-- [ ] **Route-Based Banner Triggering** — Show banner only when user navigates to Contact page (defer if simple always-show works)
-- [ ] **Consent Analytics** — Track accept/reject rates to optimize messaging (only if compliance team requests)
-- [ ] **Multi-Language Support** — Translate banner for international users (add when traffic shows need)
-- [ ] **Advanced Animations** — Polished transitions and micro-interactions (defer for speed)
-- [ ] **Cookie Scanner** — Automated detection of cookies being set (only if adding more tracking)
+- [ ] Sitemap entry for /download at `src/app/sitemap.ts` — low effort, ensures Google indexes the page; add immediately after the page exists
+- [ ] MobileApplication JSON-LD structured data — add if SEO ranking for "streetfeast download" becomes a priority; low effort
 
 ### Future Consideration (v2+)
 
-Features to defer until product-market fit is established or regulatory environment changes.
+Features to defer until product-market fit is established.
 
-- [ ] **Consent Audit Logs** — Store consent records with timestamps, IP, device info (only if enterprise customers/audit requirement)
-- [ ] **Geolocation-Based Rules** — Different banners for EU vs US vs other regions (defer - serve strictest standard globally for now)
-- [ ] **IAB TCF 2.3 Compliance** — Transparency & Consent Framework for ad tech (not relevant - no programmatic ads)
-- [ ] **Consent API Integration** — Browser-native consent signals (emerging standard, not stable yet)
-- [ ] **A/B Testing Framework** — Test different consent messaging (dangerous - could violate compliance)
+- [ ] Escape hatch via `?skip=1` query param to bypass redirect — only if user research shows frustration with auto-redirect
+- [ ] Deferred deep linking (open specific in-app screen after install) — requires Branch or Appsflyer; significant dependency; only relevant for targeted campaigns
 
 ## Feature Prioritization Matrix
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| Banner on First Visit | HIGH | LOW | P1 |
-| Accept All Button | HIGH | LOW | P1 |
-| Reject All Button | HIGH | LOW | P1 |
-| Equal Visual Prominence | HIGH | LOW | P1 |
-| Prior Consent Blocking | HIGH | HIGH | P1 |
-| Cookie Categories | HIGH | MEDIUM | P1 |
-| Preference Center | HIGH | MEDIUM | P1 |
-| Consent Persistence | HIGH | LOW | P1 |
-| Persistent Footer Link | HIGH | LOW | P1 |
-| Mobile Responsive | HIGH | MEDIUM | P1 |
-| Contact Form Gating | MEDIUM | MEDIUM | P1 |
-| Clear Service Disclosure | MEDIUM | LOW | P1 |
-| WCAG Accessibility | MEDIUM | MEDIUM | P1 |
-| Route-Based Triggering | MEDIUM | MEDIUM | P2 |
-| Privacy-First Messaging | MEDIUM | LOW | P2 |
-| Smooth Animation | LOW | LOW | P2 |
-| Consent Analytics | LOW | MEDIUM | P2 |
-| Multi-Language Support | LOW | HIGH | P3 |
-| Consent Audit Logs | LOW | HIGH | P3 |
-| Geolocation Rules | LOW | HIGH | P3 |
-| IAB TCF Compliance | LOW | HIGH | P3 |
+| Middleware device detection + redirect | HIGH | LOW | P1 |
+| Fallback page with both badges | HIGH | LOW | P1 |
+| SEO metadata (title, OG tags, Twitter card) | HIGH | LOW | P1 |
+| Sitemap inclusion for /download | MEDIUM | LOW | P1 (add immediately after page exists) |
+| MobileApplication JSON-LD structured data | MEDIUM | LOW | P2 |
+| App screenshot on fallback page | LOW | LOW | P2 |
+| Escape hatch / skip redirect param | LOW | MEDIUM | P3 |
 
 **Priority key:**
-- P1: Must have for launch (legal compliance + core UX)
-- P2: Should have, add when possible (UX improvements, not legally required)
-- P3: Nice to have, future consideration (enterprise features, emerging standards)
+- P1: Must have for launch
+- P2: Should have, add when possible
+- P3: Nice to have, future consideration
 
 ## Competitor Feature Analysis
 
-| Feature | OneTrust (Enterprise) | CookieYes (Mid-Market) | Our Approach (Lean Startup) |
-|---------|----------------------|------------------------|------------------------------|
-| Banner Display | Auto-scan all cookies, highly configurable | Template-based, limited customization | Hardcoded categories for known services |
-| Granular Controls | Vendor-level granularity (100+ vendors) | Category-level (4-6 categories) | 2 categories only (minimal but compliant) |
-| Consent Records | Full audit logs, 5-year retention, encrypted | Basic logs, 1-year retention | No logs initially (defer to v2+ unless audited) |
-| Geolocation | Region-specific rules, 100+ jurisdictions | EU vs non-EU toggle | Single strict standard globally |
-| Script Blocking | Tag manager integration, automatic blocking | Manual script wrapper implementation | Manual conditional loading |
-| Preference Center | Multi-layer with vendor lists | Single-layer category toggles | Single-layer, 2 categories |
-| Analytics Dashboard | Consent rate tracking, A/B testing | Basic consent metrics | None initially (defer) |
-| Cost | $15K-100K+/year | $99-299/year | $0 (build in-house) |
-| Implementation | Complex, requires dedicated team | Medium, 1-2 day integration | Simple, hardcoded for exact use case |
+| Feature | Typical Approach | Our Approach |
+|---------|-----------------|--------------|
+| Device detection | Third-party services (Branch, Adjust, Appsflyer) or custom middleware | Custom Next.js middleware using built-in `userAgent()` — no external dependency |
+| Bot passthrough | Often missed — bots get redirected to store, page is never indexed | `userAgent(request).isBot` check in middleware; bots see the fallback page |
+| Fallback page design | Usually minimal: two badges on branded background | StreetFeast branding + two official badge assets already in /public/ |
+| OG image | Usually the app icon or a screenshot | Reuse existing `/public/social-media-logo.png` or `/public/app-screenshot.png` |
+| Structured data | Usually absent on download pages | Add MobileApplication JSON-LD as a P2 for Google rich results |
 
-**Our competitive advantage:** Minimal implementation focused on exact use case (reCAPTCHA + FingerprintJS only), avoiding over-engineering while maintaining full compliance. Trade configurability for simplicity.
+## Implementation Notes (Existing Codebase)
+
+These observations come from reading the existing code and are relevant to avoiding rework:
+
+- **User-agent detection already exists client-side** in `src/app/truck/[truckId]/page.tsx` (lines 40-48) using `navigator.userAgent` with `/iPad|iPhone|iPod/` and `/android/i` regex patterns. The middleware should use the same regex on the `ua` string from `userAgent(request)`, or check `os.name === 'iOS'` and `os.name === 'Android'`.
+- **Store badge assets are already present:** `/public/app-store-badge.svg` (width 144, height 48) and `/public/google-play-badge.png` (width 162, height 48) — use the same dimensions as the truck profile modal for visual consistency.
+- **Store link constants are centralized:** `APP_STORE_LINK` and `GOOGLE_PLAY_LINK` in `src/constants/links.ts` — both middleware and the fallback page should import from there.
+- **Metadata pattern is established:** `src/app/layout.tsx` shows the full OG/Twitter pattern. The download page metadata export should follow that pattern with a download-specific title ("Download StreetFeast") and description.
+- **Sitemap is at `src/app/sitemap.ts`** — adding `/download` is a one-liner addition.
+- **No `middleware.ts` currently exists** in the project — this is a net-new file at the project root alongside `next.config.ts`.
+- **Next.js 15.5.2 with default Edge Runtime** is sufficient for a simple user-agent regex redirect. No need to opt into Node.js runtime for middleware — the edge runtime supports `userAgent()` from `next/server` natively.
 
 ## Sources
 
-### Legal Requirements & Compliance
-- [Cookie Banner Design 2026 | Compliance & UX Best Practices](https://secureprivacy.ai/blog/cookie-banner-design-2026)
-- [GDPR Cookie Consent: A Complete 2026 Guide for Compliance & Optimization](https://geotargetly.com/blog/gdpr-cookie-consent-a-complete-guide-for-compliance)
-- [Cookie Consent Implementation: 2026 and Beyond Step-by-Step Guide](https://secureprivacy.ai/blog/cookie-consent-implementation)
-- [5 GDPR-compliant Cookie Banner Guidelines from the EDPB](https://www.onetrust.com/resources/5-gdpr-compliant-cookie-banner-guidelines-from-the-edpb-infographic/)
-- [Cookie banner requirements by country (EU overview 2026)](https://cookiebanner.com/blog/cookie-banner-requirements-by-country-eu-overview-2026/)
-
-### Dark Patterns & Enforcement
-- [Dark Pattern Avoidance 2026 Checklist | UX & Compliance Guide](https://secureprivacy.ai/blog/dark-pattern-avoidance-2026-checklist)
-- [Global Cookie Consent Trends 2026 | Future of Consent](https://secureprivacy.ai/blog/global-cookie-consent-trends-2026)
-- [Dark Patterns in Cookie Consent: How to Avoid Them](https://www.cookieyes.com/blog/dark-patterns-in-cookie-consent/)
-- [Cookie Compliance in 2026: Where GDPR Enforcement Stands Now](https://www.gerrishlegal.com/blog/cookie-compliance-in-2026-where-gdpr-enforcement-stands-now)
-
-### Technical Implementation
-- [What are cookies, local storage and session storage from a privacy law perspective?](https://www.clym.io/blog/what-are-cookies-local-storage-and-session-storage-from-a-privacy-law-perspective)
-- [Cookie Preference Center | Consent Management Platform Guide](https://secureprivacy.ai/blog/cookie-preference-center-guide)
-- [JavaScript Cookie Consent Implementation: Complete Guide](https://etch1.com/cookie-banner/javascript-cookie-consent/)
-
-### reCAPTCHA & Fingerprinting
-- [reCAPTCHA Privacy – How to Stay GDPR Compliant in 2026](https://capmonster.cloud/en/blog/recaptcha-privacy-how-to-stay-gdpr-compliant-in-2026)
-- [Google reCAPTCHA Cookies: Are They GDPR Compliant?](https://www.gdprregister.eu/gdpr/google-recaptcha-cookies/)
-- [Is Google reCAPTCHA GDPR Compliant?](https://friendlycaptcha.com/insights/recaptcha-gdpr/)
-- [Google's ReCAPTCHA v3: What you need for GDPR compliance](https://usercentrics.com/knowledge-hub/googles-recaptcha-what-you-need-to-know-to-be-gdpr-compliant/)
-
-### Consent Withdrawal & Records
-- [Withdrawal of Consent: A Tactical Guide](https://www.termsfeed.com/blog/cookie-consent-withdrawal/)
-- [Are Consent Logs Required? How to Comply With Cookie Consent Laws](https://www.termsfeed.com/blog/cookie-consent-log/)
-- [Automating Proof of Consent: Record User Consent and Audit Trails](https://cookie-script.com/guides/automating-proof-of-consent)
-- [GDPR Cookie Consent: 8 Requirements and Critical Compliance Tips](https://www.exabeam.com/explainers/gdpr-compliance/gdpr-cookie-consent-8-requirements-and-critical-compliance-tips/)
-
-### UX & Accessibility
-- [GDPR Cookie Consent UX in 2025: Banners and Preference Centers](https://germainux.com/2025/11/30/gdpr-cookie-consent-ux-in-2025-banners-and-preference-centers-that-comply-without-killing-engagement/)
-- [Cookie Banner 101: From Legal Requirements to UX Best Practices](https://transcend.io/blog/cookie-banner-101)
-- [UX Patterns for High Consent Rates (That Are Still Legal)](https://cookie-script.com/guides/ux-patterns-for-high-consent-rates)
+- [Next.js userAgent API reference](https://nextjs.org/docs/app/api-reference/functions/userAgent) — HIGH confidence, checked 2026-02-27
+- [Redirecting mobile users to App or Play Store using Next.js — DEV Community](https://dev.to/andreasbergstrom/redirecting-mobile-users-to-app-or-play-store-using-nextjs-3pp1) — MEDIUM confidence
+- [Software app structured data — Google Search Central](https://developers.google.com/search/docs/appearance/structured-data/software-app) — HIGH confidence
+- [MobileApplication — Schema.org](https://schema.org/MobileApplication) — HIGH confidence
+- [Google Spam Policies — cloaking definition](https://developers.google.com/search/docs/essentials/spam-policies) — HIGH confidence
+- [Apple App Store Marketing Guidelines](https://developer.apple.com/app-store/marketing/guidelines/) — HIGH confidence
+- [Google Play Badge Guidelines](https://partnermarketinghub.withgoogle.com/brands/google-play/visual-identity/badge-guidelines/) — HIGH confidence
+- [Next.js 15 middleware edge runtime limitations — GitHub Discussion](https://github.com/vercel/next.js/discussions/71727) — MEDIUM confidence
 
 ---
-*Feature research for: Cookie Consent / Privacy Compliance*
-*Researched: 2026-02-19*
+*Feature research for: smart app download page with device detection — StreetFeast v1.1*
+*Researched: 2026-02-27*

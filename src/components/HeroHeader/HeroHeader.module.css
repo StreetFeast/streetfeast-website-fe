@@ -74,7 +74,8 @@
 .appStoreBtn img,
 .playStoreBtn img {
   height: 50px;
-  width: auto;
+  width: 150px;
+  object-fit: contain;
 }
 
 .truckNote {
@@ -179,6 +180,10 @@
 }
 
 @media (max-width: 640px) {
+  .container {
+    gap: 3rem;
+  }
+
   .title {
     font-size: 1.75rem;
   }
@@ -191,3 +196,12 @@
     font-size: 0.8rem;
   }
 }
+
+@media (max-width: 400px) {
+  .ctaButtonsMobile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+

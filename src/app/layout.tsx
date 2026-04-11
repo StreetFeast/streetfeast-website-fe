@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
+import { PostHogProvider, PostHogPageView } from "@posthog/next";
 import { LayoutContent } from "@/components/LayoutContent";
 import Providers from "@/components/Providers";
 import CookieBanner from "@/components/CookieBanner";
+import { POSTHOG_KEY } from "@/lib/posthog";
 
 
 const lexend = Lexend({
@@ -72,12 +74,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexend.className}>
-        <Providers>
-          <LayoutContent>
-            {children}
-          </LayoutContent>
-        </Providers>
-        <CookieBanner />
+        <PostHogProvider apiKey={POSTHOG_KEY} clientOptions={{ api_host: '/ingest' }}>
+          <PostHogPageView />
+          <Providers>
+            <LayoutContent>
+              {children}
+            </LayoutContent>
+          </Providers>
+          <CookieBanner />
+        </PostHogProvider>
       </body>
     </html>
   );

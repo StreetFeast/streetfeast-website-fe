@@ -16,7 +16,10 @@ export const getUserProfile = async (): Promise<UserResponse> => {
  * This endpoint is public and does not require authentication
  */
 export const getTruckDetails = async (truckId: string): Promise<TruckDetailResponse> => {
-  const response = await apiClient.get<TruckDetailResponse>(`/api/v1/Truck/${truckId}`);
+  const response = await apiClient.get<TruckDetailResponse>(
+    `/api/v1/Truck/${truckId}`,
+    { skipAuthRedirect: true } as import('axios').AxiosRequestConfig & { skipAuthRedirect?: boolean }
+  );
   return response.data;
 };
 
@@ -64,7 +67,8 @@ export const getTruckOccurrences = async (
         startLocal,
         endLocal,
       },
-    }
+      skipAuthRedirect: true,
+    } as import('axios').AxiosRequestConfig & { skipAuthRedirect?: boolean }
   );
   return response.data;
 };

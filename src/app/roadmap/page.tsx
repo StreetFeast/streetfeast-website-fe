@@ -12,12 +12,18 @@ export default function Roadmap() {
         </header>
 
         <section className={styles.section}>
-          <h2 className={`${styles.sectionTitle} ${styles.sectionTitleHighlighted}`}>Up Next</h2>
+          <h2 className={`${styles.sectionTitle} ${styles.sectionTitleHighlighted}`}>Currently Working On</h2>
           <div className={styles.cardsGrid}>
             <div className={`${styles.card} ${styles.cardHighlighted}`}>
-              <h3 className={styles.cardTitle}>Toast and Square</h3>
+              <h3 className={styles.cardTitle}>Multi-Image Menus</h3>
               <p className={styles.cardDescription}>
-                We are working diligently to integrate with Toast and Square to allow you to pull your menu into the app automatically and even eventually support mobile sales from the app.
+                Upload multiple images as your menu to let users know everything that you have!
+              </p>
+            </div>
+            <div className={`${styles.card} ${styles.cardHighlighted}`}>
+              <h3 className={styles.cardTitle}>Business Locations</h3>
+              <p className={styles.cardDescription}>
+                We want to allow businesses to mark locations on their physical properties that will allow you to quickly snag locations to set up at.
               </p>
             </div>
             <div className={`${styles.card} ${styles.cardHighlighted}`}>
@@ -41,9 +47,27 @@ export default function Roadmap() {
               </p>
             </div>
             <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Business Locations</h3>
+              <h3 className={styles.cardTitle}>Square and Clover Integration</h3>
               <p className={styles.cardDescription}>
-                We want to allow businesses to mark locations on their physical properties that will allow you to quickly snag locations to set up at.
+                We are working to integrate with Square and Clover to allow you to pull your menu into the app automatically and even eventually support mobile sales from the app.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.cardTitle}>Overhauled Analytics</h3>
+              <p className={styles.cardDescription}>
+                A redesigned analytics experience to give you deeper insights into your customers, sales, and schedule performance.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.cardTitle}>Event Notifications for Users</h3>
+              <p className={styles.cardDescription}>
+                Let users subscribe to a specific event so they get notified the moment vendors, schedules, or details are updated.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.cardTitle}>Reason for Leaving Early</h3>
+              <p className={styles.cardDescription}>
+                Allow vendors to share a reason when they leave a location early so customers always know what to expect.
               </p>
             </div>
           </div>

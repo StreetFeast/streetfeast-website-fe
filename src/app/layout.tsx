@@ -6,6 +6,8 @@ import { LayoutContent } from "@/components/LayoutContent";
 import Providers from "@/components/Providers";
 import CookieBanner from "@/components/CookieBanner";
 import { POSTHOG_KEY } from "@/lib/posthog";
+import FacebookPixel from "@/components/FacebookPixel";
+
 
 
 const lexend = Lexend({
@@ -74,7 +76,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexend.className}>
+        <FacebookPixel />
         <PostHogProvider apiKey={POSTHOG_KEY} clientOptions={{ api_host: '/ingest' }}>
+
           <PostHogPageView />
           <Providers>
             <LayoutContent>

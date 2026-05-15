@@ -1,0 +1,48 @@
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.h1 {
+  font-size: 2.5rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.lede {
+  font-size: 1.125rem;
+  color: #555;
+  margin: 0 0 2rem 0;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem 0;
+}
+
+.statesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.stateLink {
+  display: block;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.stateLink:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}

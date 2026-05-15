@@ -22,6 +22,16 @@ export default function Footer() {
             </div>
 
             <div className={styles.column}>
+              <h4 className={styles.columnTitle}>Find Food Trucks</h4>
+              <Link href="/food-trucks/kentucky" className={styles.link}>Kentucky</Link>
+              <Link href="/food-trucks/kentucky/bowling-green" className={styles.link}>Bowling Green</Link>
+              <Link href="/food-trucks/kentucky/glasgow" className={styles.link}>Glasgow</Link>
+              <Link href="/food-trucks/kentucky/somerset" className={styles.link}>Somerset</Link>
+              <Link href="/food-trucks/kentucky/elizabethtown" className={styles.link}>Elizabethtown</Link>
+              <Link href="/food-trucks/kentucky/owensboro" className={styles.link}>Owensboro</Link>
+            </div>
+
+            <div className={styles.column}>
               <h4 className={styles.columnTitle}>Legal</h4>
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
               <Link href="/privacy" className={styles.link}>Privacy Policy</Link>

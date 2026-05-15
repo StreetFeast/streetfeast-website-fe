@@ -31,9 +31,9 @@ export function slugify(input: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-export function cityFromZipcode(zip: string | null | undefined): CityLocation | null {
-  if (!zip) return null;
-  const data = lookup(zip);
+export function cityFromZipcode(zip: string | number | null | undefined): CityLocation | null {
+  if (zip === null || zip === undefined) return null;
+  const data = lookup(String(zip));
   if (!data) return null;
   const stateName = STATE_NAMES[data.state] ?? data.state;
   return {

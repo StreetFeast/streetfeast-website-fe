@@ -163,7 +163,7 @@ export function foodEstablishmentJsonLd(
         addressLocality: location.city,
         addressRegion: location.state,
         addressCountry: 'US',
-        ...(truck.zipcode && { postalCode: truck.zipcode }),
+        ...(truck.zipCode && { postalCode: String(truck.zipCode) }),
       },
     }),
     ...(openingHours.length > 0 && { openingHoursSpecification: openingHours }),

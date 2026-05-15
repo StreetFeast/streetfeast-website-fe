@@ -7,13 +7,17 @@ interface LayoutContentProps {
   children: React.ReactNode;
 }
 
+const ALLOWED_PREFIXES = ['/food-trucks'];
+const ALLOWED_EXACT = ['/terms', '/privacy', '/delete-my-data', '/download'];
+
 export default function LayoutContent({ children }: LayoutContentProps) {
   const isLaunched = process.env.NEXT_PUBLIC_IS_LAUNCHED === 'true';
   const pathname = usePathname();
-  const allowedPaths = ['/terms', '/privacy', '/delete-my-data', '/download'];
-  const isAllowedPath = allowedPaths.includes(pathname);
+  const isAllowed =
+    ALLOWED_EXACT.includes(pathname) ||
+    ALLOWED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 
-  if (isLaunched || isAllowedPath) {
+  if (isLaunched || isAllowed) {
     return <>{children}</>;
   }
 

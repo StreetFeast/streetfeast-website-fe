@@ -14,6 +14,7 @@ import {
 } from '@/lib/seo/jsonld';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { Breadcrumb, type BreadcrumbItem } from '@/components/Breadcrumb';
+import { RelatedTrucks } from '@/components/RelatedTrucks';
 import TruckProfileClient from './TruckProfileClient';
 
 const STORAGE_PREFIX = process.env.NEXT_PUBLIC_STORAGE_PREFIX ?? '';
@@ -112,6 +113,9 @@ export default async function TruckPage({ params }: PageProps) {
         initialDefaultMenu={defaultMenu}
         location={location}
       />
+      {location && (
+        <RelatedTrucks location={location} excludeId={truckId} />
+      )}
     </>
   );
 }

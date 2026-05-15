@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = 'https://streetfeastapp.com';
-  
+
   return {
     rules: [
       {
@@ -12,11 +12,13 @@ export default function robots(): MetadataRoute.Robots {
           '/api/',
           '/_next/',
           '/static/',
+          '/profile/',
+          '/forgot-password',
+          '/reset-password',
+          '/verify',
+          '/truck-verification',
+          '/m/',
         ],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

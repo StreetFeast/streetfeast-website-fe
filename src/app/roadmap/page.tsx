@@ -15,12 +15,6 @@ export default function Roadmap() {
           <h2 className={`${styles.sectionTitle} ${styles.sectionTitleHighlighted}`}>Currently Working On</h2>
           <div className={styles.cardsGrid}>
             <div className={`${styles.card} ${styles.cardHighlighted}`}>
-              <h3 className={styles.cardTitle}>Multi-Image Menus</h3>
-              <p className={styles.cardDescription}>
-                Upload multiple images as your menu to let users know everything that you have!
-              </p>
-            </div>
-            <div className={`${styles.card} ${styles.cardHighlighted}`}>
               <h3 className={styles.cardTitle}>Business Locations</h3>
               <p className={styles.cardDescription}>
                 We want to allow businesses to mark locations on their physical properties that will allow you to quickly snag locations to set up at.

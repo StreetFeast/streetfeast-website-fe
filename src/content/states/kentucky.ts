@@ -20,7 +20,7 @@ Trucks usually show up where people are already gathered, so breweries, coffee s
   faq: [
     {
       q: 'Where can I find food trucks in Kentucky?',
-      a: 'You can find trucks all over the state, from Bowling Green and Glasgow to Somerset, Elizabethtown, and Owensboro. Most park at breweries, coffee shops, farmers markets, college campuses, and weekend events. Since locations move around, the easiest way to track them down is to check a live map.',
+      a: 'You can find trucks all over the state, from Bowling Green and Glasgow to Somerset and Scottsville. Most park at breweries, coffee shops, farmers markets, college campuses, and weekend events. Since locations move around, the easiest way to track them down is to check a live map.',
     },
     {
       q: 'Do Kentucky food trucks operate year-round?',

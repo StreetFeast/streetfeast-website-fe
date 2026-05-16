@@ -16,7 +16,7 @@ export const HOME_FAQ: FaqItem[] = [
   },
   {
     q: 'Does StreetFeast cover food trucks in Kentucky?',
-    a: 'Yes. StreetFeast tracks food trucks across Kentucky, with active coverage in Bowling Green, Glasgow, Somerset, Owensboro, Elizabethtown, and Scottsville, and we are adding new cities as more vendors join.',
+    a: 'Yes. StreetFeast tracks food trucks across Kentucky, with active coverage in Bowling Green, Glasgow, Somerset, and Scottsville, and we are adding new cities as more vendors join.',
   },
   {
     q: 'Does StreetFeast work outside of Kentucky?',
@@ -24,7 +24,7 @@ export const HOME_FAQ: FaqItem[] = [
   },
   {
     q: 'Is StreetFeast free to use?',
-    a: 'Yes. StreetFeast is free for food truck vendors and for the foodies hunting them down - no subscription, no per-order fees, just an easier way to connect trucks with the people who want to eat at them.',
+    a: 'Yes. StreetFeast is free for food truck vendors and for the foodies hunting them down - no subscription, just an easier way to connect trucks with the people who want to eat at them.',
   },
 ];
 

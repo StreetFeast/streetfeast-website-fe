@@ -18,6 +18,7 @@ import { RelatedTrucks } from '@/components/RelatedTrucks';
 import { getStateContent } from '@/content/states';
 import { getCityContent } from '@/content/cities';
 import TruckProfileClient from './TruckProfileClient';
+import styles from './page.module.css';
 
 const STORAGE_PREFIX = process.env.NEXT_PUBLIC_STORAGE_PREFIX ?? '';
 
@@ -114,16 +115,18 @@ export default async function TruckPage({ params }: PageProps) {
         data={foodEstablishmentJsonLd(truck, location, occurrences, STORAGE_PREFIX)}
       />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
-      <Breadcrumb items={crumbs} />
+      <div className={styles.breadcrumbWrapper}>
+        <Breadcrumb items={crumbs} />
+      </div>
       <TruckProfileClient
         truck={truck}
         initialOccurrences={occurrences}
         initialDefaultMenu={defaultMenu}
         location={location}
       />
-      {location && (
+      {/* {location && (
         <RelatedTrucks location={location} excludeId={truckId} />
-      )}
+      )} */}
     </>
   );
 }

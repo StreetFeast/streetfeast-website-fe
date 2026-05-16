@@ -27,8 +27,7 @@ export default function Footer() {
               <Link href="/food-trucks/kentucky/bowling-green" className={styles.link}>Bowling Green</Link>
               <Link href="/food-trucks/kentucky/glasgow" className={styles.link}>Glasgow</Link>
               <Link href="/food-trucks/kentucky/somerset" className={styles.link}>Somerset</Link>
-              <Link href="/food-trucks/kentucky/elizabethtown" className={styles.link}>Elizabethtown</Link>
-              <Link href="/food-trucks/kentucky/owensboro" className={styles.link}>Owensboro</Link>
+              <Link href="/food-trucks/kentucky/scottsville" className={styles.link}>Scottsville</Link>
             </div>
 
             <div className={styles.column}>
@@ -36,7 +35,6 @@ export default function Footer() {
               <Link href="/terms" className={styles.link}>Terms of Service</Link>
               <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
               <Link href="/delete-my-data" className={styles.link}>Delete My Data</Link>
-              <Link href="/giveaway" className={styles.link}>Sweepstakes Rules</Link>
               <CookiePrefsButton />
             </div>
 

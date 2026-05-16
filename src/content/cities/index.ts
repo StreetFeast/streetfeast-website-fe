@@ -3,16 +3,12 @@ import type { CityContent } from '@/lib/content/types';
 import { bowlingGreen } from './kentucky/bowling-green';
 import { glasgow } from './kentucky/glasgow';
 import { somerset } from './kentucky/somerset';
-import { elizabethtown } from './kentucky/elizabethtown';
-import { owensboro } from './kentucky/owensboro';
 import { scottsville } from './kentucky/scottsville';
 
 export const ALL_CITIES: CityContent[] = [
   bowlingGreen,
   glasgow,
   somerset,
-  elizabethtown,
-  owensboro,
   scottsville,
 ];
 

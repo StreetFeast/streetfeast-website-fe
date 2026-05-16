@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.breadcrumbWrapper {
+  padding: 0 2rem;
+}
+
 /* Loading & Error States */
 .loading,
 .noData {

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | StreetFeast',
   },
   description:
-    'Find food trucks, street vendors, and pop-up restaurants near you. Real-time locations, menus, and schedules across Kentucky — Bowling Green, Glasgow, Somerset, Elizabethtown, Owensboro, and more.',
+    'Find food trucks, street vendors, and pop-up restaurants near you. Real-time locations, menus, and schedules across Kentucky — Bowling Green, Glasgow, Somerset, Scottsville, and more.',
   keywords: [
     'food trucks',
     'food trucks Kentucky',

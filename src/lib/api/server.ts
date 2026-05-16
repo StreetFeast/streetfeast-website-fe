@@ -18,9 +18,16 @@ async function safeFetchJson<T>(
 ): Promise<T | null> {
   try {
     const res = await fetch(url, { next });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      console.error(
+        `[api] ${res.status} ${res.statusText} ${url} :: ${body.slice(0, 300)}`
+      );
+      return null;
+    }
     return (await res.json()) as T;
-  } catch {
+  } catch (err) {
+    console.error(`[api] fetch threw ${url}`, err);
     return null;
   }
 }

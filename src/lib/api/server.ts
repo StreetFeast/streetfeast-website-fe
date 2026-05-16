@@ -78,6 +78,19 @@ export async function getTruckMenuServer(
   return data;
 }
 
+// Group surrounding-area cities under their nearest hub city.
+const CITY_REMAP: Record<string, { city: string; citySlug: string }> = {
+  monticello: { city: 'Somerset', citySlug: 'somerset' },
+  alvaton: { city: 'Bowling Green', citySlug: 'bowling-green' },
+};
+
+function applyCityRemap(location: CityLocation | null): CityLocation | null {
+  if (!location) return location;
+  const remap = CITY_REMAP[location.citySlug];
+  if (!remap) return location;
+  return { ...location, city: remap.city, citySlug: remap.citySlug };
+}
+
 export const getEnrichedTrucks = unstable_cache(
   async (): Promise<EnrichedTruck[]> => {
     const results = await Promise.all(
@@ -86,14 +99,14 @@ export const getEnrichedTrucks = unstable_cache(
         if (!truck) return null;
         return {
           ...truck,
-          location: cityFromZipcode(truck.zipCode),
+          location: applyCityRemap(cityFromZipcode(truck.zipCode)),
           isFeatured: FEATURED_TRUCK_IDS.has(id),
         };
       })
     );
     return results.filter((t): t is EnrichedTruck => t !== null);
   },
-  ['enriched-trucks'],
+  ['enriched-trucks-v2'],
   { revalidate: 3600, tags: ['trucks'] }
 );
 

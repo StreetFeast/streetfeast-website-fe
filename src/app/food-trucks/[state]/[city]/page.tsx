@@ -21,6 +21,7 @@ import {
   getCitiesByState,
 } from '@/content/cities';
 import { getTrucksByCity, getTruckOccurrencesServer } from '@/lib/api/server';
+import { renderInlineLinks } from '@/lib/content/inline-links';
 import styles from './page.module.css';
 
 export const dynamicParams = false;
@@ -98,7 +99,7 @@ export default async function CityPage({ params }: PageProps) {
         </h1>
         <div className={styles.intro}>
           {content.intro.split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
+            <p key={i}>{renderInlineLinks(para)}</p>
           ))}
         </div>
 

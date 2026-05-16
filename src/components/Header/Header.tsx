@@ -18,8 +18,6 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const allowAuth = process.env.NEXT_PUBLIC_ALLOW_AUTH === 'true';
-
   return (
     <header className={styles.header}>
       <a href="#main-content" className={styles.skipLink}>
@@ -35,26 +33,6 @@ export default function Header() {
             priority
           />
         </Link>
-
-        {/* Desktop Navigation */}
-        {allowAuth && (
-          <nav className={styles.nav}>
-            {user ? (
-              <Link href="/profile" className={styles.button}>
-                My Profile
-              </Link>
-            ) : (
-              <>
-                <Link href="/login-truck" className={styles.loginButton}>
-                  Login
-                </Link>
-                <Link href="/register-truck" className={styles.registerButton}>
-                  Register
-                </Link>
-              </>
-            )}
-          </nav>
-        )}
 
         {/* Hamburger Menu Button */}
         <button
@@ -84,24 +62,6 @@ export default function Header() {
             </div>
 
             <nav className={styles.mobileNav}>
-              {allowAuth && (
-                <>
-                  {user ? (
-                    <Link href="/profile" className={styles.mobileButton} onClick={closeMenu}>
-                      My Profile
-                    </Link>
-                  ) : (
-                    <>
-                      <Link href="/login-truck" className={styles.mobileButton} onClick={closeMenu}>
-                        Login
-                      </Link>
-                      <Link href="/register-truck" className={styles.mobileButton} onClick={closeMenu}>
-                        Register
-                      </Link>
-                    </>
-                  )}Í\
-                </>
-              )}
               <Link href="/about" className={styles.mobileButton} onClick={closeMenu}>
                 About Us
               </Link>

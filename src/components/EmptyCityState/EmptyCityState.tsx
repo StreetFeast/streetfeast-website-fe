@@ -10,8 +10,8 @@ export default function EmptyCityState({ cityName }: { cityName: string }) {
         a food truck or know one we should add, register and we&apos;ll get you
         on the map.
       </p>
-      <Link href="/register-truck" className={styles.cta}>
-        Register your food truck
+      <Link href="/download" className={styles.cta}>
+        Download and Register your food truck
       </Link>
     </section>
   );

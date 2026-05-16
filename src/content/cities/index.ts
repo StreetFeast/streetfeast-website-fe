@@ -5,6 +5,7 @@ import { glasgow } from './kentucky/glasgow';
 import { somerset } from './kentucky/somerset';
 import { elizabethtown } from './kentucky/elizabethtown';
 import { owensboro } from './kentucky/owensboro';
+import { scottsville } from './kentucky/scottsville';
 
 export const ALL_CITIES: CityContent[] = [
   bowlingGreen,
@@ -12,6 +13,7 @@ export const ALL_CITIES: CityContent[] = [
   somerset,
   elizabethtown,
   owensboro,
+  scottsville,
 ];
 
 export function getCityContent(stateSlug: string, citySlug: string): CityContent | null {

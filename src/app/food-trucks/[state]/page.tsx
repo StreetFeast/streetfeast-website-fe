@@ -13,6 +13,7 @@ import {
   itemListJsonLd,
 } from '@/lib/seo/jsonld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { renderInlineLinks } from '@/lib/content/inline-links';
 import {
   getStateContent,
   getAllStateRoutes,
@@ -92,7 +93,7 @@ export default async function StateHub({ params }: PageProps) {
         <h1 className={styles.h1}>Food Trucks in {content.name}</h1>
         <div className={styles.intro}>
           {content.intro.split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
+            <p key={i}>{renderInlineLinks(para)}</p>
           ))}
         </div>
 

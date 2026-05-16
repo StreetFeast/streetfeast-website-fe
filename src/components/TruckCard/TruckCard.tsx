@@ -1,6 +1,7 @@
 // src/components/TruckCard/TruckCard.tsx
 // Server component. Status badge ("Open now" / "Opens Fri 11am") is computed
 // server-side from occurrences and refreshed by ISR.
+import Image from 'next/image';
 import Link from 'next/link';
 import type { EnrichedTruck } from '@/lib/api/server';
 import type { TruckOccurrence } from '@/types/api';
@@ -58,12 +59,27 @@ export default function TruckCard({ truck, occurrences = [] }: TruckCardProps) {
 
   return (
     <Link href={`/truck/${truck.id}`} className={styles.card} aria-label={truck.name}>
-      <div
-        className={styles.hero}
-        style={hero ? { backgroundImage: `url(${hero})` } : undefined}
-        role="img"
-        aria-label={`${truck.name} food truck in ${altLocation}`}
-      />
+      <div className={styles.hero}>
+        {hero ? (
+          <Image
+            src={hero}
+            alt={`${truck.name} food truck in ${altLocation}`}
+            fill
+            sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 300px"
+            className={styles.heroImage}
+          />
+        ) : (
+          <div className={styles.placeholder}>
+            <Image
+              src="/app-vector-file.svg"
+              alt={`${truck.name} food truck in ${altLocation}`}
+              width={96}
+              height={96}
+              className={styles.placeholderLogo}
+            />
+          </div>
+        )}
+      </div>
       <div className={styles.body}>
         <h3 className={styles.name}>{truck.name}</h3>
         {truck.cuisine && <p className={styles.cuisine}>{truck.cuisine}</p>}

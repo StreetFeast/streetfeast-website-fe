@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { FaqItem } from '@/lib/content/types';
+import { renderInlineLinks } from '@/lib/content/inline-links';
 import styles from './Faq.module.css';
 
 export default function Faq({ items, heading }: { items: FaqItem[]; heading?: string }) {
@@ -32,7 +33,7 @@ export default function Faq({ items, heading }: { items: FaqItem[]; heading?: st
               </dt>
               {isOpen && (
                 <dd className={styles.answer}>
-                  <p>{item.a}</p>
+                  <p>{renderInlineLinks(item.a, { linkClassName: styles.link })}</p>
                 </dd>
               )}
             </div>

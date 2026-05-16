@@ -15,6 +15,8 @@ import {
 import { JsonLd } from '@/lib/seo/json-ld';
 import { Breadcrumb, type BreadcrumbItem } from '@/components/Breadcrumb';
 import { RelatedTrucks } from '@/components/RelatedTrucks';
+import { getStateContent } from '@/content/states';
+import { getCityContent } from '@/content/cities';
 import TruckProfileClient from './TruckProfileClient';
 
 const STORAGE_PREFIX = process.env.NEXT_PUBLIC_STORAGE_PREFIX ?? '';
@@ -84,13 +86,19 @@ export default async function TruckPage({ params }: PageProps) {
   ]);
 
   const location = cityFromZipcode(truck.zipCode);
+  const stateContent = location ? getStateContent(location.stateSlug) : null;
+  const cityContent = location
+    ? getCityContent(location.stateSlug, location.citySlug)
+    : null;
 
   const crumbs: BreadcrumbItem[] = [
     { name: 'Home', path: '/' },
     { name: 'Food Trucks', path: '/food-trucks' },
-    ...(location
+    ...(location && stateContent
+      ? [{ name: location.stateName, path: `/food-trucks/${location.stateSlug}` }]
+      : []),
+    ...(location && cityContent
       ? [
-          { name: location.stateName, path: `/food-trucks/${location.stateSlug}` },
           {
             name: location.city,
             path: `/food-trucks/${location.stateSlug}/${location.citySlug}`,

@@ -49,3 +49,12 @@
 .answer p {
   margin: 0;
 }
+
+.link {
+  color: #ED6A00;
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration: none;
+}

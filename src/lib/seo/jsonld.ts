@@ -67,6 +67,13 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   };
 }
 
+function faqAnswerToHtml(text: string): string {
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label: string, href: string) => {
+    const url = href.startsWith('/') ? `${SITE_URL}${href}` : href;
+    return `<a href="${url}">${label}</a>`;
+  });
+}
+
 export function faqPageJsonLd(faqs: FaqItem[]) {
   return {
     '@context': 'https://schema.org',
@@ -74,7 +81,7 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
     mainEntity: faqs.map((f) => ({
       '@type': 'Question',
       name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
+      acceptedAnswer: { '@type': 'Answer', text: faqAnswerToHtml(f.a) },
     })),
   };
 }

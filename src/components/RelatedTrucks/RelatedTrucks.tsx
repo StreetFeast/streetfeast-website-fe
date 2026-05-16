@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { getTrucksByCity, getTruckOccurrencesServer } from '@/lib/api/server';
 import { TruckCard } from '@/components/TruckCard';
+import { getCityContent } from '@/content/cities';
 import type { CityLocation } from '@/lib/location/zipcode';
 import styles from './RelatedTrucks.module.css';
 
@@ -27,6 +28,8 @@ export default async function RelatedTrucks({ location, excludeId }: RelatedTruc
 
   if (others.length === 0) return null;
 
+  const cityContent = getCityContent(location.stateSlug, location.citySlug);
+
   const start = todayLocalISO();
   const end = in30DaysISO();
   const truckOccurrences = await Promise.all(
@@ -41,12 +44,14 @@ export default async function RelatedTrucks({ location, excludeId }: RelatedTruc
           <TruckCard key={truck.id} truck={truck} occurrences={truckOccurrences[i]} />
         ))}
       </div>
-      <Link
-        href={`/food-trucks/${location.stateSlug}/${location.citySlug}`}
-        className={styles.viewAll}
-      >
-        View all {location.city} food trucks →
-      </Link>
+      {cityContent && (
+        <Link
+          href={`/food-trucks/${location.stateSlug}/${location.citySlug}`}
+          className={styles.viewAll}
+        >
+          View all {location.city} food trucks →
+        </Link>
+      )}
     </section>
   );
 }

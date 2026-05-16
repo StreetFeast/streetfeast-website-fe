@@ -1,7 +1,7 @@
 .main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 7rem 1.5rem 4rem;
 }
 
 .h1 {
@@ -19,6 +19,15 @@
 
 .intro p {
   margin: 0 0 1rem 0;
+}
+
+.intro a {
+  color: #ED6A00;
+  text-decoration: underline;
+}
+
+.intro a:hover {
+  text-decoration: none;
 }
 
 .h2 {

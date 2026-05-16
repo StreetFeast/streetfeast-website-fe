@@ -9,7 +9,7 @@ export default function HomeFeaturedCities({ cities }: { cities: CityContent[] }
       <div className={styles.inner}>
         <h2 className={styles.heading}>Find Food Trucks in Your City</h2>
         <p className={styles.lede}>
-          StreetFeast tracks active food trucks across Kentucky in real time.
+          StreetFeast tracks active food trucks across the United States in real time.
         </p>
         <div className={styles.grid}>
           {cities.map((city) => (
